@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://rxqd0wxka5o6"]
+
+[ext_resource type="Script" uid="uid://bffr6n4g2h0d3" path="res://gnome/gnome.gd" id="1_i3nix"]
+[ext_resource type="Texture2D" uid="uid://cocrnrbv011fv" path="res://sprites/proto-gnome.png" id="2_mlu3r"]
+
+[node name="Gnome" type="Node2D" unique_id=204754364]
+texture_filter = 1
+script = ExtResource("1_i3nix")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1097391282]
+position = Vector2(0, -12)
+texture = ExtResource("2_mlu3r")
