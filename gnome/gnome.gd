@@ -8,7 +8,7 @@ enum Direction {UP_LEFT, UP_RIGHT, DOWN_RIGHT, DOWN_LEFT}
 var direction: Direction
 
 ## FAR LEFT SIDE IS (0,0), TOP IS (11,0), FAR RIGHT SIDE IS (11,11), BOTTOM IS (0,11)
-var grid_pos: Vector2i = Vector2i(5,6)
+var grid_pos: Vector2i = Vector2i(6,5)
 
 func _ready():
 	direction = Direction.DOWN_RIGHT
