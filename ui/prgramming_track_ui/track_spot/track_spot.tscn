@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://c7b8b6nkhsmxg"]
+
+[ext_resource type="Script" uid="uid://nj1hdjl1vob2" path="res://addons/drag_and_drop/scripts/drop_zone.gd" id="1_oj61v"]
+[ext_resource type="Script" uid="uid://qksh41k3b0kj" path="res://ui/prgramming_track_ui/track_spot/track_spot.gd" id="1_xycb6"]
+[ext_resource type="Script" uid="uid://cep6qnign22b8" path="res://addons/drag_and_drop/resources/drop_behaviors/drop_behavior_swap.gd" id="3_0rj0d"]
+[ext_resource type="Script" uid="uid://djdmnemxrx7bg" path="res://addons/drag_and_drop/resources/draggable_types/draggable_type.gd" id="4_0rj0d"]
+
+[sub_resource type="Resource" id="Resource_bg4qv"]
+script = ExtResource("3_0rj0d")
+metadata/_custom_type_script = "uid://cep6qnign22b8"
+
+[sub_resource type="Resource" id="Resource_kyri6"]
+script = ExtResource("4_0rj0d")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bg4qv"]
+size = Vector2(88, 128)
+
+[node name="TrackSpot" type="Area2D" unique_id=880385725 node_paths=PackedStringArray("dropzone")]
+script = ExtResource("1_xycb6")
+dropzone = NodePath("DropZone")
+
+[node name="DropZone" type="Node2D" parent="." unique_id=1503080899 node_paths=PackedStringArray("attach_spot")]
+position = Vector2(-44, -64)
+script = ExtResource("1_oj61v")
+attach_spot = NodePath("..")
+drop_behavior = SubResource("Resource_bg4qv")
+snap_style = 1
+accepted_draggable_types = Array[ExtResource("4_0rj0d")]([SubResource("Resource_kyri6")])
+metadata/_custom_type_script = "uid://nj1hdjl1vob2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1653318062]
+shape = SubResource("RectangleShape2D_bg4qv")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=68731325]
+texture_filter = 1
+custom_minimum_size = Vector2(88, 128)
+offset_left = -44.0
+offset_top = -64.0
+offset_right = 44.0
+offset_bottom = 64.0
+mouse_filter = 1

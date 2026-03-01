@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b52d3n8sxrt4w"]
+
+[ext_resource type="Texture2D" uid="uid://d3b3tbtr72l0x" path="res://sprites/proto_vine.png" id="1_rcel3"]
+[ext_resource type="PackedScene" uid="uid://c7b8b6nkhsmxg" path="res://ui/prgramming_track_ui/track_spot/track_spot.tscn" id="2_jxowk"]
+
+[node name="ProgrammingTrackUI" type="Control" unique_id=660876712]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1323901869]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -225.0
+offset_bottom = 225.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("1_rcel3")
+
+[node name="TrackSpot" parent="TextureRect" unique_id=68731325 instance=ExtResource("2_jxowk")]
+z_index = 2
+position = Vector2(155, 378)
+
+[node name="TrackSpot2" parent="TextureRect" unique_id=1492374471 instance=ExtResource("2_jxowk")]
+z_index = 1
+position = Vector2(57, 328)
+
+[node name="TrackSpot3" parent="TextureRect" unique_id=1833243044 instance=ExtResource("2_jxowk")]
+z_index = 1
+position = Vector2(156, 230)
+
+[node name="TrackSpot4" parent="TextureRect" unique_id=1023656089 instance=ExtResource("2_jxowk")]
+z_index = 1
+position = Vector2(58, 144)
+
+[node name="TrackSpot5" parent="TextureRect" unique_id=40446193 instance=ExtResource("2_jxowk")]
+z_index = 1
+position = Vector2(156, 76)
