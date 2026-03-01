@@ -230,14 +230,11 @@ states/Jump/position = Vector2(502, 120)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_i3nix"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_ovbpe"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_be6jj")]
 graph_offset = Vector2(-901, -126)
 
-[node name="Gnome" type="Node2D" unique_id=1690238983 node_paths=PackedStringArray("animation_tree", "animation_player", "state_machine", "jump_state", "sprite")]
+[node name="Gnome" type="Node2D" unique_id=1690238983 node_paths=PackedStringArray("animation_tree", "animation_player")]
 texture_filter = 1
 script = ExtResource("1_i3nix")
 animation_tree = NodePath("AnimationTree")
 animation_player = NodePath("AnimationPlayer")
-state_machine = NodePath("StateMatchine")
-jump_state = NodePath("StateMatchine/JumpState")
-sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1064517990]
 texture = ExtResource("2_i3nix")
@@ -264,7 +261,6 @@ script = ExtResource("4_yw81g")
 gnome = NodePath("../..")
 metadata/_custom_type_script = "uid://pa7m7gyvg3gi"
 
-[node name="JumpState" type="Node" parent="StateMatchine" unique_id=1516405751 node_paths=PackedStringArray("gnome")]
+[node name="JumpState" type="Node" parent="StateMatchine" unique_id=1516405751]
 script = ExtResource("5_yw81g")
-gnome = NodePath("../..")
 metadata/_custom_type_script = "uid://bqklwfmygyixh"
