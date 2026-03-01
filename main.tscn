@@ -151,7 +151,6 @@ sources/7 = SubResource("TileSetAtlasSource_5vw27")
 sources/10 = SubResource("TileSetAtlasSource_efxa6")
 
 [node name="Main" type="Node2D" unique_id=1208621114 node_paths=PackedStringArray("base_layer", "hazard_layer", "gnomes")]
-y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_0xm2m")
 base_layer = NodePath("TileMapLayers/BaseLayer")
@@ -169,7 +168,6 @@ tile_set = SubResource("TileSet_h2yge")
 
 [node name="Gnome" parent="TileMapLayers" unique_id=1604901195 instance=ExtResource("3_h2yge")]
 z_index = 1
-y_sort_enabled = true
 position = Vector2(35, -130)
 
 [node name="HazardLayer" type="TileMapLayer" parent="TileMapLayers" unique_id=107139942]
