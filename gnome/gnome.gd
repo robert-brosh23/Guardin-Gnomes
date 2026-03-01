@@ -4,33 +4,22 @@ extends Node2D
 signal try_move(Gnome, Direction)
 
 enum Direction {UP_LEFT, UP_RIGHT, DOWN_RIGHT, DOWN_LEFT}
-enum GnomeState {IDLE, JUMPING}
 
 @export var animation_tree: AnimationTree
 @export var animation_player: AnimationPlayer
+@export var state_machine: StateMachine
+@export var jump_state: JumpState
+@export var sprite: Sprite2D
 
 var jump_tween: Tween
 var direction: Direction
-var state: GnomeState
 
 ## FAR LEFT SIDE IS (0,0), TOP IS (11,0), FAR RIGHT SIDE IS (11,11), BOTTOM IS (0,11)
 var grid_pos: Vector2i = Vector2i(6,5)
 
 func _ready():
 	direction = Direction.DOWN_RIGHT
-	state = GnomeState.IDLE
-	_update_idle_animation()
-	
-func _process(delta: float) -> void:
-	_check_debug_commands()
-	
-func _check_debug_commands():
-	if Input.is_action_just_pressed("forward"):
-		try_move_forward()
-	if Input.is_action_just_pressed("left"):
-		turn_left()
-	if Input.is_action_just_pressed("right"):
-		turn_right()
+	_update_blend_positions()
 
 func try_move_forward():
 	var new_pos: Vector2i
@@ -45,24 +34,24 @@ func try_move_forward():
 			new_pos = grid_pos + Vector2i(-1, 0)
 	try_move.emit(self, new_pos)
 
-func move_to_space(new_pos: Vector2i):
-	_do_jump_animation()
+func move_to_space(new_pos: Vector2i, new_physical_pos: Vector2):
 	grid_pos = new_pos
-	_update_idle_animation()
+	jump_state.new_physical_pos = new_physical_pos
+	state_machine.active_state.Transitioned.emit(state_machine.active_state, "JumpState")
 	
 func turn_right():
 	if direction == Direction.DOWN_LEFT:
 		direction = Direction.UP_LEFT
 	else:
 		direction += 1
-	_update_idle_animation()
+	_update_blend_positions()
 	
 func turn_left():
 	if direction == Direction.UP_LEFT:
 		direction = Direction.DOWN_LEFT
 	else:
 		direction -= 1
-	_update_idle_animation()
+	_update_blend_positions()
 
 func spin():
 	var roll := randi() % 4
@@ -71,19 +60,13 @@ func spin():
 		1: turn_right()
 		2: for i in 2: turn_right()
 		3: for i in 2: turn_left()
-
-func _do_jump_animation():
-	var direction_vector := _get_animation_direction_vector()
-	animation_tree.set("parameters/conditions/idle", false)
-	animation_tree.set("parameters/Jump/blend_position", direction_vector)
-	animation_tree.set("parameters/conditions/jump", true)
+		
+func _update_blend_positions():
+	var blend_vector := _get_animation_direction_vector()
+	animation_tree.set("parameters/Idle/blend_position", blend_vector)
+	animation_tree.set("parameters/Jump/blend_position", blend_vector)
 	
-func _update_idle_animation():
-	var direction_vector := _get_animation_direction_vector()
-	# animation_tree.set("parameters/conditions/jump", false)
-	animation_tree.set("parameters/Idle/blend_position", direction_vector)
-	animation_tree.set("parameters/conditions/idle", true)
-	
+		
 func _get_animation_direction_vector() -> Vector2:
 	var direction_vector: Vector2
 	match direction:

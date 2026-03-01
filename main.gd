@@ -28,5 +28,5 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 		if hazard_type == "pixie":
 			pass
 		
-	piece.global_position = base_layer.map_to_local(new_pos) + base_layer.global_position
-	piece.move_to_space(new_pos)
+	var new_physical_pos := base_layer.map_to_local(new_pos) + base_layer.global_position
+	piece.move_to_space(new_pos, new_physical_pos)
