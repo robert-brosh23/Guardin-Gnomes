@@ -63,7 +63,15 @@ func turn_left():
 	else:
 		direction -= 1
 	_update_idle_animation()
-	
+
+func spin():
+	var roll := randi() % 4
+	match roll:
+		0: turn_left()
+		1: turn_right()
+		2: for i in 2: turn_right()
+		3: for i in 2: turn_left()
+
 func _do_jump_animation():
 	var direction_vector := _get_animation_direction_vector()
 	animation_tree.set("parameters/conditions/idle", false)
@@ -88,6 +96,4 @@ func _get_animation_direction_vector() -> Vector2:
 		Direction.DOWN_LEFT:
 			direction_vector = Vector2(-1, -1)
 	return direction_vector
-	
-	
 	

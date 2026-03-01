@@ -1,0 +1,12 @@
+res://hazard/hazard.tscn
+res://hazard/hazard_res.gd
+res://main.gd
+res://hazard/thorn_bush.tres
+res://hazard/rock.tres
+res://hazard/hazard.gd
+res://main.tscn
+res://hazard_detector.gd
+res://hazard/hazard_manager.gd
+res://hazard/hazard_detector.tscn
+res://gnome/gnome.gd
+res://gnome/gnome.tscn

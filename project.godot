@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Guardin' Gnomes"
 run/main_scene="uid://ctew1uovq5d2f"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
@@ -47,4 +47,5 @@ forward={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
