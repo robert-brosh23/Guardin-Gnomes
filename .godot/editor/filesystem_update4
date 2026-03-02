@@ -1,6 +1,0 @@
-res://main.tscn
-res://main.gd
-res://gnome/gnome.tscn
-res://gnome/gnome.gd
-res://tilemap/tilemap.gd
-res://util/round_manager/round_manager.gd
