@@ -192,10 +192,14 @@ offset_bottom = 449.0
 cards_in_hand = [NodePath("Card"), NodePath("Card2"), NodePath("Card3")]
 
 [node name="Card" parent="CanvasLayer/Hand" unique_id=861204244 instance=ExtResource("11_efxa6")]
-position = Vector2(51, 410)
+position = Vector2(53, 381)
 
 [node name="Card2" parent="CanvasLayer/Hand" unique_id=672049880 instance=ExtResource("11_efxa6")]
-position = Vector2(162, 390)
+position = Vector2(163, 391)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Hand/Card2" unique_id=1696766785]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Card3" parent="CanvasLayer/Hand" unique_id=1448315846 instance=ExtResource("11_efxa6")]
-position = Vector2(272, 408)
+position = Vector2(289, 388)

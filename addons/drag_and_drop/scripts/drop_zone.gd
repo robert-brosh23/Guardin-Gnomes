@@ -184,7 +184,7 @@ func _on_draggable_drag_ended(area: Area2D, drop_spot: SnappingSpot):
 	else:
 		for spot in snapping_points:
 			if spot.occupant == area:
-				_attach(area)
+				spot.occupant = null
 				break
 
 #endregion
