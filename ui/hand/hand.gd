@@ -49,13 +49,18 @@ func _update_hand():
 	for card in cards_in_hand:
 		match card.state:
 			card.states.DEFAULT:
-				tween_to_pos(card, Vector2(x_pos, DEFAULT_Y))
+				card.tween_to_pos(Vector2(x_pos, DEFAULT_Y))
 				card.z_index = _z_index
 				_z_index += 1
 				
 			card.states.HOVERING:
-				tween_to_pos(card, Vector2(card.global_position.x, DEFAULT_Y - 40))
-				card.z_index = 11
+				if card.global_position.y < DEFAULT_Y - 40:
+					card.tween_to_pos(Vector2(x_pos, DEFAULT_Y))
+					card.z_index = _z_index
+					_z_index += 1
+				else:
+					card.tween_to_pos(Vector2(card.global_position.x, DEFAULT_Y - 40))
+					card.z_index = 11
 				
 			card.states.DRAGGING:
 				pass
@@ -64,10 +69,6 @@ func _update_hand():
 
 func _determine_card_separation() -> int:
 	return DEFAULT_CARD_SEPARATION / 4 + DEFAULT_CARD_SEPARATION * 3 / 4 / (cards_in_hand.size() + 1)
-
-func tween_to_pos(node: Node, pos: Vector2):
-	var tween := create_tween()
-	tween.tween_property(node, "global_position", pos, .2)
 	
 func _stop_hover_card(card: Card):
 	if !cards_in_hand.has(card):

@@ -13,6 +13,7 @@ enum Direction {UP_LEFT, UP_RIGHT, DOWN_RIGHT, DOWN_LEFT}
 
 var jump_tween: Tween
 var direction: Direction
+var stuck_count: int
 
 ## FAR LEFT SIDE IS (0,0), TOP IS (11,0), FAR RIGHT SIDE IS (11,11), BOTTOM IS (0,11)
 var grid_pos: Vector2i = Vector2i(6,5)
@@ -38,7 +39,8 @@ func move_to_space(new_pos: Vector2i, new_physical_pos: Vector2):
 	grid_pos = new_pos
 	jump_state.new_physical_pos = new_physical_pos
 	state_machine.active_state.Transitioned.emit(state_machine.active_state, "JumpState")
-	
+
+
 func turn_right():
 	if direction == Direction.DOWN_LEFT:
 		direction = Direction.UP_LEFT
@@ -60,7 +62,13 @@ func spin():
 		1: turn_right()
 		2: for i in 2: turn_right()
 		3: for i in 2: turn_left()
-		
+
+func teleport(new_pos: Vector2i, new_physical_pos: Vector2):
+	grid_pos = new_pos
+	jump_state.new_physical_pos = new_physical_pos
+	state_machine.active_state.Transitioned.emit(state_machine.active_state, "JumpState")
+	var teleport_pos = Vector2i(2,4)
+
 func _update_blend_positions():
 	var blend_vector := _get_animation_direction_vector()
 	animation_tree.set("parameters/Idle/blend_position", blend_vector)

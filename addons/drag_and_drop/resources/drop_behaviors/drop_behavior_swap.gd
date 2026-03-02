@@ -22,7 +22,8 @@ func evaluate(zone: DropZone, dropped_area: Area2D) -> DropPlan:
 			plan.actions.append(ActionRelocate.new(plan.drop_target.occupant, spot))
 			prev_zone._attach(plan.drop_target.occupant)
 		else:
-			plan.can_drop = false 
+			plan.actions.append(ActionRelocate.new(plan.drop_target.occupant, null))
+			
 	
 	return plan
 

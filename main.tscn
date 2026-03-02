@@ -3,13 +3,19 @@
 [ext_resource type="Script" uid="uid://b26e88nr7pcmo" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://736vs18thw61" path="res://sprites/blocks/proto-block.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cocrnrbv011fv" path="res://sprites/blocks/proto-gnome.png" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://conjkp1bfrl32" path="res://util/round_manager/round_manager.tscn" id="2_vivmo"]
+[ext_resource type="Script" uid="uid://d2qtdrpt2dtnn" path="res://tilemap/tilemap.gd" id="2_ycdy4"]
+[ext_resource type="Script" uid="uid://4wit70wmvxk3" path="res://util/round_manager/round_manager.gd" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://rxqd0wxka5o6" path="res://gnome/gnome.tscn" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://cguhhun74ixvm" path="res://sprites/blocks/GrassBlocks.png" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://phf1a8pwvcor" path="res://sprites/blocks/PixieBlocks.png" id="4_kek77"]
 [ext_resource type="Texture2D" uid="uid://b2aqdkp4xd3mo" path="res://sprites/hazard/ThornBush.png" id="5_272bh"]
 [ext_resource type="Texture2D" uid="uid://d4khekpm2flto" path="res://sprites/hazard/rock.png" id="6_5vw27"]
+[ext_resource type="Texture2D" uid="uid://cbjbuqil2ufi3" path="res://sprites/hazard/Tornado.png" id="7_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bb3dwseur8pdi" path="res://sprites/hazard/pixie3.png" id="7_kek77"]
+[ext_resource type="Texture2D" uid="uid://3dmgctci0s68" path="res://sprites/hazard/wall.png" id="9_efxa6"]
 [ext_resource type="PackedScene" uid="uid://b52d3n8sxrt4w" path="res://ui/prgramming_track_ui/programming_track_ui.tscn" id="10_4c57u"]
+[ext_resource type="Texture2D" uid="uid://bp7ugabbmd2ky" path="res://sprites/hazard/teleporter.png" id="10_dg77c"]
 [ext_resource type="PackedScene" uid="uid://8nfe5xqymm3v" path="res://ui/hand/hand.tscn" id="11_dg77c"]
 [ext_resource type="PackedScene" uid="uid://3xyqk6fv74h2" path="res://ui/prgramming_track_ui/card/card.tscn" id="11_efxa6"]
 
@@ -26,39 +32,51 @@ texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 12)
 0:0/0/y_sort_origin = -12
+0:0/0/custom_data_1 = true
 1:0/0 = 0
 1:0/0/texture_origin = Vector2i(0, 12)
 1:0/0/y_sort_origin = -12
+1:0/0/custom_data_1 = true
 2:0/0 = 0
 2:0/0/texture_origin = Vector2i(0, 12)
 2:0/0/y_sort_origin = -12
+2:0/0/custom_data_1 = true
 3:0/0 = 0
 3:0/0/texture_origin = Vector2i(0, 12)
 3:0/0/y_sort_origin = -12
+3:0/0/custom_data_1 = true
 4:0/0 = 0
 4:0/0/texture_origin = Vector2i(0, 12)
 4:0/0/y_sort_origin = -12
+4:0/0/custom_data_1 = true
 5:0/0 = 0
 5:0/0/texture_origin = Vector2i(0, 12)
 5:0/0/y_sort_origin = -12
+5:0/0/custom_data_1 = true
 0:1/0 = 0
 0:1/0/texture_origin = Vector2i(0, 12)
 0:1/0/y_sort_origin = -12
+0:1/0/custom_data_1 = true
 1:1/0 = 0
 1:1/0/texture_origin = Vector2i(0, 12)
 1:1/0/y_sort_origin = -12
+1:1/0/custom_data_1 = true
 2:1/0 = 0
 2:1/0/texture_origin = Vector2i(0, 12)
 2:1/0/y_sort_origin = -12
+2:1/0/custom_data_1 = true
 3:1/0 = 0
 3:1/0/texture_origin = Vector2i(0, 12)
 3:1/0/y_sort_origin = -12
+3:1/0/custom_data_1 = true
 4:1/0 = 0
 4:1/0/texture_origin = Vector2i(0, 12)
 4:1/0/y_sort_origin = -12
+4:1/0/custom_data_1 = true
 5:1/0 = 0
 5:1/0/texture_origin = Vector2i(0, 12)
 5:1/0/y_sort_origin = -12
+5:1/0/custom_data_1 = true
 0:2/0 = 0
 1:2/0 = 0
 2:2/0 = 0
@@ -82,6 +100,7 @@ texture_region_size = Vector2i(48, 24)
 0:0/animation_frame_3/duration = 0.15
 0:0/0 = 0
 0:0/0/y_sort_origin = -1
+0:0/0/custom_data_0 = "fairy1"
 0:4/size_in_atlas = Vector2i(1, 4)
 0:4/animation_frame_0/duration = 0.15
 0:4/animation_frame_1/duration = 0.15
@@ -89,6 +108,7 @@ texture_region_size = Vector2i(48, 24)
 0:4/animation_frame_3/duration = 0.15
 0:4/0 = 0
 0:4/0/y_sort_origin = -1
+0:4/0/custom_data_0 = "fairy2"
 0:8/size_in_atlas = Vector2i(1, 4)
 0:8/animation_frame_0/duration = 0.15
 0:8/animation_frame_1/duration = 0.15
@@ -96,14 +116,19 @@ texture_region_size = Vector2i(48, 24)
 0:8/animation_frame_3/duration = 0.15
 0:8/0 = 0
 0:8/0/y_sort_origin = -1
+0:8/0/custom_data_0 = "fairy3"
 
 [sub_resource type="TileSet" id="TileSet_h2yge"]
 tile_shape = 1
 tile_layout = 4
 tile_size = Vector2i(48, 24)
+custom_data_layer_0/name = "base_type"
+custom_data_layer_0/type = 4
+custom_data_layer_1/name = "empty"
+custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_0xm2m")
 sources/1 = SubResource("TileSetAtlasSource_7mycd")
-sources/4 = SubResource("TileSetAtlasSource_4c57u")
+sources/2 = SubResource("TileSetAtlasSource_4c57u")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lquwl"]
 texture = ExtResource("2_1bvp3")
@@ -113,6 +138,38 @@ texture_region_size = Vector2i(48, 48)
 0:0/0/y_sort_origin = -12
 0:0/0/custom_data_0 = true
 0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dg77c"]
+texture = ExtResource("7_4c57u")
+texture_region_size = Vector2i(48, 24)
+0:0/size_in_atlas = Vector2i(1, 2)
+0:0/animation_speed = 1.5
+0:0/animation_frame_0/duration = 0.1
+0:0/animation_frame_1/duration = 0.1
+0:0/animation_frame_2/duration = 0.1
+0:0/animation_frame_3/duration = 0.1
+0:0/animation_frame_4/duration = 0.1
+0:0/animation_frame_5/duration = 0.1
+0:0/animation_frame_6/duration = 0.1
+0:0/animation_frame_7/duration = 0.1
+0:0/animation_frame_8/duration = 0.1
+0:0/animation_frame_9/duration = 0.1
+0:0/0 = 0
+0:0/0/custom_data_1 = "tornado_left"
+0:2/size_in_atlas = Vector2i(1, 2)
+0:2/animation_speed = 15.0
+0:2/animation_frame_0/duration = 1.0
+0:2/animation_frame_1/duration = 1.0
+0:2/animation_frame_2/duration = 1.0
+0:2/animation_frame_3/duration = 1.0
+0:2/animation_frame_4/duration = 1.0
+0:2/animation_frame_5/duration = 1.0
+0:2/animation_frame_6/duration = 1.0
+0:2/animation_frame_7/duration = 1.0
+0:2/animation_frame_8/duration = 1.0
+0:2/animation_frame_9/duration = 1.0
+0:2/0 = 0
+0:2/0/custom_data_1 = "tornado_right"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_efxa6"]
 texture = ExtResource("7_kek77")
@@ -124,6 +181,23 @@ texture_region_size = Vector2i(48, 24)
 0:0/animation_frame_3/duration = 0.15
 0:0/0 = 0
 0:0/0/custom_data_1 = "pixie"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ycdy4"]
+texture = ExtResource("9_efxa6")
+texture_region_size = Vector2i(48, 24)
+0:0/0 = 0
+0:0/0/custom_data_1 = "wall_left"
+1:0/0 = 0
+1:0/0/custom_data_1 = "wall_right"
+2:0/0 = 0
+2:0/0/custom_data_1 = "wall_corner"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w48qg"]
+texture = ExtResource("10_dg77c")
+texture_region_size = Vector2i(48, 24)
+0:0/size_in_atlas = Vector2i(1, 2)
+0:0/0 = 0
+0:0/0/custom_data_1 = "teleporter"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_272bh"]
 texture = ExtResource("6_5vw27")
@@ -149,34 +223,43 @@ custom_data_layer_0/type = 1
 custom_data_layer_1/name = "hazard_type"
 custom_data_layer_1/type = 4
 sources/0 = SubResource("TileSetAtlasSource_lquwl")
-sources/6 = SubResource("TileSetAtlasSource_272bh")
-sources/7 = SubResource("TileSetAtlasSource_5vw27")
 sources/10 = SubResource("TileSetAtlasSource_efxa6")
+sources/1 = SubResource("TileSetAtlasSource_dg77c")
+sources/2 = SubResource("TileSetAtlasSource_ycdy4")
+sources/3 = SubResource("TileSetAtlasSource_w48qg")
+sources/4 = SubResource("TileSetAtlasSource_272bh")
+sources/5 = SubResource("TileSetAtlasSource_5vw27")
 
 [node name="Main" type="Node2D" unique_id=1208621114 node_paths=PackedStringArray("base_layer", "hazard_layer", "gnomes")]
 texture_filter = 1
 script = ExtResource("1_0xm2m")
-base_layer = NodePath("TileMapLayers/BaseLayer")
-hazard_layer = NodePath("TileMapLayers/HazardLayer")
-gnomes = [NodePath("TileMapLayers/Gnome")]
+base_layer = NodePath("FairyManager/TileMapLayers/BaseLayer")
+hazard_layer = NodePath("FairyManager/TileMapLayers/HazardLayer")
+gnomes = [NodePath("FairyManager/TileMapLayers/Gnome")]
 
-[node name="TileMapLayers" type="Node2D" parent="." unique_id=339126735]
+[node name="FairyManager" parent="." unique_id=1808878216 instance=ExtResource("2_vivmo")]
+unique_name_in_owner = true
+script = ExtResource("3_2cqfq")
+
+[node name="TileMapLayers" type="Node2D" parent="FairyManager" unique_id=339126735]
+unique_name_in_owner = true
 y_sort_enabled = true
 position = Vector2(5, 181)
+script = ExtResource("2_ycdy4")
 
-[node name="BaseLayer" type="TileMapLayer" parent="TileMapLayers" unique_id=1474672458]
+[node name="BaseLayer" type="TileMapLayer" parent="FairyManager/TileMapLayers" unique_id=1474672458]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAAAAAEAAQACAAEAAAAAAAIAAQADAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAFAAEAAAAAAAUAAQADAAEAAAAAAAYAAQAEAAEAAAAAAAcAAQABAAEAAAAAAAgABAAAAAAAAAAAAAkAAQAEAAEAAAAAAAoAAQABAAEAAAAAAAsABAAAAAAAAAABAAEAAQAAAAEAAAABAAIAAQAFAAEAAAABAAMAAQAAAAEAAAABAAQAAQACAAEAAAABAAUAAQABAAEAAAABAAYAAQAAAAEAAAABAAcAAQAAAAEAAAABAAgAAQABAAEAAAABAAkAAQAEAAEAAAABAAoAAQAAAAEAAAABAAsAAQACAAEAAAACAAEAAQAEAAEAAAACAAIAAQADAAEAAAACAAMAAQAAAAEAAAACAAQAAQACAAEAAAACAAUAAQADAAEAAAACAAYAAQAEAAEAAAACAAcAAQABAAEAAAACAAgAAQAAAAEAAAACAAkAAQAAAAEAAAACAAoAAQACAAEAAAACAAsAAQADAAEAAAADAAEAAQADAAEAAAADAAIAAQAAAAEAAAADAAMAAQADAAEAAAADAAQAAQABAAEAAAADAAUAAQADAAEAAAADAAYAAQAAAAEAAAADAAcAAQAEAAEAAAADAAgAAQACAAEAAAADAAkAAQAFAAEAAAADAAoAAQAEAAEAAAADAAsAAQAEAAEAAAAEAAEAAQABAAEAAAAEAAIAAQAAAAEAAAAEAAMAAQAFAAEAAAAEAAQAAQABAAEAAAAEAAUAAQAFAAEAAAAEAAYAAQAEAAEAAAAEAAcAAQABAAEAAAAEAAgAAQAFAAEAAAAEAAkAAQAFAAEAAAAEAAoAAQAFAAEAAAAEAAsAAQAFAAEAAAAFAAEAAQACAAEAAAAFAAIAAQAFAAEAAAAFAAMAAQADAAEAAAAFAAQAAQAFAAEAAAAFAAUAAQADAAEAAAAFAAYAAQACAAEAAAAFAAcAAQACAAEAAAAFAAgAAQACAAEAAAAFAAkAAQADAAEAAAAFAAoAAQAAAAEAAAAFAAsAAQAFAAEAAAAGAAEAAQAAAAEAAAAGAAIAAQACAAEAAAAGAAMAAQAAAAEAAAAGAAQAAQAAAAEAAAAGAAUAAQADAAEAAAAGAAYAAQAFAAEAAAAGAAcAAQAEAAEAAAAGAAgAAQADAAEAAAAGAAkAAQAEAAEAAAAGAAoAAQAEAAEAAAAGAAsAAQAAAAEAAAAHAAEAAQAFAAEAAAAHAAIAAQAFAAEAAAAHAAMAAQABAAEAAAAHAAQAAQAFAAEAAAAHAAUAAQACAAEAAAAHAAYAAQABAAEAAAAHAAcAAQAAAAEAAAAHAAgAAQAAAAEAAAAHAAkAAQACAAEAAAAHAAoAAQADAAEAAAAHAAsAAQACAAEAAAAIAAEAAQAEAAEAAAAIAAIAAQAAAAEAAAAIAAMAAQACAAEAAAAIAAQAAQADAAEAAAAIAAUAAQAEAAEAAAAIAAYAAQAAAAEAAAAIAAcAAQACAAEAAAAIAAgAAQAAAAEAAAAIAAkAAQAFAAEAAAAIAAoAAQAEAAEAAAAIAAsAAQAFAAEAAAAJAAEAAQADAAEAAAAJAAIAAQABAAEAAAAJAAMAAQADAAEAAAAJAAQABAAAAAQAAAAJAAUAAQABAAEAAAAJAAYAAQACAAEAAAAJAAcAAQAEAAEAAAAJAAgAAQABAAEAAAAJAAkAAQADAAEAAAAJAAoAAQAFAAEAAAAJAAsAAQAFAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQACAAEAAAAKAAMAAQABAAEAAAAKAAQAAQABAAAAAAAKAAUABAAAAAgAAAAKAAYAAQADAAEAAAAKAAcABAAAAAAAAAAKAAgAAQADAAEAAAAKAAkAAQAEAAEAAAAKAAoAAQADAAEAAAAKAAsAAQADAAEAAAAAAAAAAQAFAAEAAAABAAAAAQACAAEAAAACAAAAAQACAAEAAAADAAAAAQAEAAEAAAAEAAAAAQADAAEAAAAFAAAAAQAFAAEAAAAGAAAAAQAFAAEAAAAHAAAAAQACAAEAAAAIAAAAAQADAAEAAAAJAAAAAQACAAEAAAAKAAAAAQAAAAEAAAALAAAAAQAFAAEAAAALAAEAAQACAAEAAAALAAIAAQACAAEAAAALAAMAAQADAAEAAAALAAQAAQABAAAAAAALAAUAAQABAAAAAAALAAYAAQADAAEAAAALAAcAAQAEAAEAAAALAAgAAQAEAAEAAAALAAkAAQADAAEAAAALAAoAAQAEAAEAAAALAAsAAQABAAEAAAA=")
+tile_map_data = PackedByteArray("AAAAAAEAAQACAAEAAAAAAAIAAQADAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAFAAEAAAAAAAUAAQADAAEAAAAAAAYAAQAEAAEAAAABAAEAAQAAAAEAAAABAAIAAQAFAAEAAAABAAMAAQAAAAEAAAABAAQAAQACAAEAAAABAAUAAQABAAEAAAABAAYAAQAAAAEAAAABAAkAAQAEAAEAAAABAAoAAQAAAAEAAAACAAEAAQAEAAEAAAACAAIAAQADAAEAAAACAAMAAQAAAAEAAAACAAQAAQACAAEAAAACAAUAAQADAAEAAAACAAYAAQAEAAEAAAACAAcAAQABAAEAAAACAAgAAQAAAAEAAAACAAkAAQAAAAEAAAACAAoAAQACAAEAAAADAAEAAQADAAEAAAADAAIAAQAAAAEAAAADAAMAAQADAAEAAAADAAQAAQABAAEAAAADAAUAAQADAAEAAAADAAYAAQAAAAEAAAADAAcAAQAEAAEAAAADAAgAAQACAAEAAAADAAkAAQAFAAEAAAADAAoAAQAEAAEAAAADAAsAAQAEAAEAAAAEAAEAAQABAAEAAAAEAAIAAQAAAAEAAAAEAAMAAQAFAAEAAAAEAAQAAQABAAEAAAAEAAUAAQAFAAEAAAAEAAYAAQAEAAEAAAAEAAcAAQABAAEAAAAEAAgAAQAFAAEAAAAEAAkAAQAFAAEAAAAEAAoAAQAFAAEAAAAEAAsAAQAFAAEAAAAFAAEAAQACAAEAAAAFAAIAAQAFAAEAAAAFAAMAAQADAAEAAAAFAAQAAQAFAAEAAAAFAAUAAQADAAEAAAAFAAYAAQACAAEAAAAFAAcAAQACAAEAAAAFAAgAAQACAAEAAAAFAAoAAQAAAAEAAAAFAAsAAQAFAAEAAAAGAAEAAQAAAAEAAAAGAAIAAQACAAEAAAAGAAMAAQAAAAEAAAAGAAQAAQAAAAEAAAAGAAUAAQADAAEAAAAGAAYAAQAFAAEAAAAGAAcAAQAEAAEAAAAGAAkAAQAEAAEAAAAGAAoAAQAEAAEAAAAGAAsAAQAAAAEAAAAHAAEAAQAFAAEAAAAHAAIAAQAFAAEAAAAHAAMAAQABAAEAAAAHAAQAAQAFAAEAAAAHAAUAAQACAAEAAAAHAAYAAQABAAEAAAAHAAcAAQAAAAEAAAAHAAgAAQAAAAEAAAAHAAkAAQACAAEAAAAHAAoAAQADAAEAAAAHAAsAAQACAAEAAAAIAAEAAQAEAAEAAAAIAAIAAQAAAAEAAAAIAAMAAQACAAEAAAAIAAQAAQADAAEAAAAIAAUAAQAEAAEAAAAIAAYAAQAAAAEAAAAIAAcAAQACAAEAAAAIAAgAAQAAAAEAAAAIAAkAAQAFAAEAAAAIAAsAAQAFAAEAAAAJAAEAAQADAAEAAAAJAAIAAQABAAEAAAAJAAMAAQADAAEAAAAJAAUAAQABAAEAAAAJAAYAAQACAAEAAAAJAAcAAQAEAAEAAAAJAAgAAQABAAEAAAAJAAkAAQADAAEAAAAJAAoAAQAFAAEAAAAJAAsAAQAFAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQACAAEAAAAKAAMAAQABAAEAAAAKAAQAAQABAAAAAAAKAAYAAQADAAEAAAAKAAgAAQADAAEAAAAKAAkAAQAEAAEAAAAKAAoAAQADAAEAAAAKAAsAAQADAAEAAAAAAAAAAQAFAAEAAAABAAAAAQACAAEAAAACAAAAAQAFAAEAAAADAAAAAQAEAAEAAAAEAAAAAQADAAEAAAAFAAAAAQAFAAEAAAAGAAAAAQAFAAEAAAAHAAAAAQACAAEAAAAIAAAAAQADAAEAAAAJAAAAAQACAAEAAAAKAAAAAQAAAAEAAAALAAAAAQAFAAEAAAALAAEAAQACAAEAAAALAAIAAQACAAEAAAALAAMAAQADAAEAAAALAAQAAQABAAAAAAALAAUAAQABAAAAAAALAAYAAQADAAEAAAALAAcAAQAEAAEAAAALAAgAAQAEAAEAAAALAAkAAQADAAEAAAALAAoAAQAEAAEAAAALAAsAAQABAAEAAAAGAAgAAQADAAEAAAABAAcAAQAAAAEAAAAAAAcAAQABAAEAAAAAAAgAAQAAAAEAAAABAAgAAQABAAEAAAAAAAsAAQADAAEAAAABAAsAAQABAAEAAAACAAsAAQABAAEAAAAAAAoAAQABAAEAAAAAAAkAAQABAAEAAAAIAAoAAQABAAEAAAAFAAkAAQABAAEAAAAKAAUAAQAFAAEAAAAJAAQAAQABAAEAAAAKAAcAAQABAAEAAAA=")
 tile_set = SubResource("TileSet_h2yge")
 
-[node name="Gnome" parent="TileMapLayers" unique_id=1604901195 instance=ExtResource("3_h2yge")]
+[node name="Gnome" parent="FairyManager/TileMapLayers" unique_id=1604901195 instance=ExtResource("3_h2yge")]
 z_index = 1
 position = Vector2(35, -130)
 
-[node name="HazardLayer" type="TileMapLayer" parent="TileMapLayers" unique_id=107139942]
+[node name="HazardLayer" type="TileMapLayer" parent="FairyManager/TileMapLayers" unique_id=107139942]
 z_index = 1
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAAHAAcABgAAAAAAAAAFAAcABgAAAAAAAAAFAAgABwAAAAAAAAAHAAgABwAAAAAAAAAGAAkABgAAAAAAAAAHAAkABgAAAAAAAAAFAAkABgAAAAAAAAAEAAkABwAAAAAAAAALAAQACgAAAAAAAAABAP7/BgAAAAAAAAACAP7/BgAAAAAAAAADAP7/BgAAAAAAAAAEAP7/BgAAAAAAAAAFAP7/BgAAAAAAAAAGAP7/BgAAAAAAAAAHAP7/BgAAAAAAAAAIAP7/BgAAAAAAAAAJAP7/BgAAAAAAAAAKAP7/BgAAAAAAAAALAP7/BgAAAAAAAAAMAP7/BgAAAAAAAAANAP7/BgAAAAAAAAANAP//BgAAAAAAAAANAAAABgAAAAAAAAANAAEABgAAAAAAAAANAAIABgAAAAAAAAANAAMABgAAAAAAAAANAAQABgAAAAAAAAANAAUABgAAAAAAAAANAAYABgAAAAAAAAANAAcABgAAAAAAAAANAAgABgAAAAAAAAANAAkABgAAAAAAAAANAAoABgAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAABAP7/AgABAAAAAAACAP7/AgABAAAAAAADAP7/AgABAAAAAAAEAP7/AgABAAAAAAAFAP7/AgABAAAAAAAGAP7/AgABAAAAAAAHAP7/AgABAAAAAAAIAP7/AgABAAAAAAAJAP7/AgABAAAAAAAKAP7/AgABAAAAAAALAP7/AgABAAAAAAAMAP7/AgABAAAAAAANAP//AgAAAAAAAAANAAAAAgAAAAAAAAANAAEAAgAAAAAAAAANAAIAAgAAAAAAAAANAAMAAgAAAAAAAAANAAQAAgAAAAAAAAANAAUAAgAAAAAAAAANAAYAAgAAAAAAAAANAAcAAgAAAAAAAAANAAgAAgAAAAAAAAANAAoAAgAAAAAAAAANAAkAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_7mycd")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1409755530]
@@ -200,6 +283,7 @@ position = Vector2(163, 391)
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Hand/Card2" unique_id=1696766785]
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
 
 [node name="Card3" parent="CanvasLayer/Hand" unique_id=1448315846 instance=ExtResource("11_efxa6")]
 position = Vector2(289, 388)
