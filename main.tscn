@@ -192,10 +192,10 @@ offset_bottom = 449.0
 cards_in_hand = [NodePath("Card"), NodePath("Card2"), NodePath("Card3")]
 
 [node name="Card" parent="CanvasLayer/Hand" unique_id=861204244 instance=ExtResource("11_efxa6")]
-position = Vector2(232, 317)
+position = Vector2(51, 410)
 
 [node name="Card2" parent="CanvasLayer/Hand" unique_id=672049880 instance=ExtResource("11_efxa6")]
-position = Vector2(351, 321)
+position = Vector2(162, 390)
 
 [node name="Card3" parent="CanvasLayer/Hand" unique_id=1448315846 instance=ExtResource("11_efxa6")]
-position = Vector2(462, 322)
+position = Vector2(272, 408)

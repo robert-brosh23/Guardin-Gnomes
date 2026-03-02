@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b508fdcmd3gu1" path="res://ui/prgramming_track_ui/card/card.gd" id="1_os6nc"]
 [ext_resource type="Script" uid="uid://crmnw3ldr3xev" path="res://addons/drag_and_drop/scripts/draggable.gd" id="2_ulxs5"]
 [ext_resource type="Script" uid="uid://djdmnemxrx7bg" path="res://addons/drag_and_drop/resources/draggable_types/draggable_type.gd" id="3_1fvgc"]
+[ext_resource type="Texture2D" uid="uid://r6u8o12hu8in" path="res://sprites/Untitled_Artwork 7.png" id="4_1fvgc"]
 
 [sub_resource type="Resource" id="Resource_ljq04"]
 script = ExtResource("3_1fvgc")
@@ -42,3 +43,9 @@ grow_vertical = 2
 text = "Move
 forward"
 horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Card" unique_id=208397725]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_1fvgc")

@@ -130,7 +130,7 @@ func _move_toward(from: Vector2, to: Vector2, delta: float) -> Vector2:
 #region Input Handling
 
 func _on_input_event(_viewport, event, _shape_idx):
-	if event.is_action_pressed(drag_input_name) and state == DRAGGABLE_STATE.IDLE:
+	if event.is_action_pressed(drag_input_name) and state == DRAGGABLE_STATE.IDLE and (get_parent().state == Card.states.HOVERING or get_parent().state == Card.states.PLACED):
 		previous_position = a.global_position
 		previous_parent = a.get_parent()
 		if drag_layer_parent:
@@ -157,7 +157,7 @@ func _input(event):
 		if drop_spot:
 			move_to(drop_spot.point.global_position, DRAGGABLE_STATE.DROPPING)
 		else:
-			move_to(previous_position, DRAGGABLE_STATE.IDLE)
+			state = DRAGGABLE_STATE.IDLE
 #endregion
 
 #region Exposed Functions
