@@ -3,10 +3,9 @@
 [ext_resource type="Script" uid="uid://b26e88nr7pcmo" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://736vs18thw61" path="res://sprites/blocks/proto-block.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cocrnrbv011fv" path="res://sprites/blocks/proto-gnome.png" id="2_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://conjkp1bfrl32" path="res://util/round_manager/round_manager.tscn" id="2_vivmo"]
-[ext_resource type="Script" uid="uid://d2qtdrpt2dtnn" path="res://tilemap/tilemap.gd" id="2_ycdy4"]
-[ext_resource type="Script" uid="uid://4wit70wmvxk3" path="res://util/round_manager/round_manager.gd" id="3_2cqfq"]
-[ext_resource type="PackedScene" uid="uid://rxqd0wxka5o6" path="res://gnome/gnome.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://d2qtdrpt2dtnn" path="res://tilemap/tilemap_manager.gd" id="2_ycdy4"]
+[ext_resource type="Script" uid="uid://4wit70wmvxk3" path="res://manager/pixie_manager.gd" id="3_2cqfq"]
+[ext_resource type="Script" uid="uid://8nd74jifhd6o" path="res://manager/spawn_manager.gd" id="3_getpj"]
 [ext_resource type="Texture2D" uid="uid://cguhhun74ixvm" path="res://sprites/blocks/GrassBlocks.png" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://phf1a8pwvcor" path="res://sprites/blocks/PixieBlocks.png" id="4_kek77"]
 [ext_resource type="Texture2D" uid="uid://b2aqdkp4xd3mo" path="res://sprites/hazard/ThornBush.png" id="5_272bh"]
@@ -232,34 +231,35 @@ sources/3 = SubResource("TileSetAtlasSource_w48qg")
 sources/4 = SubResource("TileSetAtlasSource_272bh")
 sources/5 = SubResource("TileSetAtlasSource_5vw27")
 
-[node name="Main" type="Node2D" unique_id=1208621114 node_paths=PackedStringArray("base_layer", "hazard_layer", "gnomes")]
+[node name="Main" type="Node2D" unique_id=1208621114 node_paths=PackedStringArray("base_layer", "hazard_layer")]
 texture_filter = 1
 script = ExtResource("1_0xm2m")
-base_layer = NodePath("FairyManager/TileMapLayers/BaseLayer")
-hazard_layer = NodePath("FairyManager/TileMapLayers/HazardLayer")
-gnomes = [NodePath("FairyManager/TileMapLayers/Gnome")]
+base_layer = NodePath("TilemapManager/BaseLayer")
+hazard_layer = NodePath("TilemapManager/HazardLayer")
 
-[node name="FairyManager" parent="." unique_id=1808878216 instance=ExtResource("2_vivmo")]
-unique_name_in_owner = true
+[node name="PixieManager" type="Node" parent="." unique_id=700652386]
 script = ExtResource("3_2cqfq")
 
-[node name="TileMapLayers" type="Node2D" parent="FairyManager" unique_id=339126735]
-unique_name_in_owner = true
+[node name="SpawnManager" type="Node" parent="." unique_id=160465840]
+script = ExtResource("3_getpj")
+
+[node name="TilemapManager" type="Node2D" parent="." unique_id=339126735 node_paths=PackedStringArray("base_layer", "hazard_layer")]
 y_sort_enabled = true
 position = Vector2(5, 181)
 script = ExtResource("2_ycdy4")
+base_layer = NodePath("BaseLayer")
+hazard_layer = NodePath("HazardLayer")
 
-[node name="BaseLayer" type="TileMapLayer" parent="FairyManager/TileMapLayers" unique_id=1474672458]
+[node name="BaseLayer" type="TileMapLayer" parent="TilemapManager" unique_id=1474672458]
+z_index = -1
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAAAAEAAQACAAEAAAAAAAIAAQADAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAFAAEAAAAAAAUAAQADAAEAAAAAAAYAAQAEAAEAAAABAAEAAQAAAAEAAAABAAIAAQAFAAEAAAABAAMAAQAAAAEAAAABAAQAAQACAAEAAAABAAUAAQABAAEAAAABAAYAAQAAAAEAAAABAAkAAQAEAAEAAAABAAoAAQAAAAEAAAACAAEAAQAEAAEAAAACAAIAAQADAAEAAAACAAMAAQAAAAEAAAACAAQAAQACAAEAAAACAAUAAQADAAEAAAACAAYAAQAEAAEAAAACAAcAAQABAAEAAAACAAgAAQAAAAEAAAACAAkAAQAAAAEAAAACAAoAAQACAAEAAAADAAEAAQADAAEAAAADAAIAAQAAAAEAAAADAAMAAQADAAEAAAADAAQAAQABAAEAAAADAAUAAQADAAEAAAADAAYAAQAAAAEAAAADAAcAAQAEAAEAAAADAAgAAQACAAEAAAADAAkAAQAFAAEAAAADAAoAAQAEAAEAAAADAAsAAQAEAAEAAAAEAAEAAQABAAEAAAAEAAIAAQAAAAEAAAAEAAMAAQAFAAEAAAAEAAQAAQABAAEAAAAEAAUAAQAFAAEAAAAEAAYAAQAEAAEAAAAEAAcAAQABAAEAAAAEAAgAAQAFAAEAAAAEAAkAAQAFAAEAAAAEAAoAAQAFAAEAAAAEAAsAAQAFAAEAAAAFAAEAAQACAAEAAAAFAAIAAQAFAAEAAAAFAAMAAQADAAEAAAAFAAQAAQAFAAEAAAAFAAUAAQADAAEAAAAFAAYAAQACAAEAAAAFAAcAAQACAAEAAAAFAAgAAQACAAEAAAAFAAoAAQAAAAEAAAAFAAsAAQAFAAEAAAAGAAEAAQAAAAEAAAAGAAIAAQACAAEAAAAGAAMAAQAAAAEAAAAGAAQAAQAAAAEAAAAGAAUAAQADAAEAAAAGAAYAAQAFAAEAAAAGAAcAAQAEAAEAAAAGAAkAAQAEAAEAAAAGAAoAAQAEAAEAAAAGAAsAAQAAAAEAAAAHAAEAAQAFAAEAAAAHAAIAAQAFAAEAAAAHAAMAAQABAAEAAAAHAAQAAQAFAAEAAAAHAAUAAQACAAEAAAAHAAYAAQABAAEAAAAHAAcAAQAAAAEAAAAHAAgAAQAAAAEAAAAHAAkAAQACAAEAAAAHAAoAAQADAAEAAAAHAAsAAQACAAEAAAAIAAEAAQAEAAEAAAAIAAIAAQAAAAEAAAAIAAMAAQACAAEAAAAIAAQAAQADAAEAAAAIAAUAAQAEAAEAAAAIAAYAAQAAAAEAAAAIAAcAAQACAAEAAAAIAAgAAQAAAAEAAAAIAAkAAQAFAAEAAAAIAAsAAQAFAAEAAAAJAAEAAQADAAEAAAAJAAIAAQABAAEAAAAJAAMAAQADAAEAAAAJAAUAAQABAAEAAAAJAAYAAQACAAEAAAAJAAcAAQAEAAEAAAAJAAgAAQABAAEAAAAJAAkAAQADAAEAAAAJAAoAAQAFAAEAAAAJAAsAAQAFAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQACAAEAAAAKAAMAAQABAAEAAAAKAAQAAQABAAAAAAAKAAYAAQADAAEAAAAKAAgAAQADAAEAAAAKAAkAAQAEAAEAAAAKAAoAAQADAAEAAAAKAAsAAQADAAEAAAAAAAAAAQAFAAEAAAABAAAAAQACAAEAAAACAAAAAQAFAAEAAAADAAAAAQAEAAEAAAAEAAAAAQADAAEAAAAFAAAAAQAFAAEAAAAGAAAAAQAFAAEAAAAHAAAAAQACAAEAAAAIAAAAAQADAAEAAAAJAAAAAQACAAEAAAAKAAAAAQAAAAEAAAALAAAAAQAFAAEAAAALAAEAAQACAAEAAAALAAIAAQACAAEAAAALAAMAAQADAAEAAAALAAQAAQABAAAAAAALAAUAAQABAAAAAAALAAYAAQADAAEAAAALAAcAAQAEAAEAAAALAAgAAQAEAAEAAAALAAkAAQADAAEAAAALAAoAAQAEAAEAAAALAAsAAQABAAEAAAAGAAgAAQADAAEAAAABAAcAAQAAAAEAAAAAAAcAAQABAAEAAAAAAAgAAQAAAAEAAAABAAgAAQABAAEAAAAAAAsAAQADAAEAAAABAAsAAQABAAEAAAACAAsAAQABAAEAAAAAAAoAAQABAAEAAAAAAAkAAQABAAEAAAAIAAoAAQABAAEAAAAFAAkAAQABAAEAAAAKAAUAAQAFAAEAAAAJAAQAAQABAAEAAAAKAAcAAQABAAEAAAA=")
 tile_set = SubResource("TileSet_h2yge")
 
-[node name="Gnome" parent="FairyManager/TileMapLayers" unique_id=1604901195 instance=ExtResource("3_h2yge")]
-z_index = 1
-position = Vector2(35, -130)
+[node name="GnomeInstances" type="Node2D" parent="TilemapManager" unique_id=383390692]
+y_sort_enabled = true
 
-[node name="HazardLayer" type="TileMapLayer" parent="FairyManager/TileMapLayers" unique_id=107139942]
-z_index = 1
+[node name="HazardLayer" type="TileMapLayer" parent="TilemapManager" unique_id=107139942]
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAABAP7/AgABAAAAAAACAP7/AgABAAAAAAADAP7/AgABAAAAAAAEAP7/AgABAAAAAAAFAP7/AgABAAAAAAAGAP7/AgABAAAAAAAHAP7/AgABAAAAAAAIAP7/AgABAAAAAAAJAP7/AgABAAAAAAAKAP7/AgABAAAAAAALAP7/AgABAAAAAAAMAP7/AgABAAAAAAANAP//AgAAAAAAAAANAAAAAgAAAAAAAAANAAEAAgAAAAAAAAANAAIAAgAAAAAAAAANAAMAAgAAAAAAAAANAAQAAgAAAAAAAAANAAUAAgAAAAAAAAANAAYAAgAAAAAAAAANAAcAAgAAAAAAAAANAAgAAgAAAAAAAAANAAoAAgAAAAAAAAANAAkAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_7mycd")
