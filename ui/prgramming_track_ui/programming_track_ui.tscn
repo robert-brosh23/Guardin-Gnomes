@@ -3,8 +3,22 @@
 [ext_resource type="Texture2D" uid="uid://d3b3tbtr72l0x" path="res://sprites/proto_vine.png" id="1_rcel3"]
 [ext_resource type="Script" uid="uid://bv5qw1cajvfy4" path="res://ui/prgramming_track_ui/programming_track_ui.gd" id="1_uh0xp"]
 [ext_resource type="PackedScene" uid="uid://c7b8b6nkhsmxg" path="res://ui/prgramming_track_ui/track_spot/track_spot.tscn" id="2_jxowk"]
+[ext_resource type="FontFile" uid="uid://cm4gkenj5odhg" path="res://ui/fonts/m5x7.ttf" id="4_s6dcx"]
+[ext_resource type="Script" uid="uid://hd613qnyifew" path="res://ui/prgramming_track_ui/button.gd" id="5_se4ky"]
 
-[node name="ProgrammingTrackUI" type="Control" unique_id=660876712]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_se4ky"]
+bg_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.46666667, 0.45490196, 0.23137255, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="ProgrammingTrackUI" type="Control" unique_id=660876712 node_paths=PackedStringArray("enchant_button")]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -14,6 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_uh0xp")
+enchant_button = NodePath("Button")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1323901869]
 layout_mode = 1
@@ -48,3 +63,24 @@ position = Vector2(58, 144)
 [node name="TrackSpot5" parent="TextureRect" unique_id=40446193 instance=ExtResource("2_jxowk")]
 z_index = 1
 position = Vector2(156, 76)
+
+[node name="Button" type="Button" parent="." unique_id=951669152]
+layout_mode = 0
+offset_left = 601.0
+offset_top = 218.0
+offset_right = 689.0
+offset_bottom = 252.0
+theme_override_colors/font_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
+theme_override_colors/font_focus_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
+theme_override_colors/font_pressed_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
+theme_override_colors/font_hover_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
+theme_override_fonts/font = ExtResource("4_s6dcx")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_se4ky")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_se4ky")
+theme_override_styles/hover = SubResource("StyleBoxFlat_se4ky")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_se4ky")
+theme_override_styles/focus = SubResource("StyleBoxFlat_se4ky")
+text = "Enchant"
+script = ExtResource("5_se4ky")

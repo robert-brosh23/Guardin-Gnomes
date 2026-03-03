@@ -15,8 +15,9 @@ func _ready():
 	_spawn_gnome_in_world(Gnome.GnomeColor.RED, Vector2i(5,5), gnome_scene.Direction.UP_LEFT)
 	_spawn_gnome_in_world(Gnome.GnomeColor.BLUE, Vector2i(7,7), gnome_scene.Direction.UP_RIGHT)
 	_spawn_gnome_in_world(Gnome.GnomeColor.GREEN, Vector2i(8,8), gnome_scene.Direction.DOWN_LEFT)
-		
+	
 	spawn_manager.spawn_initial_hazards()
+	GameManager.game_state = GameManager.GameState.MANIPULATING
 		
 #	spawn_manager.event_tornado()
 #	spawn_manager.event_rock()
