@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://bp7ugabbmd2ky" path="res://sprites/hazard/teleporter.png" id="10_dg77c"]
 [ext_resource type="PackedScene" uid="uid://8nfe5xqymm3v" path="res://ui/hand/hand.tscn" id="11_dg77c"]
 [ext_resource type="PackedScene" uid="uid://3xyqk6fv74h2" path="res://ui/prgramming_track_ui/card/card.tscn" id="11_efxa6"]
+[ext_resource type="Resource" uid="uid://csnqnld8p5bjo" path="res://ui/prgramming_track_ui/card/data/u_turn.tres" id="19_cegan"]
+[ext_resource type="Resource" uid="uid://dcbwxhhg21gww" path="res://ui/prgramming_track_ui/card/data/forward_two.tres" id="20_82xsv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0xm2m"]
 texture = ExtResource("1_ig7tw")
@@ -276,14 +278,11 @@ cards_in_hand = [NodePath("Card"), NodePath("Card2"), NodePath("Card3")]
 
 [node name="Card" parent="CanvasLayer/Hand" unique_id=861204244 instance=ExtResource("11_efxa6")]
 position = Vector2(53, 381)
+data = ExtResource("19_cegan")
 
 [node name="Card2" parent="CanvasLayer/Hand" unique_id=672049880 instance=ExtResource("11_efxa6")]
 position = Vector2(163, 391)
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Hand/Card2" unique_id=1696766785]
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 1
-
 [node name="Card3" parent="CanvasLayer/Hand" unique_id=1448315846 instance=ExtResource("11_efxa6")]
 position = Vector2(289, 388)
+data = ExtResource("20_82xsv")

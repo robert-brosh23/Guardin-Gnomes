@@ -3,7 +3,10 @@ extends Area2D
 
 enum states {DEFAULT, HOVERING, DRAGGING, PLACED}
 
+@export var data: CardData
+
 @export var draggable: Draggable
+@export var card_image: TextureRect
 
 var state: states
 var hand: Hand
@@ -13,9 +16,14 @@ func _ready():
 	hand = get_tree().get_first_node_in_group("hand")
 	draggable.drag_layer_parent = hand
 	
+	card_image.texture = data.texture
+	
 	state = states.DEFAULT
 	draggable.drag_started.connect(_on_drag_started)
 	draggable.drag_ended.connect(_on_drag_ended)
+	
+func activate():
+	SignalBus.activate_card.emit(data.card_action)
 	
 func _on_drag_started(_area2d: Area2D):
 	state = states.DRAGGING

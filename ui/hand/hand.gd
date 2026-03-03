@@ -54,7 +54,7 @@ func _update_hand():
 				_z_index += 1
 				
 			card.states.HOVERING:
-				if card.global_position.y < DEFAULT_Y - 40:
+				if card.global_position.y < DEFAULT_Y - 40 or card.global_position.x > CENTER_X + 250 :
 					card.tween_to_pos(Vector2(x_pos, DEFAULT_Y))
 					card.z_index = _z_index
 					_z_index += 1
