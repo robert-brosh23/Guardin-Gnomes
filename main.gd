@@ -12,12 +12,9 @@ const gnome_scene = preload("uid://bffr6n4g2h0d3")
 
 
 func _ready():
-	_spawn_gnome_in_world("red", Vector2i(5,5), gnome_scene.Direction.UP_LEFT)
-	_spawn_gnome_in_world("blue", Vector2i(7,7), gnome_scene.Direction.UP_RIGHT)
-	_spawn_gnome_in_world("green", Vector2i(8,8), gnome_scene.Direction.DOWN_LEFT)
-	for gnome in gnomes:
-		gnome.global_position = base_layer.map_to_local(gnome.grid_pos) + base_layer.global_position
-		gnome.try_move.connect(_try_move_piece)
+	_spawn_gnome_in_world(Gnome.GnomeColor.RED, Vector2i(5,5), gnome_scene.Direction.UP_LEFT)
+	_spawn_gnome_in_world(Gnome.GnomeColor.BLUE, Vector2i(7,7), gnome_scene.Direction.UP_RIGHT)
+	_spawn_gnome_in_world(Gnome.GnomeColor.GREEN, Vector2i(8,8), gnome_scene.Direction.DOWN_LEFT)
 		
 	spawn_manager.spawn_initial_hazards()
 		
@@ -122,6 +119,8 @@ func _handle_teleporter(piece, new_hazard_type):
 		return
 
 
-func _spawn_gnome_in_world(color, grid_pos: Vector2i, direction):
+func _spawn_gnome_in_world(color: Gnome.GnomeColor, grid_pos: Vector2i, direction):
 	var gnome = spawn_manager.spawn_gnome(color, grid_pos, direction)
+	gnome.global_position = base_layer.map_to_local(gnome.grid_pos) + base_layer.global_position
+	gnome.try_move.connect(_try_move_piece)
 	gnomes.append(gnome)

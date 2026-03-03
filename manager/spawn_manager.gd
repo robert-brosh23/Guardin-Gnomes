@@ -19,7 +19,7 @@ var HAZARD_INITIAL_SPAWN_QTY: Dictionary = {
 	"thornbush" = 6,
 }
 	
-func spawn_gnome(color, grid_pos, direction):
+func spawn_gnome(color: Gnome.GnomeColor, grid_pos: Vector2i, direction: Gnome.Direction):
 	var gnome = gnome_scene.instantiate() as Gnome
 	gnome.color = color
 	gnome.grid_pos = grid_pos
