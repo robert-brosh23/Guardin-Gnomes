@@ -21,25 +21,25 @@ var grid_pos: Vector2i = Vector2i(6,5)
 func _ready():
 	direction = Direction.DOWN_RIGHT
 	_update_blend_positions()
+	SignalBus.activate_card.connect(_do_action)
 
-func try_move_forward():
+func try_move_forward(amount: int = 1):
 	var new_pos: Vector2i
 	match direction:
 		Direction.UP_LEFT:
-			new_pos = grid_pos + Vector2i(0, -1)
+			new_pos = grid_pos + Vector2i(0, amount * -1)
 		Direction.UP_RIGHT:
-			new_pos = grid_pos + Vector2i(1, 0)
+			new_pos = grid_pos + Vector2i(amount, 0)
 		Direction.DOWN_RIGHT:
-			new_pos = grid_pos + Vector2i(0, 1)
+			new_pos = grid_pos + Vector2i(0, amount)
 		Direction.DOWN_LEFT:
-			new_pos = grid_pos + Vector2i(-1, 0)
+			new_pos = grid_pos + Vector2i(amount * -1, 0)
 	try_move.emit(self, new_pos)
 
 func move_to_space(new_pos: Vector2i, new_physical_pos: Vector2):
 	grid_pos = new_pos
 	jump_state.new_physical_pos = new_physical_pos
 	state_machine.active_state.Transitioned.emit(state_machine.active_state, "JumpState")
-
 
 func turn_right():
 	if direction == Direction.DOWN_LEFT:
@@ -73,7 +73,6 @@ func _update_blend_positions():
 	var blend_vector := _get_animation_direction_vector()
 	animation_tree.set("parameters/Idle/blend_position", blend_vector)
 	animation_tree.set("parameters/Jump/blend_position", blend_vector)
-	
 		
 func _get_animation_direction_vector() -> Vector2:
 	var direction_vector: Vector2
@@ -88,3 +87,12 @@ func _get_animation_direction_vector() -> Vector2:
 			direction_vector = Vector2(-1, -1)
 	return direction_vector
 	
+func _do_action(action: CardData.CardAction):
+	match action:
+		CardData.CardAction.FORWARD_ONE:
+			try_move_forward()
+		CardData.CardAction.U_TURN:
+			turn_right()
+			turn_right()
+		CardData.CardAction.FORWARD_TWO:
+			try_move_forward(2)
