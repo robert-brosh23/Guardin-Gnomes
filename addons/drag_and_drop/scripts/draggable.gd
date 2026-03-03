@@ -142,6 +142,13 @@ func _on_input_event(_viewport, event, _shape_idx):
 		_change_state_to(DRAGGABLE_STATE.DRAGGING)
 		drag_started.emit(a)
 
+func stop_dragging_card():
+	if is_instance_of(get_parent(), Card):
+		var card : Card = get_parent()
+		if state == DRAGGABLE_STATE.DRAGGING and GameManager.game_state == GameManager.GameState.DISCARDING:
+			drag_ended.emit(a, null)
+			state = DRAGGABLE_STATE.IDLE
+
 func _input(event):
 	if event.is_action_released(drag_input_name) and state == DRAGGABLE_STATE.DRAGGING:
 		var overlapping_areas = a.get_overlapping_areas()

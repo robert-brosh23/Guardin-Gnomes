@@ -5,7 +5,7 @@ func evaluate(zone: DropZone, dropped_area: Area2D) -> DropPlan:
 	
 	var draggable := find_draggable(dropped_area)
 	var prev_zone : DropZone = null
-	if draggable:
+	if draggable && draggable.previous_parent:
 		prev_zone = find_drop_zone(draggable.previous_parent) as DropZone
 	var spot : SnappingSpot = null
 	if prev_zone:
@@ -14,9 +14,12 @@ func evaluate(zone: DropZone, dropped_area: Area2D) -> DropPlan:
 	var result := DropUtils.evaluate_drop_target(zone, dropped_area, false)
 	if not result.can_drop:
 		return plan
-	plan.can_drop = true
+		
 	plan.drop_target = result.target
-	
+	if plan.drop_target.occupant and is_instance_of(plan.drop_target.occupant, Card) and plan.drop_target.occupant.state == Card.states.LOCKED:
+		return plan
+			
+	plan.can_drop = true
 	if plan.drop_target and plan.drop_target.occupant and plan.drop_target.occupant != dropped_area:
 		if spot:
 			plan.actions.append(ActionRelocate.new(plan.drop_target.occupant, spot))

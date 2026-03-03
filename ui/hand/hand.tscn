@@ -1,6 +1,33 @@
 [gd_scene format=3 uid="uid://8nfe5xqymm3v"]
 
 [ext_resource type="Script" uid="uid://bwqfka8hm8ceo" path="res://ui/hand/hand.gd" id="1_vna3l"]
+[ext_resource type="FontFile" uid="uid://cm4gkenj5odhg" path="res://ui/fonts/m5x7.ttf" id="2_3gwtu"]
 
-[node name="Hand" type="Node2D" unique_id=738646449 groups=["hand"]]
+[node name="Hand" type="Node2D" unique_id=738646449 node_paths=PackedStringArray("cards_in_deck_label", "cards_in_discard_label") groups=["hand"]]
+z_index = 2
 script = ExtResource("1_vna3l")
+cards_in_deck_label = NodePath("VBoxContainer/CardsInDeck")
+cards_in_discard_label = NodePath("VBoxContainer/CardsInDiscard")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=130619667]
+z_index = 2
+offset_left = 7.0
+offset_top = 262.0
+offset_right = 121.0
+offset_bottom = 318.0
+
+[node name="CardsInDeck" type="Label" parent="VBoxContainer" unique_id=1810317781]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.67058825, 0.6313726, 1)
+theme_override_fonts/font = ExtResource("2_3gwtu")
+theme_override_font_sizes/font_size = 32
+text = "Deck: "
+horizontal_alignment = 2
+
+[node name="CardsInDiscard" type="Label" parent="VBoxContainer" unique_id=1564653344]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.67058825, 0.6313726, 1)
+theme_override_fonts/font = ExtResource("2_3gwtu")
+theme_override_font_sizes/font_size = 32
+text = "Discard: "
+horizontal_alignment = 2
