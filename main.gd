@@ -3,17 +3,24 @@ extends Node2D
 
 @export var base_layer: TileMapLayer
 @export var hazard_layer: TileMapLayer
-@export var gnomes: Array[Gnome]
+var gnomes: Array[Gnome]
+const gnome_scene = preload("uid://bffr6n4g2h0d3")
 
-@onready var fairy_manager: RoundManager = %FairyManager
-@onready var tile_map_layers: Node2D = %TileMapLayers
+@onready var pixie_manager: Node = $PixieManager
+@onready var spawn_manager: Node = $SpawnManager
+@onready var tilemap_manager: Node2D = $TilemapManager
 
 
 func _ready():
-	for gnome in gnomes:
-		gnome.global_position = base_layer.map_to_local(gnome.grid_pos) + base_layer.global_position
-		gnome.try_move.connect(_try_move_piece)
-		# tile_map_layers.spawn_custom_hazards({"rock": 20}) - can create big spawn events like this
+	_spawn_gnome_in_world(Gnome.GnomeColor.RED, Vector2i(5,5), gnome_scene.Direction.UP_LEFT)
+	_spawn_gnome_in_world(Gnome.GnomeColor.BLUE, Vector2i(7,7), gnome_scene.Direction.UP_RIGHT)
+	_spawn_gnome_in_world(Gnome.GnomeColor.GREEN, Vector2i(8,8), gnome_scene.Direction.DOWN_LEFT)
+		
+	spawn_manager.spawn_initial_hazards()
+		
+#	spawn_manager.event_tornado()
+#	spawn_manager.event_rock()
+#	spawn_manager.event_thornbush()
 
 
 func _try_move_piece(piece: Gnome, new_pos: Vector2i):
@@ -40,15 +47,6 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 	if new_hazard_tile_data != null:
 		new_hazard_type = new_hazard_tile_data.get_custom_data("hazard_type")
 	
-	# Handle base tiles
-	if new_base_type == "fairy1" || new_base_type == "fairy2":
-		#base_layer.erase_cell(new_pos + Vector2i(-1,1))
-		base_layer.set_cell(new_pos + Vector2i(-1,1), 1, tile_map_layers.get_random_grass())
-	
-	if current_base_type == "fairy1" || current_base_type == "fairy2":
-		#base_layer.erase_cell(piece.grid_pos + Vector2i(-1,1))
-		base_layer.set_cell(piece.grid_pos + Vector2i(-1,1), 1, tile_map_layers.get_random_grass())
-
 	
 	# Handle hazards / move
 	if new_hazard_type == "rock": return
@@ -57,15 +55,25 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 	
 	var new_physical_pos := base_layer.map_to_local(new_pos) + base_layer.global_position
 	piece.move_to_space(new_pos, new_physical_pos)
-	
+
+
 	if new_hazard_type == "pixie":
-		await get_tree().create_timer(0.7).timeout # makes it look like gnome stomped pixie
+		await get_tree().create_timer(0.8).timeout # purely for visuals
 		hazard_layer.erase_cell(new_pos)
 		# notify xp system that a pixie was removed
-		# notify base layer to stop spawning more
 	_handle_teleporter(piece, new_hazard_type)
 	if new_hazard_type == "tornado_right": piece.turn_right()
 	if new_hazard_type == "tornado_left": piece.turn_left()
+
+
+	# Handle base tiles
+	if new_base_type == "fairy1" || new_base_type == "fairy2":
+		await get_tree().create_timer(0.8).timeout # purely for visuals
+		base_layer.set_cell(new_pos + Vector2i(-1,1), 1, tilemap_manager.get_random_grass())
+	
+	if current_base_type == "fairy1" || current_base_type == "fairy2":
+		await get_tree().create_timer(0.8).timeout # purely for visuals
+		base_layer.set_cell(piece.grid_pos + Vector2i(-1,1), 1, tilemap_manager.get_random_grass())
 
 
 func _handle_wall(piece, new_hazard_type, current_hazard_type):
@@ -95,11 +103,11 @@ func _handle_thornbush(piece, new_hazard_type, current_hazard_type):
 
 func _handle_teleporter(piece, new_hazard_type):
 	if new_hazard_type == "teleporter":
-		await get_tree().create_timer(0.81).timeout
+		await get_tree().create_timer(0.82).timeout
 		
 		var current_pos = piece.grid_pos
 		var target_pos: Vector2i
-		for pos in tile_map_layers.teleporter_coords:
+		for pos in tilemap_manager.teleporter_coords:
 			if pos != current_pos:
 				target_pos = pos
 				break
@@ -107,6 +115,12 @@ func _handle_teleporter(piece, new_hazard_type):
 		var target_physical_pos = base_layer.map_to_local(target_pos) + base_layer.global_position
 		piece.grid_pos = target_pos
 		piece.global_position = target_physical_pos
-		
 		piece.try_move_forward()
 		return
+
+
+func _spawn_gnome_in_world(color: Gnome.GnomeColor, grid_pos: Vector2i, direction):
+	var gnome = spawn_manager.spawn_gnome(color, grid_pos, direction)
+	gnome.global_position = base_layer.map_to_local(gnome.grid_pos) + base_layer.global_position
+	gnome.try_move.connect(_try_move_piece)
+	gnomes.append(gnome)

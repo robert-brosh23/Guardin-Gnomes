@@ -4,6 +4,7 @@ extends Node2D
 signal try_move(Gnome, Direction)
 
 enum Direction {UP_LEFT, UP_RIGHT, DOWN_RIGHT, DOWN_LEFT}
+enum GnomeColor {RED, GREEN, BLUE}
 
 @export var animation_tree: AnimationTree
 @export var animation_player: AnimationPlayer
@@ -14,12 +15,14 @@ enum Direction {UP_LEFT, UP_RIGHT, DOWN_RIGHT, DOWN_LEFT}
 var jump_tween: Tween
 var direction: Direction
 var stuck_count: int
+var color: GnomeColor
+var upgrades: Array[String]
 
 ## FAR LEFT SIDE IS (0,0), TOP IS (11,0), FAR RIGHT SIDE IS (11,11), BOTTOM IS (0,11)
 var grid_pos: Vector2i = Vector2i(6,5)
 
 func _ready():
-	direction = Direction.DOWN_RIGHT
+	_set_color()
 	_update_blend_positions()
 	SignalBus.activate_card.connect(_do_action)
 
@@ -96,3 +99,8 @@ func _do_action(action: CardData.CardAction):
 			turn_right()
 		CardData.CardAction.FORWARD_TWO:
 			try_move_forward(2)
+
+func _set_color():
+	if color == GnomeColor.GREEN: sprite.texture = load("uid://cnil47ngwlo1q")
+	if color == GnomeColor.RED: sprite.texture = load("uid://c1eff46jfb1x4")
+	if color == GnomeColor.BLUE: sprite.texture = load("uid://2gdyvmldocwe")
