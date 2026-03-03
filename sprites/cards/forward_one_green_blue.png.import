@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r6u8o12hu8in"
-path="res://.godot/imported/forward_one.png-7af9185989680cebb79486a6bac809e8.ctex"
+uid="uid://bh1qpwv33qbq7"
+path="res://.godot/imported/forward_one_green_blue.png-005da698f255ad3b7aedf1250bf3545a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/cards/forward_one.png"
-dest_files=["res://.godot/imported/forward_one.png-7af9185989680cebb79486a6bac809e8.ctex"]
+source_file="res://sprites/cards/forward_one_green_blue.png"
+dest_files=["res://.godot/imported/forward_one_green_blue.png-005da698f255ad3b7aedf1250bf3545a.ctex"]
 
 [params]
 

@@ -23,7 +23,7 @@ func _ready():
 	draggable.drag_ended.connect(_on_drag_ended)
 	
 func activate():
-	SignalBus.activate_card.emit(data.card_action)
+	SignalBus.activate_card.emit(data)
 	
 func _on_drag_started(_area2d: Area2D):
 	state = states.DRAGGING
