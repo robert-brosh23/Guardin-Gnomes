@@ -1,6 +1,21 @@
 class_name Main
 extends Node2D
 
+##### BALANCING VARIABLES #####
+var MAX_BLIGHT: int = 8 # how many blight allowed before game over
+
+var PIXIE_INITIAL_SPAWN: int = 2 # how many pixie circles are at game start
+var PIXIE_GROW_RATE: int = 1 # how many rounds between each pixie growth
+var PIXIE_SPREAD_RATE: int = 1 # how many rounds between each pixie spread
+var PIXIE_SPAWN_RATE: int = 1 # how many rounds between each pixie rand spawn
+var PIXIE_SPAWN_SCALE: int = 10 # how many rounds before spawn uptick
+var PIXIE_SPAWN_INTENSITY: int = 1 # how many pixies spawned at a time
+
+var EVENT_FREQ: int = 5 # how often do events occur
+var EVENT_INTENSITY: int = 30 # how many items are spawned by events
+var EVENT_INTENSITY_SCALING: int = 5 # how many rounds before each intensity uptick
+###############################
+
 @export var base_layer: TileMapLayer
 @export var hazard_layer: TileMapLayer
 var gnomes: Array[Gnome]
@@ -9,6 +24,14 @@ const gnome_scene = preload("uid://bffr6n4g2h0d3")
 @onready var pixie_manager: Node = $PixieManager
 @onready var spawn_manager: Node = $SpawnManager
 @onready var tilemap_manager: Node2D = $TilemapManager
+@onready var hand: Hand = %Hand
+@onready var game_ui: Control = %GameUI
+@onready var event_countdown_label: Label = $CanvasLayer/GameUI/VBoxContainer/EventCountdownLabel
+@onready var blight_label: Label = $CanvasLayer/GameUI/BlightLabel
+@onready var round_label: Label = $CanvasLayer/GameUI/VBoxContainer/RoundLabel
+
+
+var round_counter: int = 1
 
 
 func _ready():
@@ -17,11 +40,27 @@ func _ready():
 	_spawn_gnome_in_world(Gnome.GnomeColor.GREEN, Vector2i(8,8), gnome_scene.Direction.DOWN_LEFT)
 	
 	spawn_manager.spawn_initial_hazards()
+	for i in PIXIE_INITIAL_SPAWN:
+		pixie_manager.pixie_rand_spawn()
 	GameManager.game_state = GameManager.GameState.MANIPULATING
-		
-#	spawn_manager.event_tornado()
-#	spawn_manager.event_rock()
-#	spawn_manager.event_thornbush()
+	SignalBus.turn_end.connect(_on_turn_end)
+
+	round_label.text = "ROUND: %s" % round_counter
+	event_countdown_label.text = "Next Event In %s Rounds" % \
+		(EVENT_FREQ - (round_counter % EVENT_FREQ)) # dif from turn on purpose
+	blight_label.text = "BLIGHT: %s/%s" % [0, MAX_BLIGHT]
+
+
+func _on_turn_end():
+	pixie_manager._on_next_round()
+	_check_gameover()
+	hand._on_turn_end()
+	if round_counter % EVENT_FREQ == 0:
+		spawn_manager.trigger_random_event()
+	event_countdown_label.text = "Next Event In %s Rounds" % \
+		(EVENT_FREQ - (round_counter % EVENT_FREQ) - 1)
+	round_counter += 1
+	round_label.text = "ROUND: %s" % round_counter
 
 
 func _try_move_piece(piece: Gnome, new_pos: Vector2i):
@@ -125,3 +164,7 @@ func _spawn_gnome_in_world(color: Gnome.GnomeColor, grid_pos: Vector2i, directio
 	gnome.global_position = base_layer.map_to_local(gnome.grid_pos) + base_layer.global_position
 	gnome.try_move.connect(_try_move_piece)
 	gnomes.append(gnome)
+
+
+func _check_gameover():
+	return pixie_manager.blight_count >= MAX_BLIGHT or gnomes.size() <= 0

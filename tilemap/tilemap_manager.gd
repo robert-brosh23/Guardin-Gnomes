@@ -6,7 +6,7 @@ extends Node2D
 @export var hazard_layer: TileMapLayer
 
 @onready var gnome_instances: Node2D = $GnomeInstances
-@onready var main: Main = get_parent()
+@export var main: Main
 
 var teleporter_coords: Array[Vector2i] = [Vector2i(3,1), Vector2i(10,8)]
 
@@ -40,11 +40,6 @@ func get_random_empty_cell() -> Vector2i:
 		var x := randi_range(1, 12)
 		var y := randi_range(-1, 10)
 		var pos := Vector2i(x, y)
-		
-		
-		print("I am:", self)
-		print("My parent:", get_parent())
-		print(hazard_layer)
 		
 		# check that there isn't a hazard there
 		if hazard_layer.get_cell_tile_data(pos) != null:

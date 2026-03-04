@@ -25,7 +25,6 @@ func _ready() -> void:
 	programming_track_ui = get_tree().get_first_node_in_group("programming_track")
 	_setup_deck_and_discard_and_hand()
 	draw_cards()
-	SignalBus.turn_end.connect(_on_turn_end)
 
 func _process(delta: float) -> void:
 	cards_in_deck_label.text = "Deck: " + str(cards_in_deck.size())
@@ -45,7 +44,7 @@ func _process(delta: float) -> void:
 		else:
 			if card.state == Card.states.HOVERING:
 				card.state = Card.states.DEFAULT
-				
+
 func draw_cards(num_cards: int = 7, lock_first: bool = true):
 	GameManager.game_state = GameManager.GameState.DRAWING
 	if lock_first:
