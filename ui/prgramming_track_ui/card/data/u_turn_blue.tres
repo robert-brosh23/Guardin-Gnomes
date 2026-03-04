@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://csnqnld8p5bjo"]
 
 [ext_resource type="Script" uid="uid://cu1r6x02a3xjt" path="res://ui/prgramming_track_ui/card/data/card_data.gd" id="1_etlam"]
-[ext_resource type="Texture2D" uid="uid://bds0twec3kume" path="res://sprites/cards/u_turn.png" id="2_vdyw0"]
+[ext_resource type="Texture2D" uid="uid://bds0twec3kume" path="res://sprites/cards/u_turn_blue.png" id="2_vdyw0"]
 
 [resource]
 script = ExtResource("1_etlam")
 card_action = 1
 texture = ExtResource("2_vdyw0")
+color = Array[int]([2])
 metadata/_custom_type_script = "uid://cu1r6x02a3xjt"

@@ -4,6 +4,14 @@ extends Area2D
 @export var dropzone: DropZone
 @export var card_highlight: TextureRect
 
+func attach_card(card: Card) -> bool:
+	var dropped = dropzone.try_dropping(card)
+	print("tried attaching")
+	if dropped != null:
+		card.tween_to_pos(global_position, 1.0, Tween.TransitionType.TRANS_CUBIC, Tween.EaseType.EASE_OUT)
+		return true
+	return false
+
 func activate():
 	card_highlight.visible = true
 	var card : Card = get_child_of_type(self, Card)

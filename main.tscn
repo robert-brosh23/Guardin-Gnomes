@@ -16,9 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://b52d3n8sxrt4w" path="res://ui/prgramming_track_ui/programming_track_ui.tscn" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bp7ugabbmd2ky" path="res://sprites/hazard/teleporter.png" id="10_dg77c"]
 [ext_resource type="PackedScene" uid="uid://8nfe5xqymm3v" path="res://ui/hand/hand.tscn" id="11_dg77c"]
-[ext_resource type="PackedScene" uid="uid://3xyqk6fv74h2" path="res://ui/prgramming_track_ui/card/card.tscn" id="11_efxa6"]
-[ext_resource type="Resource" uid="uid://csnqnld8p5bjo" path="res://ui/prgramming_track_ui/card/data/u_turn.tres" id="19_cegan"]
-[ext_resource type="Resource" uid="uid://dcbwxhhg21gww" path="res://ui/prgramming_track_ui/card/data/forward_two.tres" id="20_82xsv"]
+[ext_resource type="Script" uid="uid://cu1r6x02a3xjt" path="res://ui/prgramming_track_ui/card/data/card_data.gd" id="17_1u8w0"]
+[ext_resource type="Resource" uid="uid://csnqnld8p5bjo" path="res://ui/prgramming_track_ui/card/data/u_turn_blue.tres" id="19_cegan"]
+[ext_resource type="Resource" uid="uid://bx2pdt61mbfwa" path="res://ui/prgramming_track_ui/card/data/forward_one_green.tres" id="20_getpj"]
+[ext_resource type="Resource" uid="uid://do6mo3e746w7y" path="res://ui/prgramming_track_ui/card/data/forward_one_blue.tres" id="21_1u8w0"]
+[ext_resource type="Resource" uid="uid://cmlmm85ej7vgg" path="res://ui/prgramming_track_ui/card/data/forward_one_red.tres" id="21_ryguw"]
+[ext_resource type="Resource" uid="uid://caya841uk0ee" path="res://ui/prgramming_track_ui/card/data/forward_one_all.tres" id="22_d13ii"]
+[ext_resource type="Resource" uid="uid://bu0qlha24sdb2" path="res://ui/prgramming_track_ui/card/data/forward_one_red_blue.tres" id="23_1u8w0"]
+[ext_resource type="Resource" uid="uid://berxfei2b6svl" path="res://ui/prgramming_track_ui/card/data/forward_one_blue_green.tres" id="24_0odxb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0xm2m"]
 texture = ExtResource("1_ig7tw")
@@ -273,16 +278,5 @@ offset_bottom = 449.0
 
 [node name="ProgrammingTrackUI" parent="CanvasLayer" unique_id=660876712 instance=ExtResource("10_4c57u")]
 
-[node name="Hand" parent="CanvasLayer" unique_id=738646449 node_paths=PackedStringArray("cards_in_hand") instance=ExtResource("11_dg77c")]
-cards_in_hand = [NodePath("Card"), NodePath("Card2"), NodePath("Card3")]
-
-[node name="Card" parent="CanvasLayer/Hand" unique_id=861204244 instance=ExtResource("11_efxa6")]
-position = Vector2(53, 381)
-data = ExtResource("19_cegan")
-
-[node name="Card2" parent="CanvasLayer/Hand" unique_id=672049880 instance=ExtResource("11_efxa6")]
-position = Vector2(163, 391)
-
-[node name="Card3" parent="CanvasLayer/Hand" unique_id=1448315846 instance=ExtResource("11_efxa6")]
-position = Vector2(289, 388)
-data = ExtResource("20_82xsv")
+[node name="Hand" parent="CanvasLayer" unique_id=738646449 instance=ExtResource("11_dg77c")]
+card_datas = Array[ExtResource("17_1u8w0")]([ExtResource("21_ryguw"), ExtResource("19_cegan"), ExtResource("23_1u8w0"), ExtResource("21_1u8w0"), ExtResource("19_cegan"), ExtResource("20_getpj"), ExtResource("22_d13ii"), ExtResource("24_0odxb"), ExtResource("22_d13ii"), ExtResource("24_0odxb"), ExtResource("21_ryguw")])

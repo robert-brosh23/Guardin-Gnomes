@@ -24,7 +24,7 @@ var grid_pos: Vector2i = Vector2i(6,5)
 func _ready():
 	_set_color()
 	_update_blend_positions()
-	SignalBus.activate_card.connect(_do_action)
+	SignalBus.activate_card.connect(_try_action)
 
 func try_move_forward(amount: int = 1):
 	var new_pos: Vector2i
@@ -90,8 +90,11 @@ func _get_animation_direction_vector() -> Vector2:
 			direction_vector = Vector2(-1, -1)
 	return direction_vector
 	
-func _do_action(action: CardData.CardAction):
-	match action:
+func _try_action(data: CardData):
+	if !data.color.has(color):
+		return
+		
+	match data.card_action:
 		CardData.CardAction.FORWARD_ONE:
 			try_move_forward()
 		CardData.CardAction.U_TURN:
