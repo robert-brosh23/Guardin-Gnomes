@@ -4,8 +4,11 @@ extends Node
 @onready var tilemap_manager: Node = $"../TilemapManager"
 @onready var base_layer: TileMapLayer = $"../TilemapManager/BaseLayer"
 @onready var hazard_layer: TileMapLayer = $"../TilemapManager/HazardLayer"
+@onready var main: Main = get_parent()
+@onready var blight_label: Label = $"../CanvasLayer/GameUI/BlightLabel"
 
 
+# initializations
 const PIXIE_CIRCLE_SOURCE_ID := 2
 const PIXIE_HAZARD_SOURCE_ID := 10
 const PIXIE_CIRCLE_1_ATLAS := Vector2i(0,0)
@@ -18,17 +21,21 @@ var pixie_circle_2_tiles: Array[Vector2i]
 var pixie_circle_3_tiles: Array[Vector2i]
 var pixie_hazard_tiles: Array[Vector2i]
 
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("next_round"):
-		_on_next_round()
-		print("next round")
+var blight_count: int
 
 
-func _on_next_round():
-	pixie_grow()
-	pixie_spread()
-	pixie_rand_spawn()
+func _on_next_round(_round_number := 0):
+	if main.round_counter % main.PIXIE_GROW_RATE == 0:
+		pixie_grow()
+	if main.round_counter % main.PIXIE_SPREAD_RATE == 0:
+		pixie_spread()
+	if main.round_counter % main.PIXIE_SPAWN_RATE == 0:
+		for i in main.PIXIE_SPAWN_INTENSITY: pixie_rand_spawn()
+	if main.round_counter % main.PIXIE_SPAWN_SCALE == 0:
+		main.PIXIE_SPAWN_INTENSITY += 1
+	_check_pixie_tiles()
+	blight_count = pixie_circle_3_tiles.size()
+	blight_label.text = "BLIGHT: %s/%s" % [blight_count, main.MAX_BLIGHT]
 
 
 func pixie_rand_spawn():

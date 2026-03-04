@@ -24,6 +24,7 @@
 [ext_resource type="Resource" uid="uid://caya841uk0ee" path="res://ui/prgramming_track_ui/card/data/forward_one_all.tres" id="22_d13ii"]
 [ext_resource type="Resource" uid="uid://bu0qlha24sdb2" path="res://ui/prgramming_track_ui/card/data/forward_one_red_blue.tres" id="23_1u8w0"]
 [ext_resource type="Resource" uid="uid://berxfei2b6svl" path="res://ui/prgramming_track_ui/card/data/forward_one_blue_green.tres" id="24_0odxb"]
+[ext_resource type="FontFile" uid="uid://cm4gkenj5odhg" path="res://ui/fonts/m5x7.ttf" id="26_lswn8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0xm2m"]
 texture = ExtResource("1_ig7tw")
@@ -248,12 +249,13 @@ script = ExtResource("3_2cqfq")
 [node name="SpawnManager" type="Node" parent="." unique_id=160465840]
 script = ExtResource("3_getpj")
 
-[node name="TilemapManager" type="Node2D" parent="." unique_id=339126735 node_paths=PackedStringArray("base_layer", "hazard_layer")]
+[node name="TilemapManager" type="Node2D" parent="." unique_id=339126735 node_paths=PackedStringArray("base_layer", "hazard_layer", "main")]
 y_sort_enabled = true
 position = Vector2(5, 181)
 script = ExtResource("2_ycdy4")
 base_layer = NodePath("BaseLayer")
 hazard_layer = NodePath("HazardLayer")
+main = NodePath("..")
 
 [node name="BaseLayer" type="TileMapLayer" parent="TilemapManager" unique_id=1474672458]
 z_index = -1
@@ -276,7 +278,59 @@ offset_bottom = 449.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=156666124]
 
+[node name="GameUI" type="MarginContainer" parent="CanvasLayer" unique_id=2117885418]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="BlightLabel" type="Label" parent="CanvasLayer/GameUI" unique_id=738324382]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.4745098, 0.26666668, 0.2901961, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0.34117648, 0.28235295, 0.32156864, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("26_lswn8")
+theme_override_font_sizes/font_size = 48
+text = "BLIGHT: 0/5"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameUI" unique_id=1417149222]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = -2
+
+[node name="RoundLabel" type="Label" parent="CanvasLayer/GameUI/VBoxContainer" unique_id=1618113745]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.46666667, 0.45490196, 0.23137255, 1)
+theme_override_colors/font_outline_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("26_lswn8")
+theme_override_font_sizes/font_size = 32
+text = "ROUND: "
+horizontal_alignment = 2
+
+[node name="EventCountdownLabel" type="Label" parent="CanvasLayer/GameUI/VBoxContainer" unique_id=278781496]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.46666667, 0.45490196, 0.23137255, 1)
+theme_override_colors/font_outline_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("26_lswn8")
+theme_override_font_sizes/font_size = 20
+text = "Next Event In x Rounds"
+horizontal_alignment = 2
+
 [node name="ProgrammingTrackUI" parent="CanvasLayer" unique_id=660876712 instance=ExtResource("10_4c57u")]
 
 [node name="Hand" parent="CanvasLayer" unique_id=738646449 instance=ExtResource("11_dg77c")]
+unique_name_in_owner = true
 card_datas = Array[ExtResource("17_1u8w0")]([ExtResource("21_ryguw"), ExtResource("19_cegan"), ExtResource("23_1u8w0"), ExtResource("21_1u8w0"), ExtResource("19_cegan"), ExtResource("20_getpj"), ExtResource("22_d13ii"), ExtResource("24_0odxb"), ExtResource("22_d13ii"), ExtResource("24_0odxb"), ExtResource("21_ryguw")])

@@ -1,8 +1,10 @@
 extends Node
 
+@onready var main: Main = get_parent()
 @onready var pixie_manager: PixieManager = $"../PixieManager"
 @onready var tilemap_manager: Node2D = $"../TilemapManager"
 var gnome_scene: PackedScene = preload("uid://rxqd0wxka5o6")
+
 
 const HAZARD_TILE_IDS := {
 	"tornado": 1,
@@ -18,7 +20,14 @@ var HAZARD_INITIAL_SPAWN_QTY: Dictionary = {
 	"rock" = 6,
 	"thornbush" = 6,
 }
-	
+
+var event_list: Dictionary = {
+	"Rockslide": func(): _spawn_custom_hazards({"rock": main.EVENT_INTENSITY}),
+	"Bramblegrowth": func(): _spawn_custom_hazards({"thornbush": main.EVENT_INTENSITY}),
+	"Windstorm": func(): _spawn_custom_hazards({"tornado": main.EVENT_INTENSITY}),
+	"Pixie Swarm": func(): for i in main.EVENT_INTENSITY/3: pixie_manager.pixie_rand_spawn()
+}
+
 func spawn_gnome(color: Gnome.GnomeColor, grid_pos: Vector2i, direction: Gnome.Direction):
 	var gnome = gnome_scene.instantiate() as Gnome
 	gnome.color = color
@@ -52,18 +61,6 @@ func spawn_initial_hazards():
 			tilemap_manager.hazard_layer.set_cell(pos, tile_id, atlas_coords)
 
 
-func event_rock():
-	_spawn_custom_hazards({"rock": 4})
-
-
-func event_thornbush():
-	_spawn_custom_hazards({"thornbush": 4})
-
-
-func event_tornado():
-	_spawn_custom_hazards({"tornado": 4})
-
-
 func _spawn_custom_hazards(hazard_spawn_qty: Dictionary):
 	for hazard_type in hazard_spawn_qty.keys():
 		var count: int = hazard_spawn_qty[hazard_type]
@@ -88,7 +85,7 @@ func _generate_atlas_for_hazard(hazard_type) -> Vector2i:
 			return Vector2i(0,0)
 
 
-func _get_random_tornado(): # don't judge me Robert, I know it's hardcoded spaghetti
+func _get_random_tornado():
 	var roll := randi() % 2
 	match roll:
 		0: return Vector2i(0,0)
@@ -101,3 +98,11 @@ func _get_random_wall():
 		0: return Vector2i(0,0)
 		1: return Vector2i(1,0)
 		2: return Vector2i(2,0)
+
+
+func trigger_random_event():
+	var keys = event_list.keys()
+	var event_name = keys.pick_random()
+	
+	var event_func: Callable = event_list[event_name]
+	event_func.call()
