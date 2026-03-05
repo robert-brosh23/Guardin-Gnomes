@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bvb0m60dap38x"]
+
+[ext_resource type="Script" uid="uid://cu1r6x02a3xjt" path="res://ui/prgramming_track_ui/card/card_data.gd" id="1_p2sqj"]
+[ext_resource type="Texture2D" uid="uid://cqli5wg1iihcl" path="res://sprites/cards/forward_two_red_blue.png" id="2_oib4l"]
+
+[resource]
+script = ExtResource("1_p2sqj")
+card_action = 2
+texture = ExtResource("2_oib4l")
+color = Array[int]([0, 2])
+metadata/_custom_type_script = "uid://cu1r6x02a3xjt"

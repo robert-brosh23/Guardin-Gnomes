@@ -24,11 +24,10 @@ var programming_track_ui: ProgrammingTrackUI
 func _ready() -> void:
 	programming_track_ui = get_tree().get_first_node_in_group("programming_track")
 	_setup_deck_and_discard_and_hand()
+	move_cards_from_discard_to_deck_and_shuffle()
 	draw_cards()
 
 func _process(delta: float) -> void:
-	cards_in_deck_label.text = "Deck: " + str(cards_in_deck.size())
-	cards_in_discard_label.text = "Discard: " + str(cards_in_discard.size())
 	
 	_update_hand()
 	if GameManager.game_state == GameManager.GameState.DRAWING or GameManager.game_state == GameManager.GameState.DISCARDING:

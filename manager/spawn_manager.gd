@@ -16,9 +16,9 @@ const HAZARD_TILE_IDS := {
 
 var HAZARD_INITIAL_SPAWN_QTY: Dictionary = {
 	"tornado" = 4,
-	"wall" = 6,
-	"rock" = 6,
-	"thornbush" = 6,
+	"wall" = 0,
+	"rock" = 2,
+	"thornbush" = 2,
 }
 
 var event_list: Dictionary = {

@@ -5,7 +5,7 @@ extends Node
 @onready var base_layer: TileMapLayer = $"../TilemapManager/BaseLayer"
 @onready var hazard_layer: TileMapLayer = $"../TilemapManager/HazardLayer"
 @onready var main: Main = get_parent()
-@onready var blight_label: Label = $"../CanvasLayer/GameUI/BlightLabel"
+@export var blight_label: Label
 
 
 # initializations
@@ -35,7 +35,7 @@ func _on_next_round(_round_number := 0):
 		main.PIXIE_SPAWN_INTENSITY += 1
 	_check_pixie_tiles()
 	blight_count = pixie_circle_3_tiles.size()
-	blight_label.text = "BLIGHT: %s/%s" % [blight_count, main.MAX_BLIGHT]
+	blight_label.text = "Blight: %s/%s" % [blight_count, main.MAX_BLIGHT]
 
 
 func pixie_rand_spawn():

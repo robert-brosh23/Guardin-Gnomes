@@ -1,7 +1,7 @@
 class_name CardData
 extends Resource
 
-enum CardAction {FORWARD_ONE, U_TURN, FORWARD_TWO}
+enum CardAction {FORWARD_ONE, U_TURN, FORWARD_TWO, RIGHT_TURN, LEFT_TURN, FORWARD_THREE, AGAIN}
 
 @export var card_action: CardAction 
 @export var texture: Texture2D

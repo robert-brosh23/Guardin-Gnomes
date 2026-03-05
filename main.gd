@@ -26,13 +26,13 @@ const gnome_scene = preload("uid://bffr6n4g2h0d3")
 @onready var tilemap_manager: Node2D = $TilemapManager
 @onready var hand: Hand = %Hand
 @onready var game_ui: Control = %GameUI
-@onready var event_countdown_label: Label = $CanvasLayer/GameUI/VBoxContainer/EventCountdownLabel
-@onready var blight_label: Label = $CanvasLayer/GameUI/BlightLabel
-@onready var round_label: Label = $CanvasLayer/GameUI/VBoxContainer/RoundLabel
-
+@export var event_countdown_label: Label
+@export var blight_label: Label
+@export var round_label: Label
+@export var cards_in_deck_label: Label
+@export var cards_in_discard_label: Label
 
 var round_counter: int = 1
-
 
 func _ready():
 	_spawn_gnome_in_world(Gnome.GnomeColor.RED, Vector2i(5,5), gnome_scene.Direction.UP_LEFT)
@@ -46,9 +46,20 @@ func _ready():
 	SignalBus.turn_end.connect(_on_turn_end)
 
 	round_label.text = "ROUND: %s" % round_counter
-	event_countdown_label.text = "Next Event In %s Rounds" % \
+	event_countdown_label.text = "Next Event: " % \
 		(EVENT_FREQ - (round_counter % EVENT_FREQ)) # dif from turn on purpose
-	blight_label.text = "BLIGHT: %s/%s" % [0, MAX_BLIGHT]
+	blight_label.text = "Blight: %s/%s" % [0, MAX_BLIGHT]
+	
+func _process(delta: float) -> void:
+	cards_in_deck_label.text = "Deck: " + str(hand.cards_in_deck.size())
+	cards_in_discard_label.text = "Discard: " + str(hand.cards_in_discard.size())
+	
+	
+func all_gnomes_idle():
+	for gnome in gnomes:
+		if !gnome.is_idle():
+			return false
+	return true
 
 
 func _on_turn_end():
@@ -67,6 +78,8 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 	var base_tile_data = base_layer.get_cell_tile_data(new_pos + Vector2i(-1, 1))
 	print(new_pos)
 	if base_tile_data == null:
+		piece.try_move_distance -= 1
+		piece.try_move_forward(piece.try_move_distance)
 		return
 	
 	var new_base_tile_data = base_layer.get_cell_tile_data(new_pos + Vector2i(-1,1))
@@ -88,12 +101,21 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 		new_hazard_type = new_hazard_tile_data.get_custom_data("hazard_type")
 	
 	
+	var new_physical_pos := base_layer.map_to_local(new_pos) + base_layer.global_position
+	
 	# Handle hazards / move
-	if new_hazard_type == "rock": return
-	if _handle_wall(piece, new_hazard_type, current_hazard_type): return
+	if new_hazard_type == "rock":
+		piece.try_move_distance -= 1
+		piece.try_move_forward(piece.try_move_distance)
+		return
+		
+	if _handle_wall(piece, new_hazard_type, current_hazard_type):
+		piece.try_move_distance -= 1
+		piece.try_move_forward(piece.try_move_distance)
+		return
+		
 	if _handle_thornbush(piece, new_hazard_type, current_hazard_type): return
 	
-	var new_physical_pos := base_layer.map_to_local(new_pos) + base_layer.global_position
 	piece.move_to_space(new_pos, new_physical_pos)
 
 

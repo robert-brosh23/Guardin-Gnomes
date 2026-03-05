@@ -5,10 +5,15 @@ extends Control
 
 @export var enchant_button: Button
 var hand: Hand
+var main: Main
+
+var active_index: int
 
 func _ready():
 	enchant_button.pressed.connect(_try_start_turn)
 	hand = get_tree().get_first_node_in_group("hand")
+	main = get_tree().get_first_node_in_group("main")
+	SignalBus.activate_card.connect(_on_card_activate)
 	
 func try_attach_and_lock_card(card: Card) -> bool:
 	var selection := randi_range(0, track_spots.size() - 1)
@@ -32,14 +37,29 @@ func move_cards_to_hand():
 		hand.add_card_to_hand(card)
 
 func start_turn():
+	active_index = 0
 	for track_spot in track_spots:
-		track_spot.activate()
+		track_spot.activate(active_index)
 		await get_tree().create_timer(1.0).timeout
 		track_spot.de_activate()
+		active_index+=1
+		
+		var portal_edge_case_death_timer_countdown := 20.0
+		while !main.all_gnomes_idle():
+			await get_tree().create_timer(.05).timeout
+			portal_edge_case_death_timer_countdown -= .05
+			if portal_edge_case_death_timer_countdown <= 0:
+				main.gnomes.erase(self)
+				queue_free()
 	
 	move_cards_to_hand()
 	GameManager.game_state = GameManager.GameState.DISCARDING
 	SignalBus.turn_end.emit()
+	
+func _on_card_activate(card_data: CardData, track_index: int):
+	if card_data.card_action == CardData.CardAction.AGAIN and track_index > 0:
+		var last_index := track_index - 1
+		track_spots.get(last_index).activate(last_index, false) # activate silently
 
 func get_child_of_type(node: Node, type: Variant) -> Node:
 	for child in node.get_children():
