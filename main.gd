@@ -49,6 +49,12 @@ func _ready():
 	event_countdown_label.text = "Next Event In %s Rounds" % \
 		(EVENT_FREQ - (round_counter % EVENT_FREQ)) # dif from turn on purpose
 	blight_label.text = "BLIGHT: %s/%s" % [0, MAX_BLIGHT]
+	
+func all_gnomes_idle():
+	for gnome in gnomes:
+		if !gnome.is_idle():
+			return false
+	return true
 
 
 func _on_turn_end():

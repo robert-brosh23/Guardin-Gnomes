@@ -274,7 +274,7 @@ sources/3 = SubResource("TileSetAtlasSource_w48qg")
 sources/4 = SubResource("TileSetAtlasSource_272bh")
 sources/5 = SubResource("TileSetAtlasSource_5vw27")
 
-[node name="Main" type="Node2D" unique_id=1208621114 node_paths=PackedStringArray("base_layer", "hazard_layer")]
+[node name="Main" type="Node2D" unique_id=1208621114 node_paths=PackedStringArray("base_layer", "hazard_layer") groups=["main"]]
 texture_filter = 1
 script = ExtResource("1_0xm2m")
 base_layer = NodePath("TilemapManager/BaseLayer")

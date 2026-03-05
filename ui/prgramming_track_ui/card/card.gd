@@ -38,8 +38,8 @@ func unlock_card():
 	lock_image.visible = false
 	state = states.PLACED
 	
-func activate():
-	SignalBus.activate_card.emit(data)
+func activate(track_index: int):
+	SignalBus.activate_card.emit(data, track_index)
 	
 func _on_drag_started(_area2d: Area2D):
 	state = states.DRAGGING

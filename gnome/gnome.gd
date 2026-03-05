@@ -72,6 +72,11 @@ func teleport(new_pos: Vector2i, new_physical_pos: Vector2):
 	state_machine.active_state.Transitioned.emit(state_machine.active_state, "JumpState")
 	var teleport_pos = Vector2i(2,4)
 
+func is_idle() -> bool:
+	if is_instance_of(state_machine.active_state, IdleState):
+		return true
+	return false
+
 func _update_blend_positions():
 	var blend_vector := _get_animation_direction_vector()
 	animation_tree.set("parameters/Idle/blend_position", blend_vector)
@@ -90,7 +95,7 @@ func _get_animation_direction_vector() -> Vector2:
 			direction_vector = Vector2(-1, -1)
 	return direction_vector
 	
-func _try_action(data: CardData):
+func _try_action(data: CardData, track_index: int):
 	if !data.color.has(color):
 		return
 		
