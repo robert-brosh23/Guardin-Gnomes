@@ -12,8 +12,8 @@ func attach_card(card: Card) -> bool:
 		return true
 	return false
 
-func activate():
-	card_highlight.visible = true
+func activate(highlight_card: bool = true):
+	card_highlight.visible = highlight_card
 	var card : Card = get_child_of_type(self, Card)
 	if card != null:
 		card.activate()

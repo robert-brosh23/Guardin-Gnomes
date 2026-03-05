@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cifhxnfl53xo0"]
 
-[ext_resource type="Script" uid="uid://cu1r6x02a3xjt" path="res://ui/prgramming_track_ui/card/data/card_data.gd" id="1_q4lp0"]
+[ext_resource type="Script" uid="uid://cu1r6x02a3xjt" path="res://ui/prgramming_track_ui/card/card_data.gd" id="1_q4lp0"]
 [ext_resource type="Texture2D" uid="uid://bpa5y4025o5jp" path="res://sprites/cards/forward_three_all.png" id="2_kskp2"]
 
 [resource]
