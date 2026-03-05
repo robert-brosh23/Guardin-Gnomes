@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://leij07a6r43f"]
+
+[ext_resource type="Script" uid="uid://dhqmn2h32rfqr" path="res://ui/upgrade/upgrade_data/upgrade_data.gd" id="1_2hbx7"]
+[ext_resource type="Texture2D" uid="uid://iumjhie7ocou" path="res://sprites/upgrade_placeholder.png" id="2_68trw"]
+
+[resource]
+script = ExtResource("1_2hbx7")
+type = 9
+texture = ExtResource("2_68trw")
+title = "Divine"
+description = "Draw 2 extra cards per turn."
+metadata/_custom_type_script = "uid://dhqmn2h32rfqr"

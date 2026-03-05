@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://hpfv1e8vr08f"]
+
+[ext_resource type="Texture2D" uid="uid://iumjhie7ocou" path="res://sprites/upgrade_placeholder.png" id="1_viyr7"]
+[ext_resource type="Script" uid="uid://c05kp54sk54oc" path="res://ui/upgrade/upgrade.gd" id="1_wqv55"]
+[ext_resource type="FontFile" uid="uid://c6lfcmqrq1huc" path="res://ui/fonts/m3x6.ttf" id="3_aei2k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aei2k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ejs7"]
+bg_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Upgrade" type="MarginContainer" unique_id=1571615606 node_paths=PackedStringArray("texture_rect", "tooltip_container", "tooltip_label")]
+offset_right = 20.0
+offset_bottom = 20.0
+script = ExtResource("1_wqv55")
+texture_rect = NodePath("TextureRect")
+tooltip_container = NodePath("TextureRect/PanelContainer")
+tooltip_label = NodePath("TextureRect/PanelContainer/MarginContainer/TooltipText")
+
+[node name="HoverPanel" type="Panel" parent="." unique_id=888451701]
+z_index = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_aei2k")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1707282644]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_viyr7")
+stretch_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="TextureRect" unique_id=500030275]
+z_index = 1
+layout_mode = 0
+offset_left = 10.0
+offset_top = 24.0
+offset_right = 58.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2ejs7")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/PanelContainer" unique_id=1586710609]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="TooltipText" type="Label" parent="TextureRect/PanelContainer/MarginContainer" unique_id=1162299842]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
+theme_override_fonts/font = ExtResource("3_aei2k")
+theme_override_font_sizes/font_size = 32
+text = "asdf"
+
+[connection signal="mouse_entered" from="HoverPanel" to="." method="_on_hover_panel_mouse_entered"]
+[connection signal="mouse_exited" from="HoverPanel" to="." method="_on_hover_panel_mouse_exited"]

@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b52d3n8sxrt4w" path="res://ui/prgramming_track_ui/programming_track_ui.tscn" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bp7ugabbmd2ky" path="res://sprites/hazard/teleporter.png" id="10_dg77c"]
 [ext_resource type="PackedScene" uid="uid://8nfe5xqymm3v" path="res://ui/hand/hand.tscn" id="11_dg77c"]
+[ext_resource type="PackedScene" uid="uid://cy8tdfeu2bewm" path="res://ui/upgrade/upgrade_container/upgrade_container.tscn" id="17_b17eg"]
 [ext_resource type="Script" uid="uid://cu1r6x02a3xjt" path="res://ui/prgramming_track_ui/card/card_data.gd" id="19_pjyto"]
 [ext_resource type="Resource" uid="uid://bx2pdt61mbfwa" path="res://ui/prgramming_track_ui/card/data/forward_one_green.tres" id="20_getpj"]
 [ext_resource type="Resource" uid="uid://do6mo3e746w7y" path="res://ui/prgramming_track_ui/card/data/forward_one_blue.tres" id="21_1u8w0"]
@@ -62,6 +63,7 @@
 [ext_resource type="Resource" uid="uid://coyv45rvqo8hf" path="res://ui/prgramming_track_ui/card/data/reverse_green.tres" id="53_cyx1q"]
 [ext_resource type="Resource" uid="uid://c1qyswoosxofq" path="res://ui/prgramming_track_ui/card/data/reverse_red.tres" id="54_0dhbp"]
 [ext_resource type="Resource" uid="uid://cgye8nh8aakq0" path="res://ui/prgramming_track_ui/card/data/reverse_red_green.tres" id="55_jx0wj"]
+[ext_resource type="PackedScene" uid="uid://cfq5dfix7h65v" path="res://ui/upgrade/upgrade_menu/upgrade_menu.tscn" id="64_ntx8l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0xm2m"]
 texture = ExtResource("1_ig7tw")
@@ -286,15 +288,15 @@ texture_filter = 1
 script = ExtResource("1_0xm2m")
 base_layer = NodePath("TilemapManager/BaseLayer")
 hazard_layer = NodePath("TilemapManager/HazardLayer")
-event_countdown_label = NodePath("CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer/EventCountdownLabel")
-blight_label = NodePath("CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer/BlightLabel")
-round_label = NodePath("CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer/RoundLabel")
-cards_in_deck_label = NodePath("CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer/CardsInDeck")
-cards_in_discard_label = NodePath("CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer/CardsInDiscard")
+event_countdown_label = NodePath("CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/EventCountdownLabel")
+blight_label = NodePath("CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/BlightLabel")
+round_label = NodePath("CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/RoundLabel")
+cards_in_deck_label = NodePath("CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CardsInDeck")
+cards_in_discard_label = NodePath("CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CardsInDiscard")
 
 [node name="PixieManager" type="Node" parent="." unique_id=700652386 node_paths=PackedStringArray("blight_label")]
 script = ExtResource("3_2cqfq")
-blight_label = NodePath("../CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer/BlightLabel")
+blight_label = NodePath("../CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/BlightLabel")
 
 [node name="SpawnManager" type="Node" parent="." unique_id=160465840]
 script = ExtResource("3_getpj")
@@ -340,27 +342,30 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GameUI" unique_id=1730504052]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GameUI" unique_id=1813426529]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GameUI/HBoxContainer" unique_id=1730504052]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pjyto")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GameUI/PanelContainer" unique_id=1691649163]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer" unique_id=1691649163]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameUI/PanelContainer/MarginContainer" unique_id=1417149222]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer" unique_id=1417149222]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = -2
 
-[node name="RoundLabel" type="Label" parent="CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=1618113745]
+[node name="RoundLabel" type="Label" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1618113745]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.46666667, 0.45490196, 0.23137255, 1)
 theme_override_colors/font_outline_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
@@ -368,7 +373,7 @@ theme_override_fonts/font = ExtResource("26_lswn8")
 theme_override_font_sizes/font_size = 16
 text = "ROUND: "
 
-[node name="EventCountdownLabel" type="Label" parent="CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=278781496]
+[node name="EventCountdownLabel" type="Label" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=278781496]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.46666667, 0.45490196, 0.23137255, 1)
 theme_override_colors/font_outline_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
@@ -376,7 +381,7 @@ theme_override_fonts/font = ExtResource("26_lswn8")
 theme_override_font_sizes/font_size = 16
 text = "Next Event: x"
 
-[node name="BlightLabel" type="Label" parent="CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=738324382]
+[node name="BlightLabel" type="Label" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=738324382]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 0
@@ -388,14 +393,14 @@ theme_override_fonts/font = ExtResource("26_lswn8")
 theme_override_font_sizes/font_size = 16
 text = "Blight: 0/5"
 
-[node name="CardsInDeck" type="Label" parent="CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=746953608]
+[node name="CardsInDeck" type="Label" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=746953608]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.29411766, 0.44705883, 0.43137255, 1)
 theme_override_fonts/font = ExtResource("26_lswn8")
 theme_override_font_sizes/font_size = 16
 text = "Deck: "
 
-[node name="CardsInDiscard" type="Label" parent="CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=1823280822]
+[node name="CardsInDiscard" type="Label" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1823280822]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.29411766, 0.44705883, 0.43137255, 1)
 theme_override_fonts/font = ExtResource("26_lswn8")
@@ -407,6 +412,15 @@ text = "Discard: "
 [node name="Hand" parent="CanvasLayer" unique_id=738646449 instance=ExtResource("11_dg77c")]
 unique_name_in_owner = true
 card_datas = Array[ExtResource("19_pjyto")]([ExtResource("52_5dllo"), ExtResource("22_d13ii"), ExtResource("21_1u8w0"), ExtResource("24_0odxb"), ExtResource("20_getpj"), ExtResource("21_ryguw"), ExtResource("23_1u8w0"), ExtResource("26_blkrb"), ExtResource("27_abqjc"), ExtResource("28_6iyjs"), ExtResource("30_sm6fg"), ExtResource("29_4w656"), ExtResource("30_e71vb"), ExtResource("33_b17eg"), ExtResource("34_ntx8l"), ExtResource("31_rnkwl"), ExtResource("32_vke2r"), ExtResource("33_uit24"), ExtResource("34_ruth0"), ExtResource("35_rm4vd"), ExtResource("36_pjyto"), ExtResource("37_sm6fg"), ExtResource("38_b17eg"), ExtResource("39_ntx8l"), ExtResource("40_uatky"), ExtResource("41_rqtf5"), ExtResource("42_1vm84"), ExtResource("43_wu3dr"), ExtResource("44_cyx1q"), ExtResource("49_uatky"), ExtResource("50_rqtf5"), ExtResource("51_1vm84"), ExtResource("52_wu3dr"), ExtResource("53_cyx1q"), ExtResource("54_0dhbp"), ExtResource("55_jx0wj"), ExtResource("45_0dhbp"), ExtResource("46_jx0wj"), ExtResource("47_kkkcx"), ExtResource("48_34ol3"), ExtResource("49_c2n8d"), ExtResource("50_wy5fy"), ExtResource("51_gx4rg"), ExtResource("52_5dllo"), ExtResource("52_5dllo"), ExtResource("52_5dllo"), ExtResource("52_5dllo")])
+
+[node name="UpgradeMenu" parent="CanvasLayer" unique_id=51798529 instance=ExtResource("64_ntx8l")]
+z_index = 50
+
+[node name="UpgradeContainer" parent="CanvasLayer" unique_id=1329175558 instance=ExtResource("17_b17eg")]
+offset_left = 92.0
+offset_top = 8.0
+offset_right = 92.0
+offset_bottom = 442.0
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1607487158]
 z_index = -10
