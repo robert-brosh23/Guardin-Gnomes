@@ -20,6 +20,8 @@ var upgrades: Array[String]
 
 ## FAR LEFT SIDE IS (0,0), TOP IS (11,0), FAR RIGHT SIDE IS (11,11), BOTTOM IS (0,11)
 var grid_pos: Vector2i = Vector2i(6,5)
+var new_pos: Vector2i
+var try_move_distance: int
 
 func _ready():
 	_set_color()
@@ -27,7 +29,6 @@ func _ready():
 	SignalBus.activate_card.connect(_try_action)
 
 func try_move_forward(amount: int = 1):
-	var new_pos: Vector2i
 	match direction:
 		Direction.UP_LEFT:
 			new_pos = grid_pos + Vector2i(0, amount * -1)
@@ -39,8 +40,8 @@ func try_move_forward(amount: int = 1):
 			new_pos = grid_pos + Vector2i(amount * -1, 0)
 	try_move.emit(self, new_pos)
 
-func move_to_space(new_pos: Vector2i, new_physical_pos: Vector2):
-	grid_pos = new_pos
+func move_to_space(_new_pos: Vector2i, new_physical_pos: Vector2):
+	grid_pos = _new_pos
 	jump_state.new_physical_pos = new_physical_pos
 	state_machine.active_state.Transitioned.emit(state_machine.active_state, "JumpState")
 
@@ -99,6 +100,7 @@ func _try_action(data: CardData, track_index: int):
 	if !data.color.has(color):
 		return
 		
+	try_move_distance = 1
 	match data.card_action:
 		CardData.CardAction.FORWARD_ONE:
 			try_move_forward()
@@ -106,13 +108,15 @@ func _try_action(data: CardData, track_index: int):
 			turn_right()
 			turn_right()
 		CardData.CardAction.FORWARD_TWO:
-			try_move_forward(2)
+			try_move_distance = 2
+			try_move_forward(try_move_distance)
 		CardData.CardAction.RIGHT_TURN:
 			turn_right()
 		CardData.CardAction.LEFT_TURN:
 			turn_left()
 		CardData.CardAction.FORWARD_THREE:
-			try_move_forward(3)
+			try_move_distance = 3
+			try_move_forward(try_move_distance)
 
 func _set_color():
 	if color == GnomeColor.GREEN: sprite.texture = load("uid://cnil47ngwlo1q")

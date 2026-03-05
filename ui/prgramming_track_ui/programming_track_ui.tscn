@@ -66,9 +66,9 @@ position = Vector2(164, 69)
 [node name="Button" type="Button" parent="." unique_id=951669152]
 layout_mode = 0
 offset_left = 618.0
-offset_top = 386.0
+offset_top = 398.0
 offset_right = 706.0
-offset_bottom = 420.0
+offset_bottom = 432.0
 theme_override_colors/font_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
 theme_override_colors/font_focus_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
 theme_override_colors/font_pressed_color = Color(0.8235294, 0.7882353, 0.64705884, 1)

@@ -274,14 +274,27 @@ sources/3 = SubResource("TileSetAtlasSource_w48qg")
 sources/4 = SubResource("TileSetAtlasSource_272bh")
 sources/5 = SubResource("TileSetAtlasSource_5vw27")
 
-[node name="Main" type="Node2D" unique_id=1208621114 node_paths=PackedStringArray("base_layer", "hazard_layer") groups=["main"]]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjyto"]
+bg_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="Main" type="Node2D" unique_id=1208621114 node_paths=PackedStringArray("base_layer", "hazard_layer", "event_countdown_label", "blight_label", "round_label", "cards_in_deck_label", "cards_in_discard_label") groups=["main"]]
 texture_filter = 1
 script = ExtResource("1_0xm2m")
 base_layer = NodePath("TilemapManager/BaseLayer")
 hazard_layer = NodePath("TilemapManager/HazardLayer")
+event_countdown_label = NodePath("CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer/EventCountdownLabel")
+blight_label = NodePath("CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer/BlightLabel")
+round_label = NodePath("CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer/RoundLabel")
+cards_in_deck_label = NodePath("CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer/CardsInDeck")
+cards_in_discard_label = NodePath("CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer/CardsInDiscard")
 
-[node name="PixieManager" type="Node" parent="." unique_id=700652386]
+[node name="PixieManager" type="Node" parent="." unique_id=700652386 node_paths=PackedStringArray("blight_label")]
 script = ExtResource("3_2cqfq")
+blight_label = NodePath("../CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer/BlightLabel")
 
 [node name="SpawnManager" type="Node" parent="." unique_id=160465840]
 script = ExtResource("3_getpj")
@@ -315,6 +328,7 @@ tile_set = SubResource("TileSet_7mycd")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=156666124]
 
 [node name="GameUI" type="MarginContainer" parent="CanvasLayer" unique_id=2117885418]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -326,7 +340,43 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="BlightLabel" type="Label" parent="CanvasLayer/GameUI" unique_id=738324382]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GameUI" unique_id=1730504052]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pjyto")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GameUI/PanelContainer" unique_id=1691649163]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameUI/PanelContainer/MarginContainer" unique_id=1417149222]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = -2
+
+[node name="RoundLabel" type="Label" parent="CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=1618113745]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.46666667, 0.45490196, 0.23137255, 1)
+theme_override_colors/font_outline_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
+theme_override_fonts/font = ExtResource("26_lswn8")
+theme_override_font_sizes/font_size = 16
+text = "ROUND: "
+
+[node name="EventCountdownLabel" type="Label" parent="CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=278781496]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.46666667, 0.45490196, 0.23137255, 1)
+theme_override_colors/font_outline_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
+theme_override_fonts/font = ExtResource("26_lswn8")
+theme_override_font_sizes/font_size = 16
+text = "Next Event: x"
+
+[node name="BlightLabel" type="Label" parent="CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=738324382]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 0
@@ -334,38 +384,23 @@ size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.4745098, 0.26666668, 0.2901961, 1)
 theme_override_colors/font_shadow_color = Color(1, 0, 0, 0)
 theme_override_colors/font_outline_color = Color(0.34117648, 0.28235295, 0.32156864, 1)
-theme_override_constants/outline_size = 6
-theme_override_fonts/font = ExtResource("26_lswn8")
-theme_override_font_sizes/font_size = 32
-text = "BLIGHT: 0/5"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameUI" unique_id=1417149222]
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-theme_override_constants/separation = -2
-
-[node name="RoundLabel" type="Label" parent="CanvasLayer/GameUI/VBoxContainer" unique_id=1618113745]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.46666667, 0.45490196, 0.23137255, 1)
-theme_override_colors/font_outline_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("26_lswn8")
-theme_override_font_sizes/font_size = 32
-text = "ROUND: "
-horizontal_alignment = 2
-
-[node name="EventCountdownLabel" type="Label" parent="CanvasLayer/GameUI/VBoxContainer" unique_id=278781496]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.46666667, 0.45490196, 0.23137255, 1)
-theme_override_colors/font_outline_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
-theme_override_constants/line_spacing = -2
-theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("26_lswn8")
 theme_override_font_sizes/font_size = 16
-text = "Next Event In x Rounds"
-horizontal_alignment = 2
+text = "Blight: 0/5"
+
+[node name="CardsInDeck" type="Label" parent="CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=746953608]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29411766, 0.44705883, 0.43137255, 1)
+theme_override_fonts/font = ExtResource("26_lswn8")
+theme_override_font_sizes/font_size = 16
+text = "Deck: "
+
+[node name="CardsInDiscard" type="Label" parent="CanvasLayer/GameUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=1823280822]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29411766, 0.44705883, 0.43137255, 1)
+theme_override_fonts/font = ExtResource("26_lswn8")
+theme_override_font_sizes/font_size = 16
+text = "Discard: "
 
 [node name="ProgrammingTrackUI" parent="CanvasLayer" unique_id=660876712 instance=ExtResource("10_4c57u")]
 

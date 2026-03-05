@@ -44,8 +44,13 @@ func start_turn():
 		track_spot.de_activate()
 		active_index+=1
 		
+		var portal_edge_case_death_timer_countdown := 20.0
 		while !main.all_gnomes_idle():
 			await get_tree().create_timer(.05).timeout
+			portal_edge_case_death_timer_countdown -= .05
+			if portal_edge_case_death_timer_countdown <= 0:
+				main.gnomes.erase(self)
+				queue_free()
 	
 	move_cards_to_hand()
 	GameManager.game_state = GameManager.GameState.DISCARDING

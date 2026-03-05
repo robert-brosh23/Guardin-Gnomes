@@ -28,8 +28,6 @@ func _ready() -> void:
 	draw_cards()
 
 func _process(delta: float) -> void:
-	cards_in_deck_label.text = "Deck: " + str(cards_in_deck.size())
-	cards_in_discard_label.text = "Discard: " + str(cards_in_discard.size())
 	
 	_update_hand()
 	if GameManager.game_state == GameManager.GameState.DRAWING or GameManager.game_state == GameManager.GameState.DISCARDING:
