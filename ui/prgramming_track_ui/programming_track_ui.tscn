@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://b52d3n8sxrt4w"]
 
-[ext_resource type="Texture2D" uid="uid://d3b3tbtr72l0x" path="res://sprites/proto_vine.png" id="1_rcel3"]
 [ext_resource type="Script" uid="uid://bv5qw1cajvfy4" path="res://ui/prgramming_track_ui/programming_track_ui.gd" id="1_uh0xp"]
 [ext_resource type="PackedScene" uid="uid://c7b8b6nkhsmxg" path="res://ui/prgramming_track_ui/track_spot/track_spot.tscn" id="2_jxowk"]
 [ext_resource type="FontFile" uid="uid://cm4gkenj5odhg" path="res://ui/fonts/m5x7.ttf" id="4_s6dcx"]
+[ext_resource type="Texture2D" uid="uid://7dx85wrypfqv" path="res://sprites/foreground_2.png" id="5_6602v"]
 [ext_resource type="Script" uid="uid://hd613qnyifew" path="res://ui/prgramming_track_ui/button.gd" id="5_se4ky"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_se4ky"]
@@ -42,34 +42,33 @@ offset_top = -225.0
 offset_bottom = 225.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("1_rcel3")
 
 [node name="TrackSpot" parent="TextureRect" unique_id=68731325 instance=ExtResource("2_jxowk")]
 z_index = 2
-position = Vector2(155, 378)
+position = Vector2(164, 350)
 
 [node name="TrackSpot2" parent="TextureRect" unique_id=1492374471 instance=ExtResource("2_jxowk")]
 z_index = 1
-position = Vector2(57, 328)
+position = Vector2(71, 285)
 
 [node name="TrackSpot3" parent="TextureRect" unique_id=1833243044 instance=ExtResource("2_jxowk")]
 z_index = 1
-position = Vector2(156, 230)
+position = Vector2(165, 205)
 
 [node name="TrackSpot4" parent="TextureRect" unique_id=1023656089 instance=ExtResource("2_jxowk")]
 z_index = 1
-position = Vector2(58, 144)
+position = Vector2(72, 136)
 
 [node name="TrackSpot5" parent="TextureRect" unique_id=40446193 instance=ExtResource("2_jxowk")]
 z_index = 1
-position = Vector2(156, 76)
+position = Vector2(164, 69)
 
 [node name="Button" type="Button" parent="." unique_id=951669152]
 layout_mode = 0
-offset_left = 601.0
-offset_top = 218.0
-offset_right = 689.0
-offset_bottom = 252.0
+offset_left = 618.0
+offset_top = 386.0
+offset_right = 706.0
+offset_bottom = 420.0
 theme_override_colors/font_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
 theme_override_colors/font_focus_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
 theme_override_colors/font_pressed_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
@@ -84,3 +83,8 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_se4ky")
 theme_override_styles/focus = SubResource("StyleBoxFlat_se4ky")
 text = "Enchant"
 script = ExtResource("5_se4ky")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=573361751]
+visible = false
+position = Vector2(400, 225)
+texture = ExtResource("5_6602v")

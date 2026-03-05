@@ -4,7 +4,6 @@
 [ext_resource type="Resource" uid="uid://do6mo3e746w7y" path="res://ui/prgramming_track_ui/card/data/forward_one_blue.tres" id="2_5n8ak"]
 [ext_resource type="Script" uid="uid://crmnw3ldr3xev" path="res://addons/drag_and_drop/scripts/draggable.gd" id="2_ulxs5"]
 [ext_resource type="Script" uid="uid://djdmnemxrx7bg" path="res://addons/drag_and_drop/resources/draggable_types/draggable_type.gd" id="3_1fvgc"]
-[ext_resource type="Texture2D" uid="uid://r6u8o12hu8in" path="res://sprites/cards/forward_one_blue.png" id="4_1fvgc"]
 [ext_resource type="Texture2D" uid="uid://vkm8j248qggi" path="res://sprites/lock_placeholder.png" id="6_5n8ak"]
 
 [sub_resource type="Resource" id="Resource_ljq04"]
@@ -14,6 +13,9 @@ script = ExtResource("3_1fvgc")
 size = Vector2(88, 128)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ljq04"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ljq04"]
+load_path = "res://.godot/imported/forward_one_blue.png-fe2e3dc0c3cb977cba8998aeaabd1223.ctex"
 
 [node name="Card" type="Area2D" unique_id=1008003119 node_paths=PackedStringArray("draggable", "card_image", "lock_image")]
 script = ExtResource("1_os6nc")
@@ -56,7 +58,7 @@ horizontal_alignment = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("4_1fvgc")
+texture = SubResource("CompressedTexture2D_ljq04")
 
 [node name="Lock" type="Sprite2D" parent="." unique_id=954541053]
 visible = false

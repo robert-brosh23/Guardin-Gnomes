@@ -102,6 +102,12 @@ func _try_action(data: CardData):
 			turn_right()
 		CardData.CardAction.FORWARD_TWO:
 			try_move_forward(2)
+		CardData.CardAction.RIGHT_TURN:
+			turn_right()
+		CardData.CardAction.LEFT_TURN:
+			turn_left()
+		CardData.CardAction.FORWARD_THREE:
+			try_move_forward(3)
 
 func _set_color():
 	if color == GnomeColor.GREEN: sprite.texture = load("uid://cnil47ngwlo1q")

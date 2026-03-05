@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bds0twec3kume"
-path="res://.godot/imported/u_turn_blue.png-4e21b35634adc4002f67e733c6333b40.ctex"
+uid="uid://o2801h2hl84d"
+path="res://.godot/imported/forward_two_green.png-ea98e0cbabeab634464b3b481459d747.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/cards/u_turn_blue.png"
-dest_files=["res://.godot/imported/u_turn_blue.png-4e21b35634adc4002f67e733c6333b40.ctex"]
+source_file="res://sprites/cards/forward_two_green.png"
+dest_files=["res://.godot/imported/forward_two_green.png-ea98e0cbabeab634464b3b481459d747.ctex"]
 
 [params]
 

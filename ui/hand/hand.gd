@@ -24,6 +24,7 @@ var programming_track_ui: ProgrammingTrackUI
 func _ready() -> void:
 	programming_track_ui = get_tree().get_first_node_in_group("programming_track")
 	_setup_deck_and_discard_and_hand()
+	move_cards_from_discard_to_deck_and_shuffle()
 	draw_cards()
 
 func _process(delta: float) -> void:

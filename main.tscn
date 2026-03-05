@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://8nd74jifhd6o" path="res://manager/spawn_manager.gd" id="3_getpj"]
 [ext_resource type="Texture2D" uid="uid://cguhhun74ixvm" path="res://sprites/blocks/GrassBlocks.png" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://phf1a8pwvcor" path="res://sprites/blocks/PixieBlocks.png" id="4_kek77"]
+[ext_resource type="Texture2D" uid="uid://7dx85wrypfqv" path="res://sprites/foreground_2.png" id="4_lswn8"]
 [ext_resource type="Texture2D" uid="uid://b2aqdkp4xd3mo" path="res://sprites/hazard/ThornBush.png" id="5_272bh"]
 [ext_resource type="Texture2D" uid="uid://d4khekpm2flto" path="res://sprites/hazard/rock.png" id="6_5vw27"]
 [ext_resource type="Texture2D" uid="uid://cbjbuqil2ufi3" path="res://sprites/hazard/Tornado.png" id="7_4c57u"]
@@ -17,14 +18,40 @@
 [ext_resource type="Texture2D" uid="uid://bp7ugabbmd2ky" path="res://sprites/hazard/teleporter.png" id="10_dg77c"]
 [ext_resource type="PackedScene" uid="uid://8nfe5xqymm3v" path="res://ui/hand/hand.tscn" id="11_dg77c"]
 [ext_resource type="Script" uid="uid://cu1r6x02a3xjt" path="res://ui/prgramming_track_ui/card/data/card_data.gd" id="17_1u8w0"]
-[ext_resource type="Resource" uid="uid://csnqnld8p5bjo" path="res://ui/prgramming_track_ui/card/data/u_turn_blue.tres" id="19_cegan"]
 [ext_resource type="Resource" uid="uid://bx2pdt61mbfwa" path="res://ui/prgramming_track_ui/card/data/forward_one_green.tres" id="20_getpj"]
 [ext_resource type="Resource" uid="uid://do6mo3e746w7y" path="res://ui/prgramming_track_ui/card/data/forward_one_blue.tres" id="21_1u8w0"]
 [ext_resource type="Resource" uid="uid://cmlmm85ej7vgg" path="res://ui/prgramming_track_ui/card/data/forward_one_red.tres" id="21_ryguw"]
 [ext_resource type="Resource" uid="uid://caya841uk0ee" path="res://ui/prgramming_track_ui/card/data/forward_one_all.tres" id="22_d13ii"]
 [ext_resource type="Resource" uid="uid://bu0qlha24sdb2" path="res://ui/prgramming_track_ui/card/data/forward_one_red_blue.tres" id="23_1u8w0"]
 [ext_resource type="Resource" uid="uid://berxfei2b6svl" path="res://ui/prgramming_track_ui/card/data/forward_one_blue_green.tres" id="24_0odxb"]
+[ext_resource type="Resource" uid="uid://dutkicfbu1of5" path="res://ui/prgramming_track_ui/card/data/forward_one_red_green.tres" id="26_blkrb"]
 [ext_resource type="FontFile" uid="uid://cm4gkenj5odhg" path="res://ui/fonts/m5x7.ttf" id="26_lswn8"]
+[ext_resource type="Resource" uid="uid://cifhxnfl53xo0" path="res://ui/prgramming_track_ui/card/data/forward_three_all.tres" id="27_abqjc"]
+[ext_resource type="Resource" uid="uid://dcm4kw6enpitm" path="res://ui/prgramming_track_ui/card/data/forward_three_blue.tres" id="28_6iyjs"]
+[ext_resource type="Resource" uid="uid://yq0s5j7ll86o" path="res://ui/prgramming_track_ui/card/data/forward_three_green.tres" id="29_4w656"]
+[ext_resource type="Resource" uid="uid://x4g3qwiulp64" path="res://ui/prgramming_track_ui/card/data/forward_three_red.tres" id="30_e71vb"]
+[ext_resource type="Resource" uid="uid://crlk538l6k412" path="res://ui/prgramming_track_ui/card/data/forward_two_all.tres" id="31_rnkwl"]
+[ext_resource type="Resource" uid="uid://dcbwxhhg21gww" path="res://ui/prgramming_track_ui/card/data/forward_two_blue.tres" id="32_vke2r"]
+[ext_resource type="Resource" uid="uid://br0li0d7ujn0v" path="res://ui/prgramming_track_ui/card/data/forward_two_green.tres" id="33_uit24"]
+[ext_resource type="Resource" uid="uid://dhwmden15yyhm" path="res://ui/prgramming_track_ui/card/data/forward_two_green_blue.tres" id="34_ruth0"]
+[ext_resource type="Resource" uid="uid://b1q28kt1mvs2c" path="res://ui/prgramming_track_ui/card/data/forward_two_green_red.tres" id="35_rm4vd"]
+[ext_resource type="Resource" uid="uid://fw3g48e30cqf" path="res://ui/prgramming_track_ui/card/data/forward_two_red.tres" id="36_pjyto"]
+[ext_resource type="Resource" uid="uid://bvb0m60dap38x" path="res://ui/prgramming_track_ui/card/data/forward_two_red_blue.tres" id="37_sm6fg"]
+[ext_resource type="Resource" uid="uid://cdduvgn8yr2yw" path="res://ui/prgramming_track_ui/card/data/left_all.tres" id="38_b17eg"]
+[ext_resource type="Resource" uid="uid://cp1pgy26wiq6k" path="res://ui/prgramming_track_ui/card/data/left_blue.tres" id="39_ntx8l"]
+[ext_resource type="Resource" uid="uid://fyhmljr2ef8p" path="res://ui/prgramming_track_ui/card/data/left_blue_green.tres" id="40_uatky"]
+[ext_resource type="Resource" uid="uid://cxcf3vbfnvo0n" path="res://ui/prgramming_track_ui/card/data/left_blue_red.tres" id="41_rqtf5"]
+[ext_resource type="Resource" uid="uid://cr5roj1n23lv7" path="res://ui/prgramming_track_ui/card/data/left_green.tres" id="42_1vm84"]
+[ext_resource type="Resource" uid="uid://l6g0oxlbodo2" path="res://ui/prgramming_track_ui/card/data/left_green_red.tres" id="43_wu3dr"]
+[ext_resource type="Resource" uid="uid://cbksyfbrltxtl" path="res://ui/prgramming_track_ui/card/data/left_red.tres" id="44_cyx1q"]
+[ext_resource type="Resource" uid="uid://ctbjq3x3d4dmy" path="res://ui/prgramming_track_ui/card/data/right_all.tres" id="45_0dhbp"]
+[ext_resource type="Resource" uid="uid://dgpa3wavg2dwu" path="res://ui/prgramming_track_ui/card/data/right_blue.tres" id="46_jx0wj"]
+[ext_resource type="Resource" uid="uid://b1tjqi83kwkly" path="res://ui/prgramming_track_ui/card/data/right_blue_green.tres" id="47_kkkcx"]
+[ext_resource type="Resource" uid="uid://c400sunwahqw3" path="res://ui/prgramming_track_ui/card/data/right_green.tres" id="48_34ol3"]
+[ext_resource type="Resource" uid="uid://dyifyt0pq8p1j" path="res://ui/prgramming_track_ui/card/data/right_red.tres" id="49_c2n8d"]
+[ext_resource type="Resource" uid="uid://cemq2y1ogt60f" path="res://ui/prgramming_track_ui/card/data/right_red_blue.tres" id="50_wy5fy"]
+[ext_resource type="Resource" uid="uid://bawefy45whfbp" path="res://ui/prgramming_track_ui/card/data/right_red_green.tres" id="51_gx4rg"]
+[ext_resource type="Resource" uid="uid://bimlnamctin7i" path="res://ui/prgramming_track_ui/card/data/again.tres" id="52_5dllo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0xm2m"]
 texture = ExtResource("1_ig7tw")
@@ -249,6 +276,10 @@ script = ExtResource("3_2cqfq")
 [node name="SpawnManager" type="Node" parent="." unique_id=160465840]
 script = ExtResource("3_getpj")
 
+[node name="Foreground" type="Sprite2D" parent="." unique_id=2000795728]
+position = Vector2(400, 225)
+texture = ExtResource("4_lswn8")
+
 [node name="TilemapManager" type="Node2D" parent="." unique_id=339126735 node_paths=PackedStringArray("base_layer", "hazard_layer", "main")]
 y_sort_enabled = true
 position = Vector2(5, 181)
@@ -270,11 +301,6 @@ y_sort_enabled = true
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAABAP7/AgABAAAAAAACAP7/AgABAAAAAAADAP7/AgABAAAAAAAEAP7/AgABAAAAAAAFAP7/AgABAAAAAAAGAP7/AgABAAAAAAAHAP7/AgABAAAAAAAIAP7/AgABAAAAAAAJAP7/AgABAAAAAAAKAP7/AgABAAAAAAALAP7/AgABAAAAAAAMAP7/AgABAAAAAAANAP//AgAAAAAAAAANAAAAAgAAAAAAAAANAAEAAgAAAAAAAAANAAIAAgAAAAAAAAANAAMAAgAAAAAAAAANAAQAAgAAAAAAAAANAAUAAgAAAAAAAAANAAYAAgAAAAAAAAANAAcAAgAAAAAAAAANAAgAAgAAAAAAAAANAAoAAgAAAAAAAAANAAkAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_7mycd")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1409755530]
-offset_left = 591.0
-offset_right = 800.0
-offset_bottom = 449.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=156666124]
 
@@ -299,7 +325,7 @@ theme_override_colors/font_shadow_color = Color(1, 0, 0, 0)
 theme_override_colors/font_outline_color = Color(0.34117648, 0.28235295, 0.32156864, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("26_lswn8")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "BLIGHT: 0/5"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameUI" unique_id=1417149222]
@@ -325,7 +351,7 @@ theme_override_colors/font_outline_color = Color(0.3019608, 0.27058825, 0.223529
 theme_override_constants/line_spacing = -2
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("26_lswn8")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 16
 text = "Next Event In x Rounds"
 horizontal_alignment = 2
 
@@ -333,4 +359,15 @@ horizontal_alignment = 2
 
 [node name="Hand" parent="CanvasLayer" unique_id=738646449 instance=ExtResource("11_dg77c")]
 unique_name_in_owner = true
-card_datas = Array[ExtResource("17_1u8w0")]([ExtResource("21_ryguw"), ExtResource("19_cegan"), ExtResource("23_1u8w0"), ExtResource("21_1u8w0"), ExtResource("19_cegan"), ExtResource("20_getpj"), ExtResource("22_d13ii"), ExtResource("24_0odxb"), ExtResource("22_d13ii"), ExtResource("24_0odxb"), ExtResource("21_ryguw")])
+card_datas = Array[ExtResource("17_1u8w0")]([ExtResource("22_d13ii"), ExtResource("21_1u8w0"), ExtResource("24_0odxb"), ExtResource("20_getpj"), ExtResource("21_ryguw"), ExtResource("23_1u8w0"), ExtResource("26_blkrb"), ExtResource("27_abqjc"), ExtResource("28_6iyjs"), ExtResource("29_4w656"), ExtResource("30_e71vb"), ExtResource("31_rnkwl"), ExtResource("32_vke2r"), ExtResource("33_uit24"), ExtResource("34_ruth0"), ExtResource("35_rm4vd"), ExtResource("36_pjyto"), ExtResource("37_sm6fg"), ExtResource("38_b17eg"), ExtResource("39_ntx8l"), ExtResource("40_uatky"), ExtResource("41_rqtf5"), ExtResource("42_1vm84"), ExtResource("43_wu3dr"), ExtResource("44_cyx1q"), ExtResource("45_0dhbp"), ExtResource("46_jx0wj"), ExtResource("47_kkkcx"), ExtResource("48_34ol3"), ExtResource("49_c2n8d"), ExtResource("50_wy5fy"), ExtResource("51_gx4rg"), ExtResource("52_5dllo")])
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1607487158]
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 800.0
+offset_bottom = 450.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.46666667, 0.45490196, 0.23137255, 1)
