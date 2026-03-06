@@ -35,6 +35,9 @@ const gnome_scene = preload("uid://bffr6n4g2h0d3")
 
 var round_counter: int = 1
 
+var rock_destroy_sfx = preload("res://audio/Gravel Interaction A.wav")
+var purify_sfx = preload("res://audio/UI Success 001.wav")
+
 func _ready():
 	_spawn_gnome_in_world(Gnome.GnomeColor.RED, Vector2i(6,4), gnome_scene.Direction.DOWN_LEFT)
 	_spawn_gnome_in_world(Gnome.GnomeColor.BLUE, Vector2i(7,4), gnome_scene.Direction.UP_RIGHT)
@@ -150,6 +153,7 @@ func _purify_tile(grid_pos: Vector2i):
 	purify.global_position = base_layer.map_to_local(grid_pos) + base_layer.global_position
 	add_child(purify)
 	base_layer.set_cell(grid_pos + Vector2i(-1,1), 1, tilemap_manager.get_random_grass())
+	AudioPlayer.play_sound(purify_sfx)
 	
 func _try_serene(gnome: Gnome, new_pos: Vector2i, old_pos: Vector2i, fairy_tiles_to_check: Array[String]):
 	if !GameManager.check_if_has(UpgradeData.UpgradeType.SERENE) or gnome.color != Gnome.GnomeColor.BLUE:
@@ -212,6 +216,8 @@ func _destroy_hazard(grid_pos: Vector2i, hazard_type: String):
 	
 	if GameManager.check_if_has(UpgradeData.UpgradeType.PRACTICAL) and hazard_type == "rock":
 		print("+1 money")
+	
+	AudioPlayer.play_sound(rock_destroy_sfx)
 	
 func _get_adjacent_points(grid_pos: Vector2i) -> Array[Vector2i]:
 	var points: Array[Vector2i] = []
