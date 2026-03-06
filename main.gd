@@ -5,14 +5,14 @@ extends Node2D
 var MAX_BLIGHT: int = 8 # how many blight allowed before game over
 
 var PIXIE_INITIAL_SPAWN: int = 2 # how many pixie circles are at game start
-var PIXIE_GROW_RATE: int = 1 # how many rounds between each pixie growth
+var PIXIE_GROW_RATE: int = 2 # how many rounds between each pixie growth
 var PIXIE_SPREAD_RATE: int = 1 # how many rounds between each pixie spread
-var PIXIE_SPAWN_RATE: int = 1 # how many rounds between each pixie rand spawn
+var PIXIE_SPAWN_RATE: int = 3 # how many rounds between each pixie rand spawn
 var PIXIE_SPAWN_SCALE: int = 10 # how many rounds before spawn uptick
 var PIXIE_SPAWN_INTENSITY: int = 1 # how many pixies spawned at a time
 
 var EVENT_FREQ: int = 5 # how often do events occur
-var EVENT_INTENSITY: int = 30 # how many items are spawned by events
+var EVENT_INTENSITY: int = 5 # how many items are spawned by events
 var EVENT_INTENSITY_SCALING: int = 5 # how many rounds before each intensity uptick
 ###############################
 
@@ -36,9 +36,9 @@ const gnome_scene = preload("uid://bffr6n4g2h0d3")
 var round_counter: int = 1
 
 func _ready():
-	_spawn_gnome_in_world(Gnome.GnomeColor.RED, Vector2i(5,5), gnome_scene.Direction.UP_LEFT)
-	_spawn_gnome_in_world(Gnome.GnomeColor.BLUE, Vector2i(7,7), gnome_scene.Direction.UP_RIGHT)
-	_spawn_gnome_in_world(Gnome.GnomeColor.GREEN, Vector2i(8,8), gnome_scene.Direction.DOWN_LEFT)
+	_spawn_gnome_in_world(Gnome.GnomeColor.RED, Vector2i(6,4), gnome_scene.Direction.DOWN_LEFT)
+	_spawn_gnome_in_world(Gnome.GnomeColor.BLUE, Vector2i(7,4), gnome_scene.Direction.UP_RIGHT)
+	_spawn_gnome_in_world(Gnome.GnomeColor.GREEN, Vector2i(7,5), gnome_scene.Direction.DOWN_RIGHT)
 	
 	spawn_manager.spawn_initial_hazards()
 	for i in PIXIE_INITIAL_SPAWN:
@@ -139,6 +139,7 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 		fairy_tiles_to_check.append("fairy3")
 	
 	_try_serene(piece, new_pos, old_pos, fairy_tiles_to_check)
+	_try_empathetic(piece, new_pos, fairy_tiles_to_check)
 	if fairy_tiles_to_check.has(new_base_type):
 		_purify_tile(new_pos)
 	

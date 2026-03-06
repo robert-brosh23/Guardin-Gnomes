@@ -8,5 +8,5 @@ script = ExtResource("1_sx2il")
 type = 5
 texture = ExtResource("2_io0ov")
 title = "Intelligent"
-description = "Green gnome will collect all coins it jumps over."
+description = "Green gnome will collect all coins it jumps over. Coins are doubled for green."
 metadata/_custom_type_script = "uid://dhqmn2h32rfqr"
