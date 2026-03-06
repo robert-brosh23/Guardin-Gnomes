@@ -17,6 +17,7 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+anti_aliasing = false
 
 [node name="ProgrammingTrackUI" type="Control" unique_id=660876712 node_paths=PackedStringArray("enchant_button") groups=["programming_track"]]
 texture_filter = 1

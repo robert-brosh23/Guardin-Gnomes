@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bwqfka8hm8ceo" path="res://ui/hand/hand.gd" id="1_vna3l"]
 
-[node name="Hand" type="Node2D" unique_id=738646449 node_paths=PackedStringArray("cards_in_deck_label", "cards_in_discard_label") groups=["hand"]]
+[node name="Hand" type="Node2D" unique_id=738646449 groups=["hand"]]
 z_index = 2
 script = ExtResource("1_vna3l")
-cards_in_deck_label = NodePath("")
-cards_in_discard_label = NodePath("")

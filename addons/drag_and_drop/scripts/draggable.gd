@@ -130,7 +130,7 @@ func _move_toward(from: Vector2, to: Vector2, delta: float) -> Vector2:
 #region Input Handling
 
 func _on_input_event(_viewport, event, _shape_idx):
-	if event.is_action_pressed(drag_input_name) and state == DRAGGABLE_STATE.IDLE and (get_parent().state == Card.states.HOVERING or get_parent().state == Card.states.PLACED):
+	if event.is_action_pressed(drag_input_name) and state == DRAGGABLE_STATE.IDLE and (get_parent().state == Card.states.HOVERING or get_parent().state == Card.states.PLACED) and GameManager.game_state == GameManager.GameState.MANIPULATING:
 		previous_position = a.global_position
 		previous_parent = a.get_parent()
 		if drag_layer_parent:
@@ -145,7 +145,7 @@ func _on_input_event(_viewport, event, _shape_idx):
 func stop_dragging_card():
 	if is_instance_of(get_parent(), Card):
 		var card : Card = get_parent()
-		if state == DRAGGABLE_STATE.DRAGGING and GameManager.game_state == GameManager.GameState.DISCARDING:
+		if state == DRAGGABLE_STATE.DRAGGING and GameManager.game_state == GameManager.GameState.ENCHANTING:
 			drag_ended.emit(a, null)
 			state = DRAGGABLE_STATE.IDLE
 

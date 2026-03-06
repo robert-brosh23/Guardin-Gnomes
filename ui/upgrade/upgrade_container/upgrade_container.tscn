@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cy8tdfeu2bewm"]
+
+[ext_resource type="Script" uid="uid://c5tjsg5ck1krs" path="res://ui/upgrade/upgrade_container/upgrade_container.gd" id="1_rj770"]
+
+[node name="UpgradeContainer" type="MarginContainer" unique_id=1329175558 node_paths=PackedStringArray("grid_container") groups=["upgrade_container"]]
+script = ExtResource("1_rj770")
+grid_container = NodePath("GridContainer")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1714423367]
+layout_mode = 2
+columns = 5

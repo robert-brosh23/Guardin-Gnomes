@@ -3,7 +3,7 @@ extends Node2D
 
 const CENTER_X = 320
 const DEFAULT_Y = 420
-const DEFAULT_CARD_SEPARATION = 150
+const DEFAULT_CARD_SEPARATION = 170
 const DECK_POSITION := Vector2(-50, 200)
 const DISCARD_POSITION := Vector2(950, 400)
 
@@ -44,7 +44,9 @@ func _process(delta: float) -> void:
 			if card.state == Card.states.HOVERING:
 				card.state = Card.states.DEFAULT
 
-func draw_cards(num_cards: int = 7, lock_first: bool = true):
+func draw_cards(num_cards: int = 9, lock_first: bool = true):
+	if GameManager.check_if_has(UpgradeData.UpgradeType.DIVINE):
+		num_cards += 2
 	GameManager.game_state = GameManager.GameState.DRAWING
 	if lock_first:
 		if cards_in_deck.is_empty():

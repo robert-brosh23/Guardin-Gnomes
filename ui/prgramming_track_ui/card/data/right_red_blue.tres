@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_kphkf")
+card_action = 3
 texture = ExtResource("2_rkfw7")
 color = Array[int]([0, 2])
 metadata/_custom_type_script = "uid://cu1r6x02a3xjt"

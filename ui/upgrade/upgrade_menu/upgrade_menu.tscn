@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cfq5dfix7h65v"]
+
+[ext_resource type="Script" uid="uid://covqu3g2orosr" path="res://ui/upgrade/upgrade_menu/upgrade_menu.gd" id="1_eyvtj"]
+[ext_resource type="FontFile" uid="uid://cm4gkenj5odhg" path="res://ui/fonts/m5x7.ttf" id="1_jc6kg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eyvtj"]
+bg_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.7294118, 0.5686275, 0.34509805, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[node name="UpgradeMenu" type="Control" unique_id=51798529 node_paths=PackedStringArray("hbox_container") groups=["upgrade_menu"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_eyvtj")
+hbox_container = NodePath("VBoxContainer/HBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=685336620]
+layout_mode = 0
+offset_left = 292.5
+offset_top = 176.0
+offset_right = 507.5
+offset_bottom = 274.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=96175441]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_eyvtj")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer" unique_id=117604989]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer" unique_id=1084421360]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
+theme_override_fonts/font = ExtResource("1_jc6kg")
+theme_override_font_sizes/font_size = 48
+text = "Choose one"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=2119440804]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 70

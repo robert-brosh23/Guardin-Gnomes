@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://brnxwbld13hhe"]
+
+[ext_resource type="Script" uid="uid://dhqmn2h32rfqr" path="res://ui/upgrade/upgrade_data/upgrade_data.gd" id="1_i1vua"]
+[ext_resource type="Texture2D" uid="uid://iumjhie7ocou" path="res://sprites/upgrade_placeholder.png" id="2_orag3"]
+
+[resource]
+script = ExtResource("1_i1vua")
+type = 1
+texture = ExtResource("2_orag3")
+title = "Sturdy"
+description = "Red gnome will destroy all rocks/thorn bushes it jumps over/into."
+metadata/_custom_type_script = "uid://dhqmn2h32rfqr"
