@@ -15,7 +15,7 @@ var EVENT_FREQ: int = 5 # how often do events occur
 var EVENT_INTENSITY: int = 5 # how many items are spawned by events
 var EVENT_INTENSITY_SCALING: int = 5 # how many rounds before each intensity uptick
 
-var COIN_FREQ: int = 4 # how many rounds between each coin spawn
+var COIN_FREQ: int = 1 # how many rounds between each coin spawn
 ###############################
 
 @export var debug_enabled: bool
