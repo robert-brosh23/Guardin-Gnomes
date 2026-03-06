@@ -25,6 +25,7 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arx8u"]
 bg_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
@@ -37,6 +38,7 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+anti_aliasing = false
 
 [node name="UpgradePreview" type="MarginContainer" unique_id=924358459 node_paths=PackedStringArray("texture_rect", "title_label", "description_label", "button")]
 texture_filter = 1
@@ -101,10 +103,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_arx8u")
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=580581979]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 14
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=742706660]
 layout_mode = 2

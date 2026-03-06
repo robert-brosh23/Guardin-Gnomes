@@ -12,6 +12,7 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+anti_aliasing = false
 
 [node name="Upgrade" type="MarginContainer" unique_id=1571615606 node_paths=PackedStringArray("texture_rect", "tooltip_container", "tooltip_label")]
 offset_right = 20.0
@@ -38,7 +39,7 @@ layout_mode = 0
 offset_left = 10.0
 offset_top = 24.0
 offset_right = 58.0
-offset_bottom = 54.0
+offset_bottom = 44.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2ejs7")
 
@@ -47,13 +48,13 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_bottom = 2
 
 [node name="TooltipText" type="Label" parent="TextureRect/PanelContainer/MarginContainer" unique_id=1162299842]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
 theme_override_fonts/font = ExtResource("3_aei2k")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 text = "asdf"
 
 [connection signal="mouse_entered" from="HoverPanel" to="." method="_on_hover_panel_mouse_entered"]

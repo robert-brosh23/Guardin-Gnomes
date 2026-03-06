@@ -282,6 +282,8 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
+corner_detail = 19
+anti_aliasing = false
 
 [node name="Main" type="Node2D" unique_id=1208621114 node_paths=PackedStringArray("base_layer", "hazard_layer", "event_countdown_label", "blight_label", "round_label", "cards_in_deck_label", "cards_in_discard_label") groups=["main"]]
 texture_filter = 1
@@ -346,6 +348,7 @@ theme_override_constants/margin_bottom = 4
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GameUI/HBoxContainer" unique_id=1730504052]
+texture_filter = 1
 custom_minimum_size = Vector2(215, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -353,6 +356,7 @@ size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pjyto")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer" unique_id=1691649163]
+texture_filter = 1
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 6

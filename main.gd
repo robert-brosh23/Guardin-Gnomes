@@ -150,6 +150,10 @@ func _try_serene(gnome: Gnome, new_pos: Vector2i, old_pos: Vector2i, fairy_tiles
 	var points := _get_points_between(old_pos, new_pos)
 	for point in points:
 		_try_empathetic(gnome, point, fairy_tiles_to_check)
+		if hazard_layer.get_cell_tile_data(point):
+			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
+			if hazard_type == "pixie":
+				_destroy_hazard(point, hazard_type)
 		point += + Vector2i(-1,1)
 		if base_layer.get_cell_tile_data(point):
 			var tile_type := base_layer.get_cell_tile_data(point).get_custom_data("base_type") as String
@@ -161,6 +165,10 @@ func _try_empathetic(gnome: Gnome, new_pos: Vector2i, fairy_tiles_to_check: Arra
 		return
 	var points := _get_adjacent_points(new_pos)
 	for point in points:
+		if hazard_layer.get_cell_tile_data(point):
+			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
+			if hazard_type == "pixie":
+				_destroy_hazard(point, hazard_type)
 		point += + Vector2i(-1,1)
 		if base_layer.get_cell_tile_data(point):
 			var tile_type := base_layer.get_cell_tile_data(point).get_custom_data("base_type") as String
