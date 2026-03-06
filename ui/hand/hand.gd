@@ -20,6 +20,7 @@ var dragging_card: Card
 
 var programming_track_ui: ProgrammingTrackUI
 
+var draw_card_sound := preload("res://audio/Cozy UI A8.wav")
 
 func _ready() -> void:
 	programming_track_ui = get_tree().get_first_node_in_group("programming_track")
@@ -57,6 +58,7 @@ func draw_cards(num_cards: int = 9, lock_first: bool = true):
 			if result:
 				cards_in_deck.erase(card)
 				num_cards -= 1
+			AudioPlayer.play_sound(draw_card_sound)
 				
 	for i in range(num_cards):
 		if cards_in_deck.is_empty():
@@ -66,6 +68,7 @@ func draw_cards(num_cards: int = 9, lock_first: bool = true):
 			var card = cards_in_deck.get(0)
 			cards_in_deck.remove_at(0)
 			add_card_to_hand(card)
+			AudioPlayer.play_sound(draw_card_sound)
 	GameManager.game_state = GameManager.GameState.MANIPULATING
 	
 func move_cards_from_discard_to_deck_and_shuffle():

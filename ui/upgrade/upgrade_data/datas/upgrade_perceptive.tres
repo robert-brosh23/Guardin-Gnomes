@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://bdcih4fd57b6u"]
 
 [ext_resource type="Script" uid="uid://dhqmn2h32rfqr" path="res://ui/upgrade/upgrade_data/upgrade_data.gd" id="1_ma7po"]
-[ext_resource type="Texture2D" uid="uid://iumjhie7ocou" path="res://sprites/upgrade_placeholder.png" id="2_g5bub"]
+[ext_resource type="Texture2D" uid="uid://c32xg5gwv8cci" path="res://sprites/upgrades/Perceptive.png" id="2_k84l0"]
 
 [resource]
 script = ExtResource("1_ma7po")
 type = 4
-texture = ExtResource("2_g5bub")
+texture = ExtResource("2_k84l0")
 title = "Perceptive"
-description = "Green gnome will collect coins on spaces adjacent to it."
+description = "Green gnome colects coins it jumps over and is adjacent to."
 metadata/_custom_type_script = "uid://dhqmn2h32rfqr"

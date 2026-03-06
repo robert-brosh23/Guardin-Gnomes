@@ -25,7 +25,7 @@ var gnomes: Array[Gnome]
 const gnome_scene = preload("uid://bffr6n4g2h0d3")
 
 @onready var programming_track_ui: ProgrammingTrackUI = $CanvasLayer/ProgrammingTrackUI
-@onready var pixie_manager: Node = $PixieManager
+@onready var pixie_manager: PixieManager = $PixieManager
 @onready var spawn_manager: Node = $SpawnManager
 @onready var tilemap_manager: Node2D = $TilemapManager
 @onready var hand: Hand = %Hand
@@ -33,10 +33,13 @@ const gnome_scene = preload("uid://bffr6n4g2h0d3")
 @export var event_countdown_label: Label
 @export var blight_label: Label
 @export var round_label: Label
-@export var cards_in_deck_label: Label
-@export var cards_in_discard_label: Label
+@export var coins_to_next_label: Label
 
 var round_counter: int = 1
+
+var rock_destroy_sfx = preload("res://audio/Gravel Interaction A.wav")
+var purify_sfx = preload("res://audio/Cozy UI D2.wav")
+var coin_sfx = preload("res://audio/Cozy UI D5.wav")
 
 func _ready():
 	_spawn_gnome_in_world(Gnome.GnomeColor.RED, Vector2i(6,4), gnome_scene.Direction.DOWN_LEFT)
@@ -57,8 +60,7 @@ func _ready():
 		(EVENT_FREQ - (round_counter % EVENT_FREQ))
 	
 func _process(delta: float) -> void:
-	cards_in_deck_label.text = "Deck: " + str(hand.cards_in_deck.size())
-	cards_in_discard_label.text = "Discard: " + str(hand.cards_in_discard.size())
+	coins_to_next_label.text = "Coins to next Upgrade: "
 	
 	
 func all_gnomes_idle():
@@ -121,7 +123,7 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 		piece.try_move_forward(piece.try_move_distance)
 		return
 	
-	_handle_coin(piece, new_hazard_type)
+	_handle_coin(piece, new_pos, new_hazard_type)
 	
 	if _handle_wall(piece, new_hazard_type, current_hazard_type):
 		piece.try_move_distance -= 1
@@ -153,14 +155,16 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 		_purify_tile(new_pos)
 
 func _purify_tile(grid_pos: Vector2i):
+	
 	await get_tree().create_timer(0.8).timeout # purely for visuals
 	var purify = Purify.create_purify()
 	purify.global_position = base_layer.map_to_local(grid_pos) + base_layer.global_position
 	add_child(purify)
 	base_layer.set_cell(grid_pos + Vector2i(-1,1), 1, tilemap_manager.get_random_grass())
+	AudioPlayer.play_sound(purify_sfx)
 	
 func _try_serene(gnome: Gnome, new_pos: Vector2i, old_pos: Vector2i, fairy_tiles_to_check: Array[String]):
-	if !GameManager.check_if_has(UpgradeData.UpgradeType.SERENE) or gnome.color != Gnome.GnomeColor.BLUE:
+	if !((GameManager.check_if_has(UpgradeData.UpgradeType.SERENE) and gnome.color == Gnome.GnomeColor.BLUE) or (GameManager.check_if_has(UpgradeData.UpgradeType.AGILE) and gnome.color == Gnome.GnomeColor.GREEN)):
 		return
 	var points := _get_points_between(old_pos, new_pos)
 	for point in points:
@@ -236,6 +240,10 @@ func _destroy_hazard(grid_pos: Vector2i, hazard_type: String):
 	if GameManager.check_if_has(UpgradeData.UpgradeType.PRACTICAL) and hazard_type == "rock":
 		print("+1 money")
 		
+	AudioPlayer.play_sound(rock_destroy_sfx)
+		
+	
+
 	
 func _get_3x3_points(grid_pos: Vector2i) -> Array[Vector2i]:
 	var points: Array[Vector2i] = []
@@ -317,13 +325,23 @@ func _handle_teleporter(piece, new_hazard_type):
 		return
 
 
-func _handle_coin(piece, new_hazard_type):
+func _handle_coin(piece: Gnome, grid_pos: Vector2i, new_hazard_type: String):
 	if new_hazard_type == "coin":
-		programming_track_ui.coins += 1
-		await get_tree().create_timer(0.6).timeout
-		hazard_layer.erase_cell(piece.grid_pos)
+		_collect_coin(grid_pos)
 		return true
 
+
+func _collect_coin(grid_pos: Vector2i = Vector2i(-999,-999)):
+	GameManager.num_coins += 1
+	await get_tree().create_timer(0.6).timeout
+	if grid_pos != Vector2i(-999,-999):
+		hazard_layer.erase_cell(grid_pos)
+	AudioPlayer.play_sound(coin_sfx)
+	if GameManager.check_if_has(UpgradeData.UpgradeType.INTELLIGENT):
+		var circles_coords := pixie_manager.get_pixie_circles()
+		if !circles_coords.is_empty():
+			_purify_tile(circles_coords.pick_random() + Vector2i(1, -1))
+			
 
 func _spawn_gnome_in_world(color: Gnome.GnomeColor, grid_pos: Vector2i, direction):
 	var gnome = spawn_manager.spawn_gnome(color, grid_pos, direction)

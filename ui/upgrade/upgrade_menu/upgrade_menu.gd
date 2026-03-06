@@ -21,6 +21,8 @@ var possible_upgrades: Array[UpgradeData] = [
 	preload("res://ui/upgrade/upgrade_data/datas/upgrade_wise.tres")
 ]
 
+var upgrade_sound := preload("res://audio/Cozy UI D7.wav")
+
 func _ready() -> void:
 	visible = false
 
@@ -28,6 +30,9 @@ func open_upgrade_menu():
 	if possible_upgrades.size() == 0:
 		chosen.emit(null)
 		return
+		
+	AudioPlayer.play_sound(upgrade_sound)
+		
 	if possible_upgrades.size() == 1:
 		_open_upgrade_menu_for_one()
 		return

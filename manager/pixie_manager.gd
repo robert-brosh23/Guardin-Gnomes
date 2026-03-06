@@ -73,3 +73,11 @@ func _check_pixie_tiles():
 	pixie_circle_4_tiles = base_layer.get_used_cells_by_id(PIXIE_CIRCLE_SOURCE_ID, PIXIE_CIRCLE_4_ATLAS)
 	pixie_circle_5_tiles = base_layer.get_used_cells_by_id(PIXIE_CIRCLE_SOURCE_ID, PIXIE_CIRCLE_5_ATLAS)
 	pixie_hazard_tiles = hazard_layer.get_used_cells_by_id(PIXIE_HAZARD_SOURCE_ID, PIXIE_HAZARD_ATLAS)
+	
+	
+func get_pixie_circles() -> Array[Vector2i]:
+	pixie_circle_1_tiles = base_layer.get_used_cells_by_id(PIXIE_CIRCLE_SOURCE_ID, PIXIE_CIRCLE_1_ATLAS)
+	pixie_circle_2_tiles = base_layer.get_used_cells_by_id(PIXIE_CIRCLE_SOURCE_ID, PIXIE_CIRCLE_2_ATLAS)
+	pixie_circle_3_tiles = base_layer.get_used_cells_by_id(PIXIE_CIRCLE_SOURCE_ID, PIXIE_CIRCLE_3_ATLAS)
+	pixie_circle_4_tiles = base_layer.get_used_cells_by_id(PIXIE_CIRCLE_SOURCE_ID, PIXIE_CIRCLE_4_ATLAS)
+	return pixie_circle_1_tiles + pixie_circle_2_tiles + pixie_circle_3_tiles + pixie_circle_4_tiles

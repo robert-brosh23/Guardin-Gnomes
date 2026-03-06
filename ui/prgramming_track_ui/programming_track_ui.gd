@@ -8,7 +8,6 @@ var hand: Hand
 var main: Main
 var upgrade_menu: UpgradeMenu
 
-var coins: int = 0
 var active_index: int
 
 func _ready():
@@ -50,8 +49,8 @@ func start_turn():
 		track_spot.de_activate()
 		active_index+=1	
 	
-	while coins > 0:
-		coins -= 1
+	while GameManager.num_coins > 0:
+		GameManager.num_coins -= 1
 		if GameManager.upgrades.size() < 10:
 			upgrade_menu.open_upgrade_menu()
 			await upgrade_menu.chosen

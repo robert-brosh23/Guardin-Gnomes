@@ -102,6 +102,8 @@ func _try_action(data: CardData, track_index: int):
 	if !data.color.has(color):
 		return
 		
+	await _delay_based_on_color()
+		
 	try_move_distance = 1
 	if color == GnomeColor.GREEN and GameManager.check_if_has(UpgradeData.UpgradeType.AGILE):
 		try_move_distance *= 2
@@ -122,6 +124,16 @@ func _try_action(data: CardData, track_index: int):
 		CardData.CardAction.FORWARD_THREE:
 			try_move_distance *= 3
 			try_move_forward(try_move_distance)
+
+func _delay_based_on_color():
+	var delay = .1
+	match color:
+		GnomeColor.RED:
+			pass
+		GnomeColor.GREEN:
+			await get_tree().create_timer(delay).timeout
+		GnomeColor.BLUE:
+			await get_tree().create_timer(delay * 2).timeout
 
 func _set_color():
 	if color == GnomeColor.GREEN: sprite.texture = load("uid://cnil47ngwlo1q")
