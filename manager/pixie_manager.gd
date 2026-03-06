@@ -33,8 +33,14 @@ func _on_next_round(_round_number := 0):
 		pixie_grow()
 	if main.round_counter % main.PIXIE_SPREAD_RATE == 0:
 		pixie_spread()
-	if main.round_counter % main.PIXIE_SPAWN_RATE == 0 || 1:
-		for i in main.PIXIE_SPAWN_INTENSITY * (main.round_counter / 3 + 1): pixie_rand_spawn()
+	if main.round_counter % main.PIXIE_SPAWN_RATE == 0:
+		for i in main.PIXIE_SPAWN_INTENSITY: pixie_rand_spawn()
+	if main.round_counter % main.PIXIE_SPAWN_SCALE == 0:
+		if main.PIXIE_SPAWN_RATE >= 1:
+			main.PIXIE_SPAWN_RATE -= 1
+		else:
+			main.PIXIE_SPAWN_INTENSITY += 1
+
 	_check_pixie_tiles()
 	blight_count = pixie_circle_5_tiles.size()
 	blight_label.text = "Blight: %s/%s" % [blight_count, main.MAX_BLIGHT]
