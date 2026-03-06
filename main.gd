@@ -149,13 +149,10 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 	
 	_try_serene(piece, new_pos, old_pos, fairy_tiles_to_check)
 	_range_helper(piece, new_pos, fairy_tiles_to_check)
-	_try_empathetic(piece, new_pos, fairy_tiles_to_check)
 	if fairy_tiles_to_check.has(new_base_type):
 		_purify_tile(new_pos)
 
-
 func _purify_tile(grid_pos: Vector2i):
-	
 	await get_tree().create_timer(0.8).timeout # purely for visuals
 	var purify = Purify.create_purify()
 	purify.global_position = base_layer.map_to_local(grid_pos) + base_layer.global_position
@@ -168,7 +165,6 @@ func _try_serene(gnome: Gnome, new_pos: Vector2i, old_pos: Vector2i, fairy_tiles
 	var points := _get_points_between(old_pos, new_pos)
 	for point in points:
 		_range_helper(gnome, point, fairy_tiles_to_check)
-		_try_empathetic(gnome, point, fairy_tiles_to_check)
 		if hazard_layer.get_cell_tile_data(point):
 			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
 			if hazard_type == "pixie":
@@ -195,7 +191,7 @@ func _try_empathetic(gnome: Gnome, new_pos: Vector2i, fairy_tiles_to_check: Arra
 				_purify_tile(point + Vector2i(1,-1))
 
 func _range_helper(gnome: Gnome, new_pos: Vector2i, fairy_tiles_to_check: Array[String]):
-	var points := _get_adjacent_points(new_pos)
+	var points := _get_3x3_points(new_pos)
 	for point in points:
 		if hazard_layer.get_cell_tile_data(point):
 			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
@@ -206,6 +202,7 @@ func _range_helper(gnome: Gnome, new_pos: Vector2i, fairy_tiles_to_check: Array[
 			var tile_type := base_layer.get_cell_tile_data(point).get_custom_data("base_type") as String
 			if fairy_tiles_to_check.has(tile_type):
 				_purify_tile(point + Vector2i(1,-1))
+		_try_empathetic(gnome, new_pos, fairy_tiles_to_check)
 
 
 func _try_sturdy(gnome: Gnome, new_pos: Vector2i):
@@ -222,7 +219,7 @@ func _try_sturdy(gnome: Gnome, new_pos: Vector2i):
 func _try_powerful(gnome: Gnome, new_pos: Vector2i):
 	if !GameManager.check_if_has(UpgradeData.UpgradeType.POWERFUL) or gnome.color != Gnome.GnomeColor.RED:
 		return
-	var points := _get_adjacent_points(new_pos)
+	var points := _get_3x3_points(new_pos)
 	for point in points:
 		if hazard_layer.get_cell_tile_data(point):
 			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
@@ -238,15 +235,7 @@ func _destroy_hazard(grid_pos: Vector2i, hazard_type: String):
 	
 	if GameManager.check_if_has(UpgradeData.UpgradeType.PRACTICAL) and hazard_type == "rock":
 		print("+1 money")
-	
-func _get_adjacent_points(grid_pos: Vector2i) -> Array[Vector2i]:
-	var points: Array[Vector2i] = []
-	points.append(grid_pos + Vector2i(1,0))
-	points.append(grid_pos + Vector2i(-1,0))
-	points.append(grid_pos + Vector2i(0,1))
-	points.append(grid_pos + Vector2i(0,-1))
-	return points
-	
+		
 	
 func _get_3x3_points(grid_pos: Vector2i) -> Array[Vector2i]:
 	var points: Array[Vector2i] = []
