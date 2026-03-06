@@ -49,8 +49,8 @@ func start_turn():
 		track_spot.de_activate()
 		active_index+=1	
 	
-	while GameManager.num_coins > 0:
-		GameManager.num_coins -= 1
+	while GameManager.num_coins >= GameManager.get_required_coins():
+		GameManager.num_coins -= GameManager.get_required_coins()
 		if GameManager.upgrades.size() < 10:
 			upgrade_menu.open_upgrade_menu()
 			await upgrade_menu.chosen

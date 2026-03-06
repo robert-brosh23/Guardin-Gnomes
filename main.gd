@@ -60,7 +60,7 @@ func _ready():
 		(EVENT_FREQ - (round_counter % EVENT_FREQ))
 	
 func _process(delta: float) -> void:
-	coins_to_next_label.text = "Coins to next Upgrade: "
+	coins_to_next_label.text = "Coins to next upgrade: " + str(GameManager.get_required_coins() - GameManager.num_coins)
 	
 	
 func all_gnomes_idle():
