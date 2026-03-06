@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://fquthifaoajj"
+path="res://.godot/imported/Cozy UI D2.wav-05e10f3e17b39e48b4944355d0e9bf30.sample"
+
+[deps]
+
+source_file="res://audio/Cozy UI D2.wav"
+dest_files=["res://.godot/imported/Cozy UI D2.wav-05e10f3e17b39e48b4944355d0e9bf30.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

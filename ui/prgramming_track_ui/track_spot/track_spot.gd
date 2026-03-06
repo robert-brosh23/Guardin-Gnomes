@@ -4,12 +4,17 @@ extends Area2D
 @export var dropzone: DropZone
 @export var card_highlight: TextureRect
 
+var place_card_sound := preload("res://audio/Cozy UI A2.wav")
+
+func _ready():
+	dropzone.drop_applied.connect(func(zone, area, plan): AudioPlayer.play_sound(place_card_sound))
+
 func attach_card(card: Card) -> bool:
 	var dropped = dropzone.try_dropping(card)
-	print("tried attaching")
 	if dropped != null:
 		card.tween_to_pos(global_position, 1.0, Tween.TransitionType.TRANS_CUBIC, Tween.EaseType.EASE_OUT)
 		return true
+		
 	return false
 
 func activate(track_index: int, highlight_card: bool = true):

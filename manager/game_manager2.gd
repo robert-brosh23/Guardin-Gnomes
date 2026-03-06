@@ -8,3 +8,5 @@ var upgrades: Array[UpgradeData.UpgradeType]
 
 func check_if_has(upgrade_type: UpgradeData.UpgradeType) -> bool:
 	return upgrades.has(upgrade_type)
+
+var num_coins: int = 0

@@ -8,5 +8,5 @@ script = ExtResource("1_6aoi5")
 type = 7
 texture = ExtResource("2_4sdyy")
 title = "Empathetic"
-description = "Blue gnome will purify tiles adjacent to it."
+description = "Blue gnome purification range is increased."
 metadata/_custom_type_script = "uid://dhqmn2h32rfqr"

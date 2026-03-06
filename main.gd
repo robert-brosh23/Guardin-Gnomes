@@ -14,6 +14,8 @@ var PIXIE_SPAWN_INTENSITY: int = 1 # how many pixies spawned at a time
 var EVENT_FREQ: int = 5 # how often do events occur
 var EVENT_INTENSITY: int = 5 # how many items are spawned by events
 var EVENT_INTENSITY_SCALING: int = 5 # how many rounds before each intensity uptick
+
+var COIN_FREQ: int = 4 # how many rounds between each coin spawn
 ###############################
 
 @export var debug_enabled: bool
@@ -22,7 +24,8 @@ var EVENT_INTENSITY_SCALING: int = 5 # how many rounds before each intensity upt
 var gnomes: Array[Gnome]
 const gnome_scene = preload("uid://bffr6n4g2h0d3")
 
-@onready var pixie_manager: Node = $PixieManager
+@onready var programming_track_ui: ProgrammingTrackUI = $CanvasLayer/ProgrammingTrackUI
+@onready var pixie_manager: PixieManager = $PixieManager
 @onready var spawn_manager: Node = $SpawnManager
 @onready var tilemap_manager: Node2D = $TilemapManager
 @onready var hand: Hand = %Hand
@@ -36,7 +39,8 @@ const gnome_scene = preload("uid://bffr6n4g2h0d3")
 var round_counter: int = 1
 
 var rock_destroy_sfx = preload("res://audio/Gravel Interaction A.wav")
-var purify_sfx = preload("res://audio/UI Success 001.wav")
+var purify_sfx = preload("res://audio/Cozy UI D2.wav")
+var coin_sfx = preload("res://audio/Cozy UI D5.wav")
 
 func _ready():
 	_spawn_gnome_in_world(Gnome.GnomeColor.RED, Vector2i(6,4), gnome_scene.Direction.DOWN_LEFT)
@@ -72,8 +76,12 @@ func _on_turn_end():
 	pixie_manager._on_next_round()
 	_check_gameover()
 	hand._on_turn_end()
+	if round_counter % COIN_FREQ == 0:
+		spawn_manager.spawn_coin()
 	if round_counter % EVENT_FREQ == 0:
 		spawn_manager.trigger_random_event()
+		
+		
 	event_countdown_label.text = "Next Event In %s Rounds" % \
 		(EVENT_FREQ - (round_counter % EVENT_FREQ) - 1)
 	round_counter += 1
@@ -116,7 +124,9 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 		piece.try_move_distance -= 1
 		piece.try_move_forward(piece.try_move_distance)
 		return
-		
+	
+	_handle_coin(piece, new_pos, new_hazard_type)
+	
 	if _handle_wall(piece, new_hazard_type, current_hazard_type):
 		piece.try_move_distance -= 1
 		piece.try_move_forward(piece.try_move_distance)
@@ -137,15 +147,15 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 
 
 	# Handle base tiles
-	var fairy_tiles_to_check : Array[String] = ["fairy1", "fairy2"]
+	var fairy_tiles_to_check : Array[String] = ["fairy1", "fairy2","fairy3","fairy4"]
 	if GameManager.check_if_has(UpgradeData.UpgradeType.WISE) and piece.color == Gnome.GnomeColor.BLUE:
-		fairy_tiles_to_check.append("fairy3")
+		fairy_tiles_to_check.append("fairy5")
 	
 	_try_serene(piece, new_pos, old_pos, fairy_tiles_to_check)
-	_try_empathetic(piece, new_pos, fairy_tiles_to_check)
+	_range_helper(piece, new_pos, fairy_tiles_to_check)
 	if fairy_tiles_to_check.has(new_base_type):
 		_purify_tile(new_pos)
-	
+
 func _purify_tile(grid_pos: Vector2i):
 	
 	await get_tree().create_timer(0.8).timeout # purely for visuals
@@ -156,11 +166,11 @@ func _purify_tile(grid_pos: Vector2i):
 	AudioPlayer.play_sound(purify_sfx)
 	
 func _try_serene(gnome: Gnome, new_pos: Vector2i, old_pos: Vector2i, fairy_tiles_to_check: Array[String]):
-	if !GameManager.check_if_has(UpgradeData.UpgradeType.SERENE) or gnome.color != Gnome.GnomeColor.BLUE:
+	if !((GameManager.check_if_has(UpgradeData.UpgradeType.SERENE) and gnome.color == Gnome.GnomeColor.BLUE) or (GameManager.check_if_has(UpgradeData.UpgradeType.AGILE) and gnome.color == Gnome.GnomeColor.GREEN)):
 		return
 	var points := _get_points_between(old_pos, new_pos)
 	for point in points:
-		_try_empathetic(gnome, point, fairy_tiles_to_check)
+		_range_helper(gnome, point, fairy_tiles_to_check)
 		if hazard_layer.get_cell_tile_data(point):
 			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
 			if hazard_type == "pixie":
@@ -174,7 +184,7 @@ func _try_serene(gnome: Gnome, new_pos: Vector2i, old_pos: Vector2i, fairy_tiles
 func _try_empathetic(gnome: Gnome, new_pos: Vector2i, fairy_tiles_to_check: Array[String]):
 	if !GameManager.check_if_has(UpgradeData.UpgradeType.EMPATHETIC) or gnome.color != Gnome.GnomeColor.BLUE:
 		return
-	var points := _get_adjacent_points(new_pos)
+	var points := _get_3x3_points(new_pos)
 	for point in points:
 		if hazard_layer.get_cell_tile_data(point):
 			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
@@ -185,6 +195,21 @@ func _try_empathetic(gnome: Gnome, new_pos: Vector2i, fairy_tiles_to_check: Arra
 			var tile_type := base_layer.get_cell_tile_data(point).get_custom_data("base_type") as String
 			if fairy_tiles_to_check.has(tile_type):
 				_purify_tile(point + Vector2i(1,-1))
+
+func _range_helper(gnome: Gnome, new_pos: Vector2i, fairy_tiles_to_check: Array[String]):
+	var points := _get_3x3_points(new_pos)
+	for point in points:
+		if hazard_layer.get_cell_tile_data(point):
+			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
+			if hazard_type == "pixie":
+				_destroy_hazard(point, hazard_type)
+		point += + Vector2i(-1,1)
+		if base_layer.get_cell_tile_data(point):
+			var tile_type := base_layer.get_cell_tile_data(point).get_custom_data("base_type") as String
+			if fairy_tiles_to_check.has(tile_type):
+				_purify_tile(point + Vector2i(1,-1))
+		_try_empathetic(gnome, new_pos, fairy_tiles_to_check)
+
 
 func _try_sturdy(gnome: Gnome, new_pos: Vector2i):
 	if !GameManager.check_if_has(UpgradeData.UpgradeType.STURDY) or gnome.color != Gnome.GnomeColor.RED:
@@ -200,7 +225,7 @@ func _try_sturdy(gnome: Gnome, new_pos: Vector2i):
 func _try_powerful(gnome: Gnome, new_pos: Vector2i):
 	if !GameManager.check_if_has(UpgradeData.UpgradeType.POWERFUL) or gnome.color != Gnome.GnomeColor.RED:
 		return
-	var points := _get_adjacent_points(new_pos)
+	var points := _get_3x3_points(new_pos)
 	for point in points:
 		if hazard_layer.get_cell_tile_data(point):
 			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
@@ -216,16 +241,24 @@ func _destroy_hazard(grid_pos: Vector2i, hazard_type: String):
 	
 	if GameManager.check_if_has(UpgradeData.UpgradeType.PRACTICAL) and hazard_type == "rock":
 		print("+1 money")
-	
+		
 	AudioPlayer.play_sound(rock_destroy_sfx)
+		
 	
-func _get_adjacent_points(grid_pos: Vector2i) -> Array[Vector2i]:
+
+	
+func _get_3x3_points(grid_pos: Vector2i) -> Array[Vector2i]:
 	var points: Array[Vector2i] = []
 	points.append(grid_pos + Vector2i(1,0))
 	points.append(grid_pos + Vector2i(-1,0))
 	points.append(grid_pos + Vector2i(0,1))
 	points.append(grid_pos + Vector2i(0,-1))
+	points.append(grid_pos + Vector2i(1,1))
+	points.append(grid_pos + Vector2i(1,-1))
+	points.append(grid_pos + Vector2i(-1,1))
+	points.append(grid_pos + Vector2i(-1,-1))
 	return points
+
 	
 ## This function only works when the two points are on the same axis.
 func _get_points_between(a: Vector2i, b: Vector2i) -> Array[Vector2i]:
@@ -293,6 +326,24 @@ func _handle_teleporter(piece, new_hazard_type):
 		piece.try_move_forward()
 		return
 
+
+func _handle_coin(piece: Gnome, grid_pos: Vector2i, new_hazard_type: String):
+	if new_hazard_type == "coin":
+		_collect_coin(grid_pos)
+		return true
+
+
+func _collect_coin(grid_pos: Vector2i = Vector2i(-999,-999)):
+	GameManager.num_coins += 1
+	await get_tree().create_timer(0.6).timeout
+	if grid_pos != Vector2i(-999,-999):
+		hazard_layer.erase_cell(grid_pos)
+	AudioPlayer.play_sound(coin_sfx)
+	if GameManager.check_if_has(UpgradeData.UpgradeType.INTELLIGENT):
+		var circles_coords := pixie_manager.get_pixie_circles()
+		if !circles_coords.is_empty():
+			_purify_tile(circles_coords.pick_random())
+			
 
 func _spawn_gnome_in_world(color: Gnome.GnomeColor, grid_pos: Vector2i, direction):
 	var gnome = spawn_manager.spawn_gnome(color, grid_pos, direction)

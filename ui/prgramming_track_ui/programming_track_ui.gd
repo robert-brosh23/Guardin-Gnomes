@@ -49,10 +49,11 @@ func start_turn():
 		track_spot.de_activate()
 		active_index+=1	
 	
-	# Move coin check here
-	if GameManager.upgrades.size() < 10:
-		upgrade_menu.open_upgrade_menu()
-		await upgrade_menu.chosen
+	while GameManager.num_coins > 0:
+		GameManager.num_coins -= 1
+		if GameManager.upgrades.size() < 10:
+			upgrade_menu.open_upgrade_menu()
+			await upgrade_menu.chosen
 	
 	move_cards_to_hand()
 	GameManager.game_state = GameManager.GameState.DISCARDING

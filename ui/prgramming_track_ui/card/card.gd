@@ -15,6 +15,8 @@ var state: states
 var hand: Hand
 var tween: Tween
 
+var pick_up_card_sound := preload("res://audio/Cozy UI A5.wav")
+
 static func create_card(card_data: CardData):
 	var card : Card = SCENE.instantiate()
 	card.data = card_data
@@ -23,6 +25,8 @@ static func create_card(card_data: CardData):
 func _ready():
 	hand = get_tree().get_first_node_in_group("hand")
 	draggable.drag_layer_parent = hand
+	
+	draggable.drag_started.connect(func(area): AudioPlayer.play_sound(pick_up_card_sound))
 	
 	card_image.texture = data.texture
 	
