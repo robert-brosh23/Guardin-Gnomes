@@ -23,10 +23,6 @@ var possible_upgrades: Array[UpgradeData] = [
 
 func _ready() -> void:
 	visible = false
-	
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("left"):
-		open_upgrade_menu()
 
 func open_upgrade_menu():
 	if possible_upgrades.size() == 0:

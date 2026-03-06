@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://4wit70wmvxk3" path="res://manager/pixie_manager.gd" id="3_2cqfq"]
 [ext_resource type="Script" uid="uid://8nd74jifhd6o" path="res://manager/spawn_manager.gd" id="3_getpj"]
 [ext_resource type="Texture2D" uid="uid://cguhhun74ixvm" path="res://sprites/blocks/GrassBlocks.png" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://c3gil5thauhwg" path="res://sprites/foreground3.png" id="4_b17eg"]
 [ext_resource type="Texture2D" uid="uid://phf1a8pwvcor" path="res://sprites/blocks/PixieBlocks.png" id="4_kek77"]
-[ext_resource type="Texture2D" uid="uid://7dx85wrypfqv" path="res://sprites/foreground_2.png" id="4_lswn8"]
 [ext_resource type="Texture2D" uid="uid://b2aqdkp4xd3mo" path="res://sprites/hazard/ThornBush.png" id="5_272bh"]
 [ext_resource type="Texture2D" uid="uid://d4khekpm2flto" path="res://sprites/hazard/rock.png" id="6_5vw27"]
 [ext_resource type="Texture2D" uid="uid://cbjbuqil2ufi3" path="res://sprites/hazard/Tornado.png" id="7_4c57u"]
@@ -305,7 +305,7 @@ script = ExtResource("3_getpj")
 
 [node name="Foreground" type="Sprite2D" parent="." unique_id=2000795728]
 position = Vector2(400, 225)
-texture = ExtResource("4_lswn8")
+texture = ExtResource("4_b17eg")
 
 [node name="TilemapManager" type="Node2D" parent="." unique_id=339126735 node_paths=PackedStringArray("base_layer", "hazard_layer", "main")]
 y_sort_enabled = true
@@ -349,7 +349,7 @@ layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GameUI/HBoxContainer" unique_id=1730504052]
 texture_filter = 1
-custom_minimum_size = Vector2(215, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -371,8 +371,9 @@ size_flags_vertical = 0
 theme_override_constants/separation = -2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=203678873]
+texture_filter = 1
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 6
 
 [node name="RoundLabel" type="Label" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1618113745]
 layout_mode = 2

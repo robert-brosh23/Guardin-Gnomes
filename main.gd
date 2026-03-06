@@ -16,6 +16,7 @@ var EVENT_INTENSITY: int = 30 # how many items are spawned by events
 var EVENT_INTENSITY_SCALING: int = 5 # how many rounds before each intensity uptick
 ###############################
 
+@export var debug_enabled: bool
 @export var base_layer: TileMapLayer
 @export var hazard_layer: TileMapLayer
 var gnomes: Array[Gnome]
