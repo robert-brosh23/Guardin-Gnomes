@@ -325,7 +325,7 @@ corner_radius_bottom_left = 16
 corner_detail = 19
 anti_aliasing = false
 
-[node name="Main" type="Node2D" unique_id=1208621114 node_paths=PackedStringArray("base_layer", "hazard_layer", "event_countdown_label", "blight_label", "round_label", "cards_in_deck_label", "cards_in_discard_label") groups=["main"]]
+[node name="Main" type="Node2D" unique_id=1208621114 node_paths=PackedStringArray("base_layer", "hazard_layer", "event_countdown_label", "blight_label", "round_label") groups=["main"]]
 texture_filter = 1
 script = ExtResource("1_0xm2m")
 base_layer = NodePath("TilemapManager/BaseLayer")
@@ -333,8 +333,6 @@ hazard_layer = NodePath("TilemapManager/HazardLayer")
 event_countdown_label = NodePath("CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventCountdownLabel")
 blight_label = NodePath("CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/BlightLabel")
 round_label = NodePath("CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RoundLabel")
-cards_in_deck_label = NodePath("CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/CardsInDeck")
-cards_in_discard_label = NodePath("CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/CardsInDiscard")
 
 [node name="PixieManager" type="Node" parent="." unique_id=700652386 node_paths=PackedStringArray("blight_label")]
 script = ExtResource("3_2cqfq")
@@ -443,23 +441,12 @@ theme_override_fonts/font = ExtResource("26_lswn8")
 theme_override_font_sizes/font_size = 16
 text = "Blight: 0/5"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2073096377]
-layout_mode = 2
-theme_override_constants/separation = 14
-
-[node name="CardsInDeck" type="Label" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=746953608]
+[node name="CoinsToNext" type="Label" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=746953608]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.29411766, 0.44705883, 0.43137255, 1)
 theme_override_fonts/font = ExtResource("26_lswn8")
 theme_override_font_sizes/font_size = 16
-text = "Deck: "
-
-[node name="CardsInDiscard" type="Label" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1823280822]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.29411766, 0.44705883, 0.43137255, 1)
-theme_override_fonts/font = ExtResource("26_lswn8")
-theme_override_font_sizes/font_size = 16
-text = "Discard: "
+text = "Coins to Next Upgrade:"
 
 [node name="ProgrammingTrackUI" parent="CanvasLayer" unique_id=660876712 instance=ExtResource("10_4c57u")]
 metadata/_edit_use_anchors_ = true

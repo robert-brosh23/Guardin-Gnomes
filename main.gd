@@ -33,8 +33,7 @@ const gnome_scene = preload("uid://bffr6n4g2h0d3")
 @export var event_countdown_label: Label
 @export var blight_label: Label
 @export var round_label: Label
-@export var cards_in_deck_label: Label
-@export var cards_in_discard_label: Label
+@export var coins_to_next_label: Label
 
 var round_counter: int = 1
 
@@ -61,8 +60,7 @@ func _ready():
 		(EVENT_FREQ - (round_counter % EVENT_FREQ))
 	
 func _process(delta: float) -> void:
-	cards_in_deck_label.text = "Deck: " + str(hand.cards_in_deck.size())
-	cards_in_discard_label.text = "Discard: " + str(hand.cards_in_discard.size())
+	coins_to_next_label.text = "Coins to next Upgrade: "
 	
 	
 func all_gnomes_idle():
@@ -342,7 +340,7 @@ func _collect_coin(grid_pos: Vector2i = Vector2i(-999,-999)):
 	if GameManager.check_if_has(UpgradeData.UpgradeType.INTELLIGENT):
 		var circles_coords := pixie_manager.get_pixie_circles()
 		if !circles_coords.is_empty():
-			_purify_tile(circles_coords.pick_random())
+			_purify_tile(circles_coords.pick_random() + Vector2i(1, -1))
 			
 
 func _spawn_gnome_in_world(color: Gnome.GnomeColor, grid_pos: Vector2i, direction):

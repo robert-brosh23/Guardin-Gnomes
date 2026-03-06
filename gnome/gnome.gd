@@ -126,7 +126,7 @@ func _try_action(data: CardData, track_index: int):
 			try_move_forward(try_move_distance)
 
 func _delay_based_on_color():
-	var delay = .25
+	var delay = .1
 	match color:
 		GnomeColor.RED:
 			pass
