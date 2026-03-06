@@ -30,9 +30,10 @@ func _process(delta: float) -> void:
 
 func open_upgrade_menu():
 	if possible_upgrades.size() == 0:
+		chosen.emit(null)
 		return
 	if possible_upgrades.size() == 1:
-		open_upgrade_menu_for_one()
+		_open_upgrade_menu_for_one()
 		return
 	var upgrade_one : UpgradeData = get_random_upgrade()
 	var upgrade_two : UpgradeData = get_random_upgrade()
@@ -50,7 +51,7 @@ func open_upgrade_menu():
 	
 	visible = true
 
-func open_upgrade_menu_for_one():
+func _open_upgrade_menu_for_one():
 	var upgrade_one : UpgradeData = get_random_upgrade()
 	preview_one = UpgradePreview.create_upgrade_preview(upgrade_one)
 	preview_one.chosen.connect(_on_upgrade_chosen)

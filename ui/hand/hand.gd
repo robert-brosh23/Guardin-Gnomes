@@ -45,6 +45,8 @@ func _process(delta: float) -> void:
 				card.state = Card.states.DEFAULT
 
 func draw_cards(num_cards: int = 7, lock_first: bool = true):
+	if GameManager.check_if_has(UpgradeData.UpgradeType.DIVINE):
+		num_cards = 9
 	GameManager.game_state = GameManager.GameState.DRAWING
 	if lock_first:
 		if cards_in_deck.is_empty():

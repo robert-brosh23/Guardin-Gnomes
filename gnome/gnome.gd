@@ -101,21 +101,24 @@ func _try_action(data: CardData, track_index: int):
 		return
 		
 	try_move_distance = 1
+	if color == GnomeColor.GREEN and GameManager.check_if_has(UpgradeData.UpgradeType.AGILE):
+		try_move_distance *= 2
+	
 	match data.card_action:
 		CardData.CardAction.FORWARD_ONE:
-			try_move_forward()
+			try_move_forward(try_move_distance)
 		CardData.CardAction.U_TURN:
 			turn_right()
 			turn_right()
 		CardData.CardAction.FORWARD_TWO:
-			try_move_distance = 2
+			try_move_distance *= 2
 			try_move_forward(try_move_distance)
 		CardData.CardAction.RIGHT_TURN:
 			turn_right()
 		CardData.CardAction.LEFT_TURN:
 			turn_left()
 		CardData.CardAction.FORWARD_THREE:
-			try_move_distance = 3
+			try_move_distance *= 3
 			try_move_forward(try_move_distance)
 
 func _set_color():

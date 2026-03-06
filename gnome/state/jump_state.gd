@@ -2,7 +2,6 @@ class_name JumpState
 extends GnomeBaseState
 
 var new_physical_pos: Vector2
-var fail_jump: bool = false
 
 func enter() -> void:
 	super()
@@ -12,7 +11,6 @@ func enter() -> void:
 	
 func exit() -> void:
 	super()
-	fail_jump = false
 	gnome.animation_tree.set("parameters/conditions/jump", false)
 	
 func do_jump():
@@ -32,6 +30,4 @@ func do_jump():
 
 func _on_tween_finished():
 	var next_state := "IdleState"
-	if fail_jump:
-		next_state = "FallBackState"
 	Transitioned.emit(self, next_state)

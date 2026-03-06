@@ -6,6 +6,7 @@ extends Control
 @export var enchant_button: Button
 var hand: Hand
 var main: Main
+var upgrade_menu: UpgradeMenu
 
 var active_index: int
 
@@ -13,6 +14,7 @@ func _ready():
 	enchant_button.pressed.connect(_try_start_turn)
 	hand = get_tree().get_first_node_in_group("hand")
 	main = get_tree().get_first_node_in_group("main")
+	upgrade_menu = get_tree().get_first_node_in_group("upgrade_menu")
 	SignalBus.activate_card.connect(_on_card_activate)
 	
 func try_attach_and_lock_card(card: Card) -> bool:
@@ -41,16 +43,15 @@ func start_turn():
 	for track_spot in track_spots:
 		track_spot.activate(active_index)
 		await get_tree().create_timer(1.0).timeout
-		track_spot.de_activate()
-		active_index+=1
-		
-		var portal_edge_case_death_timer_countdown := 20.0
 		while !main.all_gnomes_idle():
 			await get_tree().create_timer(.05).timeout
-			portal_edge_case_death_timer_countdown -= .05
-			if portal_edge_case_death_timer_countdown <= 0:
-				main.gnomes.erase(self)
-				queue_free()
+		
+		track_spot.de_activate()
+		active_index+=1	
+	
+	# Move coin check here
+	upgrade_menu.open_upgrade_menu()
+	await upgrade_menu.chosen
 	
 	move_cards_to_hand()
 	GameManager.game_state = GameManager.GameState.DISCARDING
