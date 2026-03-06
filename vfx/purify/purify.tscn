@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b373ltvux8cb"]
+
+[ext_resource type="Script" uid="uid://b37tb0km8084" path="res://vfx/purify/purify.gd" id="1_1bsb1"]
+[ext_resource type="Shader" uid="uid://0h2v6e7fjok8" path="res://vfx/purify/purify_ring.gdshader" id="1_231gy"]
+[ext_resource type="Texture2D" uid="uid://dw86cc5ro05rd" path="res://icon.svg" id="2_1bsb1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwtwm"]
+shader = ExtResource("1_231gy")
+shader_parameter/render_front = true
+shader_parameter/circle_width = 0.5
+shader_parameter/circle_distance = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oosdi"]
+shader = ExtResource("1_231gy")
+shader_parameter/render_front = false
+shader_parameter/circle_width = 0.5
+shader_parameter/circle_distance = 0.5
+
+[node name="Purify" type="Node2D" unique_id=237046909 node_paths=PackedStringArray("ring_front", "ring_back")]
+script = ExtResource("1_1bsb1")
+ring_front = NodePath("RingFront")
+ring_back = NodePath("RingBack")
+
+[node name="RingFront" type="Sprite2D" parent="." unique_id=1626672813]
+z_index = 1
+material = SubResource("ShaderMaterial_wwtwm")
+position = Vector2(0, -1.9999962)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_1bsb1")
+
+[node name="RingBack" type="Sprite2D" parent="." unique_id=240061426]
+z_index = -1
+material = SubResource("ShaderMaterial_oosdi")
+position = Vector2(0, -1.9999962)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_1bsb1")

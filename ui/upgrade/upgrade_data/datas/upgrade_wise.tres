@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://bv6fgh53d2pjg"]
 
 [ext_resource type="Script" uid="uid://dhqmn2h32rfqr" path="res://ui/upgrade/upgrade_data/upgrade_data.gd" id="1_cuir5"]
-[ext_resource type="Texture2D" uid="uid://iumjhie7ocou" path="res://sprites/upgrade_placeholder.png" id="2_kmv35"]
+[ext_resource type="Texture2D" uid="uid://mbtpg7qslw1o" path="res://sprites/upgrades/Wise.png" id="2_5deu6"]
 
 [resource]
 script = ExtResource("1_cuir5")
 type = 6
-texture = ExtResource("2_kmv35")
+texture = ExtResource("2_5deu6")
 title = "Wise"
 description = "Blue gnome can purify cursed land."
 metadata/_custom_type_script = "uid://dhqmn2h32rfqr"

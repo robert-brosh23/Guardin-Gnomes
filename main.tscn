@@ -384,9 +384,9 @@ theme_override_font_sizes/font_size = 16
 text = "ROUND: "
 
 [node name="EventCountdownLabel" type="Label" parent="CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=278781496]
+texture_filter = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.46666667, 0.45490196, 0.23137255, 1)
-theme_override_colors/font_outline_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
 theme_override_fonts/font = ExtResource("26_lswn8")
 theme_override_font_sizes/font_size = 16
 text = "Next Event: x"

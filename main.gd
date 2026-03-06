@@ -50,6 +50,8 @@ func _ready():
 	event_countdown_label.text = "Next Event: " % \
 		(EVENT_FREQ - (round_counter % EVENT_FREQ)) # dif from turn on purpose
 	blight_label.text = "Blight: %s/%s" % [0, MAX_BLIGHT]
+	event_countdown_label.text = "Next Event In %s Rounds" % \
+		(EVENT_FREQ - (round_counter % EVENT_FREQ))
 	
 func _process(delta: float) -> void:
 	cards_in_deck_label.text = "Deck: " + str(hand.cards_in_deck.size())
@@ -124,8 +126,7 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 	_try_powerful(piece, new_pos)
 
 	if new_hazard_type == "pixie":
-		await get_tree().create_timer(0.8).timeout # purely for visuals
-		hazard_layer.erase_cell(new_pos)
+		_destroy_hazard(new_pos, "pixie")
 		# notify xp system that a pixie was removed
 	_handle_teleporter(piece, new_hazard_type)
 	if new_hazard_type == "tornado_right": piece.turn_right()
@@ -142,7 +143,11 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 		_purify_tile(new_pos)
 	
 func _purify_tile(grid_pos: Vector2i):
+	
 	await get_tree().create_timer(0.8).timeout # purely for visuals
+	var purify = Purify.create_purify()
+	purify.global_position = base_layer.map_to_local(grid_pos) + base_layer.global_position
+	add_child(purify)
 	base_layer.set_cell(grid_pos + Vector2i(-1,1), 1, tilemap_manager.get_random_grass())
 	
 func _try_serene(gnome: Gnome, new_pos: Vector2i, old_pos: Vector2i, fairy_tiles_to_check: Array[String]):
@@ -199,6 +204,11 @@ func _try_powerful(gnome: Gnome, new_pos: Vector2i):
 		
 func _destroy_hazard(grid_pos: Vector2i, hazard_type: String):
 	hazard_layer.set_cell(grid_pos, 1)
+	
+	var breaker_particles := BreakerParticles.create_breaker_particles(hazard_type)
+	breaker_particles.global_position = base_layer.map_to_local(grid_pos) + base_layer.global_position
+	add_child(breaker_particles)
+	
 	if GameManager.check_if_has(UpgradeData.UpgradeType.PRACTICAL) and hazard_type == "rock":
 		print("+1 money")
 	
@@ -225,6 +235,7 @@ func _get_points_between(a: Vector2i, b: Vector2i) -> Array[Vector2i]:
 			points.append(Vector2i(x, a.y))
 	return points
 
+
 func _handle_wall(piece, new_hazard_type, current_hazard_type):
 	if new_hazard_type == "wall_left" && piece.direction == piece.Direction.UP_RIGHT:
 		return true
@@ -242,13 +253,21 @@ func _handle_wall(piece, new_hazard_type, current_hazard_type):
 		return true
 
 
-func _handle_thornbush(piece, new_hazard_type, current_hazard_type):
-	if new_hazard_type == "thorn_bush": piece.stuck_count = 1
+func _handle_thornbush(piece: Gnome, new_hazard_type, current_hazard_type):
+	if new_hazard_type == "thorn_bush": 
+		piece.stuck_count = 1
+		_enable_stuck_label(piece)
 	if current_hazard_type == "thorn_bush":
 		if piece.stuck_count > 0:
+			piece.stuck_label.visible = false
 			piece.stuck_count -= 1
 			return true
 
+
+func _enable_stuck_label(piece: Gnome):
+	await get_tree().create_timer(.8).timeout
+	piece.stuck_label.visible = true
+	
 
 func _handle_teleporter(piece, new_hazard_type):
 	if new_hazard_type == "teleporter":
