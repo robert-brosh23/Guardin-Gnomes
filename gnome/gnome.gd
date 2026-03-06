@@ -29,6 +29,14 @@ func _ready():
 	_update_blend_positions()
 	SignalBus.activate_card.connect(_try_action)
 	stuck_label.visible = false
+	
+	match color:
+		GnomeColor.RED:
+			sprite.position = Vector2(-3, -2)
+		GnomeColor.BLUE:
+			sprite.position = Vector2(1, 0)
+		GnomeColor.GREEN:
+			sprite.position = Vector2(4, 2)
 
 func try_move_forward(amount: int = 1):
 	match direction:

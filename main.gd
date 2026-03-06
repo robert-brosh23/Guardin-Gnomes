@@ -60,7 +60,7 @@ func _ready():
 		(EVENT_FREQ - (round_counter % EVENT_FREQ))
 	
 func _process(delta: float) -> void:
-	coins_to_next_label.text = "Coins to next Upgrade: "
+	coins_to_next_label.text = "Coins to next upgrade: " + str(GameManager.get_required_coins() - GameManager.num_coins)
 	
 	
 func all_gnomes_idle():
@@ -122,7 +122,7 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 		piece.try_move_distance -= 1
 		piece.try_move_forward(piece.try_move_distance)
 		return
-	
+	_try_perceptive(piece, new_pos, piece.grid_pos)
 	_handle_coin(piece, new_pos, new_hazard_type)
 	
 	if _handle_wall(piece, new_hazard_type, current_hazard_type):
@@ -155,7 +155,6 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 		_purify_tile(new_pos)
 
 func _purify_tile(grid_pos: Vector2i):
-	
 	await get_tree().create_timer(0.8).timeout # purely for visuals
 	var purify = Purify.create_purify()
 	purify.global_position = base_layer.map_to_local(grid_pos) + base_layer.global_position
@@ -163,6 +162,19 @@ func _purify_tile(grid_pos: Vector2i):
 	base_layer.set_cell(grid_pos + Vector2i(-1,1), 1, tilemap_manager.get_random_grass())
 	AudioPlayer.play_sound(purify_sfx)
 	
+func _try_perceptive(gnome: Gnome, new_pos: Vector2i, old_pos: Vector2i):
+	if !GameManager.check_if_has(UpgradeData.UpgradeType.PERCEPTIVE) or gnome.color != Gnome.GnomeColor.GREEN:
+		return
+	var points := _get_points_between(old_pos, new_pos)
+	for point in points:
+		var secondary_points := _get_3x3_points(point)
+		for secondary_point in secondary_points:
+			if hazard_layer.get_cell_tile_data(secondary_point):
+				var hazard_type := hazard_layer.get_cell_tile_data(secondary_point).get_custom_data("hazard_type") as String
+				if hazard_type == "coin":
+					_collect_coin(secondary_point)
+				
+
 func _try_serene(gnome: Gnome, new_pos: Vector2i, old_pos: Vector2i, fairy_tiles_to_check: Array[String]):
 	if !((GameManager.check_if_has(UpgradeData.UpgradeType.SERENE) and gnome.color == Gnome.GnomeColor.BLUE) or (GameManager.check_if_has(UpgradeData.UpgradeType.AGILE) and gnome.color == Gnome.GnomeColor.GREEN)):
 		return
@@ -292,7 +304,7 @@ func _handle_wall(piece, new_hazard_type, current_hazard_type):
 
 
 func _handle_thornbush(piece: Gnome, new_hazard_type, current_hazard_type):
-	if new_hazard_type == "thorn_bush": 
+	if new_hazard_type == "thorn_bush" and current_hazard_type != "thorn_bush": 
 		piece.stuck_count = 1
 		_enable_stuck_label(piece)
 	if current_hazard_type == "thorn_bush":

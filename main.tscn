@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cxmlkb1s16rj3" path="res://sprites/coin.png" id="16_ntx8l"]
 [ext_resource type="PackedScene" uid="uid://cy8tdfeu2bewm" path="res://ui/upgrade/upgrade_container/upgrade_container.tscn" id="17_b17eg"]
 [ext_resource type="FontFile" uid="uid://b0rxba54kbo4h" path="res://ui/fonts/m6x11plus.ttf" id="18_uatky"]
-[ext_resource type="Script" path="res://ui/prgramming_track_ui/card/card_data.gd" id="19_pjyto"]
+[ext_resource type="Script" uid="uid://cu1r6x02a3xjt" path="res://ui/prgramming_track_ui/card/card_data.gd" id="19_pjyto"]
 [ext_resource type="Resource" uid="uid://bx2pdt61mbfwa" path="res://ui/prgramming_track_ui/card/data/forward_one_green.tres" id="20_getpj"]
 [ext_resource type="Resource" uid="uid://do6mo3e746w7y" path="res://ui/prgramming_track_ui/card/data/forward_one_blue.tres" id="21_1u8w0"]
 [ext_resource type="Resource" uid="uid://cmlmm85ej7vgg" path="res://ui/prgramming_track_ui/card/data/forward_one_red.tres" id="21_ryguw"]
@@ -328,6 +328,7 @@ anti_aliasing = false
 [node name="Main" type="Node2D" unique_id=1208621114 node_paths=PackedStringArray("base_layer", "hazard_layer", "event_countdown_label", "blight_label", "round_label", "coins_to_next_label") groups=["main"]]
 texture_filter = 1
 script = ExtResource("1_0xm2m")
+debug_enabled = true
 base_layer = NodePath("TilemapManager/BaseLayer")
 hazard_layer = NodePath("TilemapManager/HazardLayer")
 event_countdown_label = NodePath("CanvasLayer/GameUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EventCountdownLabel")
