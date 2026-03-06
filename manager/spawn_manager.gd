@@ -4,6 +4,7 @@ extends Node
 @onready var pixie_manager: PixieManager = $"../PixieManager"
 @onready var tilemap_manager: Node2D = $"../TilemapManager"
 var gnome_scene: PackedScene = preload("uid://rxqd0wxka5o6")
+@onready var event_label: Label = $"../CanvasLayer/GameplayArea/EventLabel"
 
 
 const HAZARD_TILE_IDS := {
@@ -11,21 +12,24 @@ const HAZARD_TILE_IDS := {
 	"wall": 2,
 	"teleporter": 3,
 	"rock": 4,
-	"thornbush": 5
+	"thornbush": 5,
+	"coin": 6
 }
 
 var HAZARD_INITIAL_SPAWN_QTY: Dictionary = {
-	"tornado" = 4,
+	"tornado" = 2,
 	"wall" = 0,
 	"rock" = 2,
 	"thornbush" = 2,
+	"coin" = 2
 }
 
 var event_list: Dictionary = {
 	"Rockslide": func(): _spawn_custom_hazards({"rock": main.EVENT_INTENSITY}),
 	"Bramblegrowth": func(): _spawn_custom_hazards({"thornbush": main.EVENT_INTENSITY}),
-	"Windstorm": func(): _spawn_custom_hazards({"tornado": main.EVENT_INTENSITY}),
-	"Pixie Swarm": func(): for i in main.EVENT_INTENSITY/3: pixie_manager.pixie_rand_spawn()
+	"Windstorm": func(): _spawn_custom_hazards({"tornado": 2}),
+	"Pixie Swarm": func(): for i in main.EVENT_INTENSITY/5: pixie_manager.pixie_rand_spawn(),
+	"Make It Rain": func(): _spawn_custom_hazards({"coin": 3})
 }
 
 func spawn_gnome(color: Gnome.GnomeColor, grid_pos: Vector2i, direction: Gnome.Direction):
@@ -75,6 +79,10 @@ func _spawn_custom_hazards(hazard_spawn_qty: Dictionary):
 			tilemap_manager.hazard_layer.set_cell(pos, tile_id, atlas_coords)
 
 
+func spawn_coin():
+	_spawn_custom_hazards({"coin": 1})
+
+
 func _generate_atlas_for_hazard(hazard_type) -> Vector2i:
 	match hazard_type:
 		"tornado":
@@ -103,6 +111,14 @@ func _get_random_wall():
 func trigger_random_event():
 	var keys = event_list.keys()
 	var event_name = keys.pick_random()
-	
 	var event_func: Callable = event_list[event_name]
+	
+	await get_tree().create_timer(2.5).timeout
+	for i in 3:
+		event_label.text = "EVENT: " + event_name.to_upper()
+		event_label.visible = true
+		await get_tree().create_timer(0.5).timeout
+		event_label.visible = false
+		await get_tree().create_timer(0.25).timeout
+	
 	event_func.call()
