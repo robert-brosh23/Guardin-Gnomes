@@ -235,6 +235,7 @@ func _get_points_between(a: Vector2i, b: Vector2i) -> Array[Vector2i]:
 			points.append(Vector2i(x, a.y))
 	return points
 
+
 func _handle_wall(piece, new_hazard_type, current_hazard_type):
 	if new_hazard_type == "wall_left" && piece.direction == piece.Direction.UP_RIGHT:
 		return true
@@ -261,12 +262,12 @@ func _handle_thornbush(piece: Gnome, new_hazard_type, current_hazard_type):
 			piece.stuck_label.visible = false
 			piece.stuck_count -= 1
 			return true
-			
+
+
 func _enable_stuck_label(piece: Gnome):
 	await get_tree().create_timer(.8).timeout
 	piece.stuck_label.visible = true
 	
-
 
 func _handle_teleporter(piece, new_hazard_type):
 	if new_hazard_type == "teleporter":
