@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://rbpv2yyecy83" path="res://util/state_machine/state_matchine.tscn" id="3_ygka5"]
 [ext_resource type="Script" uid="uid://b3hy1cok1dal1" path="res://gnome/state/idle_state.gd" id="4_yw81g"]
 [ext_resource type="Script" uid="uid://clgw016600gwa" path="res://gnome/state/jump_state.gd" id="5_yw81g"]
+[ext_resource type="FontFile" uid="uid://cm4gkenj5odhg" path="res://ui/fonts/m5x7.ttf" id="6_xcsc7"]
 
 [sub_resource type="Animation" id="Animation_ygka5"]
 length = 0.001
@@ -230,7 +231,7 @@ states/Jump/position = Vector2(502, 120)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_i3nix"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_ovbpe"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_be6jj")]
 graph_offset = Vector2(-901, -126)
 
-[node name="Gnome" type="Node2D" unique_id=1690238983 node_paths=PackedStringArray("animation_tree", "animation_player", "state_machine", "jump_state", "sprite")]
+[node name="Gnome" type="Node2D" unique_id=1690238983 node_paths=PackedStringArray("animation_tree", "animation_player", "state_machine", "jump_state", "sprite", "stuck_label")]
 texture_filter = 1
 script = ExtResource("1_i3nix")
 animation_tree = NodePath("AnimationTree")
@@ -238,6 +239,7 @@ animation_player = NodePath("AnimationPlayer")
 state_machine = NodePath("StateMatchine")
 jump_state = NodePath("StateMatchine/JumpState")
 sprite = NodePath("Sprite2D")
+stuck_label = NodePath("StuckLabel")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1064517990]
 texture = ExtResource("2_i3nix")
@@ -268,3 +270,16 @@ metadata/_custom_type_script = "uid://pa7m7gyvg3gi"
 script = ExtResource("5_yw81g")
 gnome = NodePath("../..")
 metadata/_custom_type_script = "uid://bqklwfmygyixh"
+
+[node name="StuckLabel" type="RichTextLabel" parent="." unique_id=1730214994]
+visible = false
+offset_left = -24.0
+offset_top = -66.0
+offset_right = 24.0
+offset_bottom = -47.0
+theme_override_colors/default_color = Color(0.68235296, 0.3647059, 0.2509804, 1)
+theme_override_fonts/normal_font = ExtResource("6_xcsc7")
+bbcode_enabled = true
+text = "[wave]Stuck![/wave]"
+horizontal_alignment = 1
+vertical_alignment = 1

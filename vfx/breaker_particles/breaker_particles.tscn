@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ch8nwh4vbeese"]
+
+[ext_resource type="Script" uid="uid://vroud7gd6n8e" path="res://vfx/breaker_particles/breaker_particles.gd" id="1_kt6au"]
+[ext_resource type="Texture2D" uid="uid://c2qunds3ol5xc" path="res://vfx/breaker_particles/color_ramps/thorn.tres" id="2_3bqdo"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7xhnf"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 149.03
+initial_velocity_max = 448.33
+gravity = Vector3(0, 1000, 0)
+scale_min = 4.0
+scale_max = 4.0
+color_ramp = ExtResource("2_3bqdo")
+
+[node name="BreakerParticles" type="Node2D" unique_id=2075289637 node_paths=PackedStringArray("particles")]
+script = ExtResource("1_kt6au")
+particles = NodePath("GPUParticles2D")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=709821986]
+texture_filter = 1
+emitting = false
+amount = 50
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_7xhnf")

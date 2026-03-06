@@ -11,6 +11,7 @@ enum GnomeColor {RED, GREEN, BLUE}
 @export var state_machine: StateMachine
 @export var jump_state: JumpState
 @export var sprite: Sprite2D
+@export var stuck_label: RichTextLabel
 
 var jump_tween: Tween
 var direction: Direction
@@ -27,6 +28,7 @@ func _ready():
 	_set_color()
 	_update_blend_positions()
 	SignalBus.activate_card.connect(_try_action)
+	stuck_label.visible = false
 
 func try_move_forward(amount: int = 1):
 	match direction:

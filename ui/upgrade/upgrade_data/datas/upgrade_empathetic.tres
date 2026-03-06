@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://dxp8o202j6ykd"]
 
 [ext_resource type="Script" uid="uid://dhqmn2h32rfqr" path="res://ui/upgrade/upgrade_data/upgrade_data.gd" id="1_6aoi5"]
-[ext_resource type="Texture2D" uid="uid://iumjhie7ocou" path="res://sprites/upgrade_placeholder.png" id="2_76jx6"]
+[ext_resource type="Texture2D" uid="uid://jlhfbm2disqr" path="res://sprites/upgrades/Empathetic.png" id="2_4sdyy"]
 
 [resource]
 script = ExtResource("1_6aoi5")
 type = 7
-texture = ExtResource("2_76jx6")
+texture = ExtResource("2_4sdyy")
 title = "Empathetic"
 description = "Blue gnome will purify tiles adjacent to it."
 metadata/_custom_type_script = "uid://dhqmn2h32rfqr"
