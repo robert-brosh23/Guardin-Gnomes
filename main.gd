@@ -16,6 +16,7 @@ var EVENT_INTENSITY: int = 5 # how many items are spawned by events
 var EVENT_INTENSITY_SCALING: int = 5 # how many rounds before each intensity uptick
 
 var COIN_FREQ: int = 1 # how many rounds between each coin spawn
+var COIN_SCALE: int = 15 # how many rounds between coin spawn increase
 ###############################
 
 @export var debug_enabled: bool
@@ -35,7 +36,7 @@ const gnome_scene = preload("uid://bffr6n4g2h0d3")
 @export var round_label: Label
 @export var coins_to_next_label: Label
 
-var round_counter: int = 2
+var round_counter: int = 1
 
 var rock_destroy_sfx = preload("res://audio/Gravel Interaction A.wav")
 var purify_sfx = preload("res://audio/Cozy UI D2.wav")
@@ -58,11 +59,13 @@ func _ready():
 	blight_label.text = "Blight: %s/%s" % [0, MAX_BLIGHT]
 	event_countdown_label.text = "Next Event In %s Rounds" % \
 		(EVENT_FREQ - (round_counter % EVENT_FREQ))
-	
+
+
 func _process(delta: float) -> void:
 	coins_to_next_label.text = "Coins to next upgrade: " + str(GameManager.get_required_coins() - GameManager.num_coins)
 	
-	
+
+
 func all_gnomes_idle():
 	for gnome in gnomes:
 		if !gnome.is_idle():
@@ -74,12 +77,12 @@ func _on_turn_end():
 	pixie_manager._on_next_round()
 	_check_gameover()
 	hand._on_turn_end()
-	if round_counter % COIN_FREQ == 0:
+	for i in round_counter/15 + 1:
 		spawn_manager.spawn_coin()
 	if round_counter % EVENT_FREQ == 0:
 		spawn_manager.trigger_random_event()
-		
-		
+	
+	
 	event_countdown_label.text = "Next Event In %s Rounds" % \
 		(EVENT_FREQ - (round_counter % EVENT_FREQ) - 1)
 	round_counter += 1
