@@ -48,22 +48,27 @@ grow_vertical = 2
 [node name="TrackSpot" parent="TextureRect" unique_id=68731325 instance=ExtResource("2_jxowk")]
 z_index = 2
 position = Vector2(164, 350)
+number = 1
 
 [node name="TrackSpot2" parent="TextureRect" unique_id=1492374471 instance=ExtResource("2_jxowk")]
 z_index = 1
 position = Vector2(71, 285)
+number = 2
 
 [node name="TrackSpot3" parent="TextureRect" unique_id=1833243044 instance=ExtResource("2_jxowk")]
 z_index = 1
 position = Vector2(165, 205)
+number = 3
 
 [node name="TrackSpot4" parent="TextureRect" unique_id=1023656089 instance=ExtResource("2_jxowk")]
 z_index = 1
 position = Vector2(72, 136)
+number = 4
 
 [node name="TrackSpot5" parent="TextureRect" unique_id=40446193 instance=ExtResource("2_jxowk")]
 z_index = 1
 position = Vector2(164, 69)
+number = 5
 
 [node name="Button" type="Button" parent="." unique_id=951669152]
 z_index = 1

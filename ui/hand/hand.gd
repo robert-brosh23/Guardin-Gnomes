@@ -64,7 +64,8 @@ func draw_cards(num_cards: int = 9, lock_first: bool = true):
 		if cards_in_deck.is_empty():
 			move_cards_from_discard_to_deck_and_shuffle()
 		if !cards_in_deck.is_empty():
-			await get_tree().create_timer(.1).timeout
+			if get_tree():
+				await get_tree().create_timer(.1).timeout
 			var card = cards_in_deck.get(0)
 			cards_in_deck.remove_at(0)
 			add_card_to_hand(card)
@@ -149,9 +150,10 @@ func _hover_card(card: Card):
 	hovered_card.append(card)
 
 func _on_turn_end():
-	discard_hand()
-	await get_tree().create_timer(.5).timeout
-	draw_cards()
+	if get_tree():
+		discard_hand()
+		await get_tree().create_timer(.5).timeout
+		draw_cards()
 	
 
 func _setup_deck_and_discard_and_hand():

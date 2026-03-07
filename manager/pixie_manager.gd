@@ -27,6 +27,8 @@ var pixie_hazard_tiles: Array[Vector2i]
 
 var blight_count: int
 
+var game_over_scene := preload("res://ui/game_over/game_over.tscn")
+
 
 func _on_next_round(_round_number := 0):
 	if main.round_counter % main.PIXIE_GROW_RATE == 0:
@@ -44,7 +46,7 @@ func _on_next_round(_round_number := 0):
 	_check_pixie_tiles()
 	blight_count = pixie_circle_5_tiles.size()
 	blight_label.text = "Blight: %s/%s" % [blight_count, main.MAX_BLIGHT]
-
+	
 
 func pixie_rand_spawn():
 	var target_pos = tilemap_manager.get_random_empty_cell()

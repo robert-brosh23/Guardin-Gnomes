@@ -1,12 +1,15 @@
 class_name TrackSpot
 extends Area2D
 
+@export var number: int
 @export var dropzone: DropZone
 @export var card_highlight: TextureRect
+@onready var number_label := %Label
 
 var place_card_sound := preload("res://audio/Cozy UI A2.wav")
 
 func _ready():
+	number_label.text = str(number)
 	dropzone.drop_applied.connect(func(zone, area, plan): AudioPlayer.play_sound(place_card_sound))
 
 func attach_card(card: Card) -> bool:

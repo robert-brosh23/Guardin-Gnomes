@@ -54,20 +54,16 @@ func start_turn():
 			upgrade_menu.open_upgrade_menu()
 			await upgrade_menu.chosen
 	
-	if _check_game_over():
-		return
-	
 	move_cards_to_hand()
 	GameManager.game_state = GameManager.GameState.DISCARDING
 	
-	SignalBus.turn_end.emit()
-	
-func _check_game_over() -> bool:
 	if main.pixie_manager.blight_count >= main.MAX_BLIGHT:
-		GameManager.round_number_for_end = main.round_counter - 1
-		get_tree().change_scene_to_file("res://ui/game_over/game_over.tscn")
-		return true
-	return false
+		GameManager.round_number_for_end = main.round_counter
+		var tree := get_tree()
+		tree.change_scene_to_file("res://ui/game_over/game_over.tscn")
+		await tree.process_frame
+	
+	SignalBus.turn_end.emit()
 
 func _on_card_activate(card_data: CardData, track_index: int):
 	if card_data.card_action == CardData.CardAction.AGAIN and track_index > 0:

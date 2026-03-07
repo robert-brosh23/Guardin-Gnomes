@@ -8,5 +8,5 @@ script = ExtResource("1_cuir5")
 type = 6
 texture = ExtResource("2_5deu6")
 title = "Wise"
-description = "Blue gnome can purify cursed land."
+description = "Blue gnome can purify blighted land."
 metadata/_custom_type_script = "uid://dhqmn2h32rfqr"
