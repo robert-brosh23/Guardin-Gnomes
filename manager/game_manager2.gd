@@ -25,3 +25,10 @@ func _update_coins():
 		if coin.rounds_left <= 0:
 			main.hazard_layer.set_cell(coin.grid_pos, 1)
 			coins_in_world.erase(coin)
+
+func remove_coin_at_pos(grid_pos: Vector2i) -> bool:
+	for coin in coins_in_world:
+		if coin.grid_pos == grid_pos:
+			coins_in_world.erase(coin)
+			return true
+	return false

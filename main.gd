@@ -251,11 +251,9 @@ func _destroy_hazard(grid_pos: Vector2i, hazard_type: String):
 	add_child(breaker_particles)
 	
 	if GameManager.check_if_has(UpgradeData.UpgradeType.PRACTICAL) and hazard_type == "rock":
-		print("+1 money")
+		_collect_coin()
 		
 	AudioPlayer.play_sound(rock_destroy_sfx)
-		
-	
 
 	
 func _get_3x3_points(grid_pos: Vector2i) -> Array[Vector2i]:
@@ -345,10 +343,11 @@ func _handle_coin(piece: Gnome, grid_pos: Vector2i, new_hazard_type: String):
 
 
 func _collect_coin(grid_pos: Vector2i = Vector2i(-999,-999)):
-	GameManager.num_coins += 1
-	await get_tree().create_timer(0.6).timeout
 	if grid_pos != Vector2i(-999,-999):
+		await get_tree().create_timer(0.6).timeout
 		hazard_layer.erase_cell(grid_pos)
+		GameManager.remove_coin_at_pos(grid_pos)
+	GameManager.num_coins += 1
 	AudioPlayer.play_sound(coin_sfx)
 	if GameManager.check_if_has(UpgradeData.UpgradeType.INTELLIGENT):
 		var circles_coords := pixie_manager.get_pixie_circles()
