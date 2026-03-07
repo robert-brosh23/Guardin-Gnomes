@@ -36,7 +36,7 @@ func _on_next_round(_round_number := 0):
 	if main.round_counter % main.PIXIE_SPAWN_RATE == 0:
 		for i in main.PIXIE_SPAWN_INTENSITY: pixie_rand_spawn()
 	if main.round_counter % main.PIXIE_SPAWN_SCALE == 0:
-		if main.PIXIE_SPAWN_RATE >= 1:
+		if main.PIXIE_SPAWN_RATE >= 2:
 			main.PIXIE_SPAWN_RATE -= 1
 		else:
 			main.PIXIE_SPAWN_INTENSITY += 1

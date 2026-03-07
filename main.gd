@@ -7,7 +7,7 @@ var MAX_BLIGHT: int = 8 # how many blight allowed before game over
 var PIXIE_INITIAL_SPAWN: int = 2 # how many pixie circles are at game start
 var PIXIE_GROW_RATE: int = 2 # how many rounds between each pixie growth
 var PIXIE_SPREAD_RATE: int = 1 # how many rounds between each pixie spread
-var PIXIE_SPAWN_RATE: int = 3 # how many rounds between each pixie rand spawn
+var PIXIE_SPAWN_RATE: int = 2 # how many rounds between each pixie rand spawn
 var PIXIE_SPAWN_SCALE: int = 10 # how many rounds before spawn uptick
 var PIXIE_SPAWN_INTENSITY: int = 1 # how many pixies spawned at a time
 
@@ -35,7 +35,7 @@ const gnome_scene = preload("uid://bffr6n4g2h0d3")
 @export var round_label: Label
 @export var coins_to_next_label: Label
 
-var round_counter: int = 1
+var round_counter: int = 2
 
 var rock_destroy_sfx = preload("res://audio/Gravel Interaction A.wav")
 var purify_sfx = preload("res://audio/Cozy UI D2.wav")
