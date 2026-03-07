@@ -168,7 +168,7 @@ func _try_perceptive(gnome: Gnome, new_pos: Vector2i, old_pos: Vector2i):
 		return
 	var points := _get_points_between(old_pos, new_pos)
 	for point in points:
-		var secondary_points := _get_3x3_points(point)
+		var secondary_points := _get_adj_points(point)
 		for secondary_point in secondary_points:
 			if hazard_layer.get_cell_tile_data(secondary_point):
 				var hazard_type := hazard_layer.get_cell_tile_data(secondary_point).get_custom_data("hazard_type") as String
@@ -195,7 +195,7 @@ func _try_serene(gnome: Gnome, new_pos: Vector2i, old_pos: Vector2i, fairy_tiles
 func _try_empathetic(gnome: Gnome, new_pos: Vector2i, fairy_tiles_to_check: Array[String]):
 	if !GameManager.check_if_has(UpgradeData.UpgradeType.EMPATHETIC) or gnome.color != Gnome.GnomeColor.BLUE:
 		return
-	var points := _get_3x3_points(new_pos)
+	var points := _get_more_points(new_pos)
 	for point in points:
 		if hazard_layer.get_cell_tile_data(point):
 			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
@@ -208,7 +208,7 @@ func _try_empathetic(gnome: Gnome, new_pos: Vector2i, fairy_tiles_to_check: Arra
 				_purify_tile(point + Vector2i(1,-1))
 
 func _range_helper(gnome: Gnome, new_pos: Vector2i, fairy_tiles_to_check: Array[String]):
-	var points := _get_3x3_points(new_pos)
+	var points := _get_adj_points(new_pos)
 	for point in points:
 		if hazard_layer.get_cell_tile_data(point):
 			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
@@ -232,17 +232,19 @@ func _try_sturdy(gnome: Gnome, new_pos: Vector2i):
 			if hazard_type == "rock" or hazard_type == "thorn_bush":
 				_destroy_hazard(point, hazard_type)
 		_try_powerful(gnome, point)
-				
+
+
 func _try_powerful(gnome: Gnome, new_pos: Vector2i):
 	if !GameManager.check_if_has(UpgradeData.UpgradeType.POWERFUL) or gnome.color != Gnome.GnomeColor.RED:
 		return
-	var points := _get_3x3_points(new_pos)
+	var points := _get_adj_points(new_pos)
 	for point in points:
 		if hazard_layer.get_cell_tile_data(point):
 			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
 			if hazard_type == "rock" or hazard_type == "thorn_bush":
 				_destroy_hazard(point, hazard_type)
-		
+
+
 func _destroy_hazard(grid_pos: Vector2i, hazard_type: String):
 	hazard_layer.set_cell(grid_pos, 1)
 	
@@ -255,8 +257,17 @@ func _destroy_hazard(grid_pos: Vector2i, hazard_type: String):
 		
 	AudioPlayer.play_sound(rock_destroy_sfx)
 
-	
-func _get_3x3_points(grid_pos: Vector2i) -> Array[Vector2i]:
+
+func _get_adj_points(grid_pos: Vector2i) -> Array[Vector2i]:
+	var points: Array[Vector2i] = []
+	points.append(grid_pos + Vector2i(1,0))
+	points.append(grid_pos + Vector2i(-1,0))
+	points.append(grid_pos + Vector2i(0,1))
+	points.append(grid_pos + Vector2i(0,-1))
+	return points
+
+
+func _get_more_points(grid_pos: Vector2i) -> Array[Vector2i]:
 	var points: Array[Vector2i] = []
 	points.append(grid_pos + Vector2i(1,0))
 	points.append(grid_pos + Vector2i(-1,0))
@@ -266,9 +277,13 @@ func _get_3x3_points(grid_pos: Vector2i) -> Array[Vector2i]:
 	points.append(grid_pos + Vector2i(1,-1))
 	points.append(grid_pos + Vector2i(-1,1))
 	points.append(grid_pos + Vector2i(-1,-1))
+	points.append(grid_pos + Vector2i(2,0))
+	points.append(grid_pos + Vector2i(-2,0))
+	points.append(grid_pos + Vector2i(0,2))
+	points.append(grid_pos + Vector2i(0,-2))
 	return points
 
-	
+
 ## This function only works when the two points are on the same axis.
 func _get_points_between(a: Vector2i, b: Vector2i) -> Array[Vector2i]:
 	var points: Array[Vector2i] = []

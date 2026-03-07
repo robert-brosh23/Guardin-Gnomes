@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cxmlkb1s16rj3" path="res://sprites/coin.png" id="16_ntx8l"]
 [ext_resource type="PackedScene" uid="uid://cy8tdfeu2bewm" path="res://ui/upgrade/upgrade_container/upgrade_container.tscn" id="17_b17eg"]
 [ext_resource type="FontFile" uid="uid://b0rxba54kbo4h" path="res://ui/fonts/m6x11plus.ttf" id="18_uatky"]
-[ext_resource type="Script" uid="uid://cu1r6x02a3xjt" path="res://ui/prgramming_track_ui/card/card_data.gd" id="19_pjyto"]
+[ext_resource type="Script" path="res://ui/prgramming_track_ui/card/card_data.gd" id="19_pjyto"]
 [ext_resource type="Resource" uid="uid://bx2pdt61mbfwa" path="res://ui/prgramming_track_ui/card/data/forward_one_green.tres" id="20_getpj"]
 [ext_resource type="Resource" uid="uid://do6mo3e746w7y" path="res://ui/prgramming_track_ui/card/data/forward_one_blue.tres" id="21_1u8w0"]
 [ext_resource type="Resource" uid="uid://cmlmm85ej7vgg" path="res://ui/prgramming_track_ui/card/data/forward_one_red.tres" id="21_ryguw"]
@@ -294,7 +294,7 @@ resource_name = "coin"
 texture = ExtResource("16_ntx8l")
 texture_region_size = Vector2i(48, 24)
 0:0/size_in_atlas = Vector2i(1, 2)
-0:0/animation_speed = 10.0
+0:0/animation_speed = 5.0
 0:0/animation_frame_0/duration = 1.0
 0:0/animation_frame_1/duration = 1.0
 0:0/animation_frame_2/duration = 1.0
@@ -303,6 +303,22 @@ texture_region_size = Vector2i(48, 24)
 0:0/animation_frame_5/duration = 1.0
 0:0/0 = 0
 0:0/0/custom_data_1 = "coin"
+0:2/size_in_atlas = Vector2i(1, 2)
+0:2/animation_speed = 5.0
+0:2/animation_frame_0/duration = 0.6
+0:2/animation_frame_1/duration = 0.4
+0:2/animation_frame_2/duration = 0.6
+0:2/animation_frame_3/duration = 0.4
+0:2/animation_frame_4/duration = 0.6
+0:2/animation_frame_5/duration = 0.4
+0:2/animation_frame_6/duration = 0.6
+0:2/animation_frame_7/duration = 0.4
+0:2/animation_frame_8/duration = 0.6
+0:2/animation_frame_9/duration = 0.4
+0:2/animation_frame_10/duration = 0.6
+0:2/animation_frame_11/duration = 0.4
+0:2/0 = 0
+0:2/0/custom_data_1 = "coin"
 
 [sub_resource type="TileSet" id="TileSet_7mycd"]
 tile_shape = 1
