@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://cbjbuqil2ufi3" path="res://sprites/hazard/Tornado.png" id="7_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bb3dwseur8pdi" path="res://sprites/hazard/pixie3.png" id="7_kek77"]
 [ext_resource type="Texture2D" uid="uid://3dmgctci0s68" path="res://sprites/hazard/wall.png" id="9_efxa6"]
-[ext_resource type="Shader" uid="uid://ccnvc40u5d132" path="res://vfx/blink/blink.gdshader" id="9_rqtf5"]
 [ext_resource type="PackedScene" uid="uid://b52d3n8sxrt4w" path="res://ui/prgramming_track_ui/programming_track_ui.tscn" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bp7ugabbmd2ky" path="res://sprites/hazard/teleporter.png" id="10_dg77c"]
 [ext_resource type="PackedScene" uid="uid://8nfe5xqymm3v" path="res://ui/hand/hand.tscn" id="11_dg77c"]
@@ -194,9 +193,6 @@ custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_0xm2m")
 sources/1 = SubResource("TileSetAtlasSource_7mycd")
 sources/2 = SubResource("TileSetAtlasSource_4c57u")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vm84"]
-shader = ExtResource("9_rqtf5")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lquwl"]
 texture = ExtResource("2_1bvp3")
@@ -389,9 +385,7 @@ y_sort_enabled = true
 
 [node name="HazardLayer" type="TileMapLayer" parent="TilemapManager" unique_id=107139942]
 y_sort_enabled = true
-material = SubResource("ShaderMaterial_1vm84")
 tile_map_data = PackedByteArray("AAABAP7/AgABAAAAAAACAP7/AgABAAAAAAADAP7/AgABAAAAAAAEAP7/AgABAAAAAAAFAP7/AgABAAAAAAAGAP7/AgABAAAAAAAHAP7/AgABAAAAAAAIAP7/AgABAAAAAAAJAP7/AgABAAAAAAAKAP7/AgABAAAAAAALAP7/AgABAAAAAAAMAP7/AgABAAAAAAANAP//AgAAAAAAAAANAAAAAgAAAAAAAAANAAEAAgAAAAAAAAANAAIAAgAAAAAAAAANAAMAAgAAAAAAAAANAAQAAgAAAAAAAAANAAUAAgAAAAAAAAANAAYAAgAAAAAAAAANAAcAAgAAAAAAAAANAAgAAgAAAAAAAAANAAoAAgAAAAAAAAANAAkAAgAAAAAAAAA=")
-enabled = false
 tile_set = SubResource("TileSet_7mycd")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=156666124]

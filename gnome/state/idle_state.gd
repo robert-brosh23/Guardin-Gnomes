@@ -22,8 +22,8 @@ func _check_debug_commands():
 	if !main.debug_enabled:
 		return
 	if Input.is_action_just_pressed("forward"):
-		gnome.try_move_distance = 3
-		gnome.try_move_forward(3)
+		gnome.try_move_distance = 1
+		gnome.try_move_forward(1)
 	if Input.is_action_just_pressed("left"):
 		gnome.turn_left()
 	if Input.is_action_just_pressed("right"):

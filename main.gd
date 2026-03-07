@@ -41,6 +41,7 @@ var round_counter: int = 1
 var rock_destroy_sfx = preload("res://audio/Gravel Interaction A.wav")
 var purify_sfx = preload("res://audio/Cozy UI D2.wav")
 var coin_sfx = preload("res://audio/Cozy UI D5.wav")
+var portal_sfx = preload("res://audio/Movement and Actions Portal 005.wav")
 
 func _ready():
 	_spawn_gnome_in_world(Gnome.GnomeColor.RED, Vector2i(6,4), gnome_scene.Direction.DOWN_LEFT)
@@ -64,7 +65,6 @@ func _ready():
 func _process(delta: float) -> void:
 	coins_to_next_label.text = "Coins to next upgrade: " + str(GameManager.get_required_coins() - GameManager.num_coins)
 	
-
 
 func all_gnomes_idle():
 	for gnome in gnomes:
@@ -351,6 +351,7 @@ func _handle_teleporter(piece, new_hazard_type):
 		var target_physical_pos = base_layer.map_to_local(target_pos) + base_layer.global_position
 		piece.grid_pos = target_pos
 		piece.global_position = target_physical_pos
+		AudioPlayer.play_sound(portal_sfx)
 		piece.try_move_forward()
 		return
 
