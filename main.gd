@@ -122,8 +122,6 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 		piece.try_move_distance -= 1
 		piece.try_move_forward(piece.try_move_distance)
 		return
-	_try_perceptive(piece, new_pos, piece.grid_pos)
-	_handle_coin(piece, new_pos, new_hazard_type)
 	
 	if _handle_wall(piece, new_hazard_type, current_hazard_type):
 		piece.try_move_distance -= 1
@@ -131,6 +129,9 @@ func _try_move_piece(piece: Gnome, new_pos: Vector2i):
 		return
 		
 	if _handle_thornbush(piece, new_hazard_type, current_hazard_type): return
+	
+	_try_perceptive(piece, new_pos, piece.grid_pos)
+	_handle_coin(piece, new_pos, new_hazard_type)
 	
 	var old_pos := piece.grid_pos
 	piece.move_to_space(new_pos, new_physical_pos)
