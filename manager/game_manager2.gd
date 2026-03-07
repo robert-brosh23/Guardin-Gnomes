@@ -8,6 +8,10 @@ var upgrades: Array[UpgradeData.UpgradeType]
 var coins_required_for_upgrade : Array[int] = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 999]
 var num_coins: int = 0
 var coins_in_world: Array[SpawnManager.Coin]
+var total_collected: int = 0
+var total_purified: int = 0
+
+var round_number_for_end: int
 
 func _ready() -> void:
 	main = get_tree().get_first_node_in_group("main")

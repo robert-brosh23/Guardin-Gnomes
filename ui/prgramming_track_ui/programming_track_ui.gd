@@ -7,7 +7,6 @@ extends Control
 var hand: Hand
 var main: Main
 var upgrade_menu: UpgradeMenu
-
 var active_index: int
 
 func _ready():
@@ -55,10 +54,21 @@ func start_turn():
 			upgrade_menu.open_upgrade_menu()
 			await upgrade_menu.chosen
 	
+	if _check_game_over():
+		return
+	
 	move_cards_to_hand()
 	GameManager.game_state = GameManager.GameState.DISCARDING
+	
 	SignalBus.turn_end.emit()
 	
+func _check_game_over() -> bool:
+	if main.pixie_manager.blight_count >= main.MAX_BLIGHT:
+		GameManager.round_number_for_end = main.round_counter - 1
+		get_tree().change_scene_to_file("res://ui/game_over/game_over.tscn")
+		return true
+	return false
+
 func _on_card_activate(card_data: CardData, track_index: int):
 	if card_data.card_action == CardData.CardAction.AGAIN and track_index > 0:
 		var last_index := track_index - 1

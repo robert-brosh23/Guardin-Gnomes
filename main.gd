@@ -162,6 +162,7 @@ func _purify_tile(grid_pos: Vector2i):
 	add_child(purify)
 	base_layer.set_cell(grid_pos + Vector2i(-1,1), 1, tilemap_manager.get_random_grass())
 	AudioPlayer.play_sound(purify_sfx)
+	GameManager.total_purified += 1
 	
 func _try_perceptive(gnome: Gnome, new_pos: Vector2i, old_pos: Vector2i):
 	if !GameManager.check_if_has(UpgradeData.UpgradeType.PERCEPTIVE) or gnome.color != Gnome.GnomeColor.GREEN:
@@ -348,6 +349,7 @@ func _collect_coin(grid_pos: Vector2i = Vector2i(-999,-999)):
 		hazard_layer.erase_cell(grid_pos)
 		GameManager.remove_coin_at_pos(grid_pos)
 	GameManager.num_coins += 1
+	GameManager.total_collected += 1
 	AudioPlayer.play_sound(coin_sfx)
 	if GameManager.check_if_has(UpgradeData.UpgradeType.INTELLIGENT):
 		var circles_coords := pixie_manager.get_pixie_circles()

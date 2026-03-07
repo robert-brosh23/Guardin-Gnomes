@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://c280pbn1a6dih"]
+
+[ext_resource type="Script" uid="uid://bvom4hrkps0jv" path="res://ui/game_over/game_over.gd" id="1_5nexe"]
+[ext_resource type="FontFile" uid="uid://cm4gkenj5odhg" path="res://ui/fonts/m5x7.ttf" id="2_4cp6t"]
+
+[node name="Game Over" type="Control" unique_id=489796550]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5nexe")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1260305839]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4745098, 0.26666668, 0.2901961, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=769067780]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=391524225]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=56698191]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
+theme_override_fonts/font = ExtResource("2_4cp6t")
+theme_override_font_sizes/font_size = 48
+text = "The Blight has overtaken the garden!
+"
+horizontal_alignment = 1
+
+[node name="RoundLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=662777798]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
+theme_override_fonts/font = ExtResource("2_4cp6t")
+theme_override_font_sizes/font_size = 48
+text = "Made it to: Round "
+horizontal_alignment = 1
+
+[node name="GoldLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=822992646]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
+theme_override_fonts/font = ExtResource("2_4cp6t")
+theme_override_font_sizes/font_size = 48
+text = "Gold Earned: "
+horizontal_alignment = 1
+
+[node name="LandsLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1981153211]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8235294, 0.7882353, 0.64705884, 1)
+theme_override_fonts/font = ExtResource("2_4cp6t")
+theme_override_font_sizes/font_size = 48
+text = "Lands Purified: "
+horizontal_alignment = 1

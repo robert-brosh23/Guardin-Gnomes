@@ -17,10 +17,7 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-expand_margin_left = 10.0
-expand_margin_top = 10.0
-expand_margin_right = 10.0
-expand_margin_bottom = 10.0
+expand_margin_bottom = 1.0
 anti_aliasing = false
 
 [node name="ProgrammingTrackUI" type="Control" unique_id=660876712 node_paths=PackedStringArray("enchant_button") groups=["programming_track"]]
@@ -71,10 +68,10 @@ position = Vector2(164, 69)
 [node name="Button" type="Button" parent="." unique_id=951669152]
 z_index = 1
 layout_mode = 0
-offset_left = 567.0
-offset_top = 13.0
-offset_right = 691.0
-offset_bottom = 55.0
+offset_left = 544.0
+offset_top = 15.0
+offset_right = 698.0
+offset_bottom = 57.0
 theme_override_colors/font_color = Color(0.3019608, 0.27058825, 0.22352941, 1)
 theme_override_colors/font_focus_color = Color(0.68235296, 0.3647059, 0.2509804, 1)
 theme_override_colors/font_pressed_color = Color(0.68235296, 0.3647059, 0.2509804, 1)
@@ -87,7 +84,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_se4ky")
 theme_override_styles/hover = SubResource("StyleBoxFlat_se4ky")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_se4ky")
 theme_override_styles/focus = SubResource("StyleBoxFlat_se4ky")
-text = "Enchant"
+text = " Enchant "
 script = ExtResource("5_se4ky")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=573361751]
