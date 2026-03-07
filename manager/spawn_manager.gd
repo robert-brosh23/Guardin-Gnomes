@@ -1,3 +1,4 @@
+class_name SpawnManager
 extends Node
 
 @onready var main: Main = get_parent()
@@ -6,6 +7,15 @@ extends Node
 var gnome_scene: PackedScene = preload("uid://rxqd0wxka5o6")
 @onready var event_label: Label = $"../CanvasLayer/GameplayArea/EventLabel"
 
+class Coin:
+	static func create_coin(_gridpos: Vector2i, _rounds_left: int) -> Coin:
+		var coin = Coin.new()
+		coin.grid_pos = _gridpos
+		coin.rounds_left = _rounds_left
+		return coin
+	
+	var grid_pos: Vector2i
+	var rounds_left: int
 
 const HAZARD_TILE_IDS := {
 	"tornado": 1,
@@ -29,7 +39,9 @@ var event_list: Dictionary = {
 	"Bramblegrowth": func(): _spawn_custom_hazards({"thornbush": main.EVENT_INTENSITY}),
 	"Windstorm": func(): _spawn_custom_hazards({"tornado": 2}),
 	"Pixie Swarm": func(): for i in main.EVENT_INTENSITY/5: pixie_manager.pixie_rand_spawn(),
-	"Make It Rain": func(): _spawn_custom_hazards({"coin": 3})
+	"Make It Rain": func(): 
+		for i in range(0,main.round_counter / 10 + 2):
+			spawn_coin()
 }
 
 func spawn_gnome(color: Gnome.GnomeColor, grid_pos: Vector2i, direction: Gnome.Direction):
@@ -63,6 +75,8 @@ func spawn_initial_hazards():
 #			if pos == Vector2i(-1000,-1000):
 #				return
 			tilemap_manager.hazard_layer.set_cell(pos, tile_id, atlas_coords)
+			if hazard_type == "coin":
+				GameManager.coins_in_world.append(Coin.create_coin(pos, 5))
 
 
 func _spawn_custom_hazards(hazard_spawn_qty: Dictionary):
@@ -77,6 +91,8 @@ func _spawn_custom_hazards(hazard_spawn_qty: Dictionary):
 			if pos == null:
 				return
 			tilemap_manager.hazard_layer.set_cell(pos, tile_id, atlas_coords)
+			if hazard_type == "coin":
+				GameManager.coins_in_world.append(Coin.create_coin(pos, 3))
 
 
 func spawn_coin():

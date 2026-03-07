@@ -26,7 +26,7 @@ const gnome_scene = preload("uid://bffr6n4g2h0d3")
 
 @onready var programming_track_ui: ProgrammingTrackUI = $CanvasLayer/ProgrammingTrackUI
 @onready var pixie_manager: PixieManager = $PixieManager
-@onready var spawn_manager: Node = $SpawnManager
+@onready var spawn_manager: SpawnManager = $SpawnManager
 @onready var tilemap_manager: Node2D = $TilemapManager
 @onready var hand: Hand = %Hand
 @onready var game_ui: Control = %GameUI
@@ -201,7 +201,7 @@ func _try_empathetic(gnome: Gnome, new_pos: Vector2i, fairy_tiles_to_check: Arra
 			var hazard_type := hazard_layer.get_cell_tile_data(point).get_custom_data("hazard_type") as String
 			if hazard_type == "pixie":
 				_destroy_hazard(point, hazard_type)
-		point += + Vector2i(-1,1)
+		point += Vector2i(-1,1)
 		if base_layer.get_cell_tile_data(point):
 			var tile_type := base_layer.get_cell_tile_data(point).get_custom_data("base_type") as String
 			if fairy_tiles_to_check.has(tile_type):
