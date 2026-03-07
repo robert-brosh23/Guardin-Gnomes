@@ -29,13 +29,13 @@ const HAZARD_TILE_IDS := {
 var HAZARD_INITIAL_SPAWN_QTY: Dictionary = {
 	"tornado" = 2,
 	"wall" = 0,
-	"rock" = 2,
-	"thornbush" = 2,
+	"rock" = 4,
+	"thornbush" = 4,
 	"coin" = 2
 }
 
 var event_list: Dictionary = {
-	"Rockslide": func(): _spawn_custom_hazards({"rock": main.EVENT_INTENSITY}),
+	"Rockslide": func(): _spawn_custom_hazards({"rock": main.EVENT_INTENSITY + 2}),
 	"Bramblegrowth": func(): _spawn_custom_hazards({"thornbush": main.EVENT_INTENSITY}),
 	"Windstorm": func(): _spawn_custom_hazards({"tornado": 2}),
 	"Pixie Swarm": func(): for i in main.round_counter / 10 + 1: pixie_manager.pixie_rand_spawn(),

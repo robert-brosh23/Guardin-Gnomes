@@ -8,7 +8,7 @@ var PIXIE_INITIAL_SPAWN: int = 2 # how many pixie circles are at game start
 var PIXIE_GROW_RATE: int = 2 # how many rounds between each pixie growth
 var PIXIE_SPREAD_RATE: int = 1 # how many rounds between each pixie spread
 var PIXIE_SPAWN_RATE: int = 2 # how many rounds between each pixie rand spawn
-var PIXIE_SPAWN_SCALE: int = 10 # how many rounds before spawn uptick
+var PIXIE_SPAWN_SCALE: int = 8 # how many rounds before spawn uptick
 var PIXIE_SPAWN_INTENSITY: int = 1 # how many pixies spawned at a time
 
 var EVENT_FREQ: int = 5 # how often do events occur
@@ -16,7 +16,7 @@ var EVENT_INTENSITY: int = 5 # how many items are spawned by events
 var EVENT_INTENSITY_SCALING: int = 5 # how many rounds before each intensity uptick
 
 var COIN_FREQ: int = 1 # how many rounds between each coin spawn
-var COIN_SCALE: int = 15 # how many rounds between coin spawn increase
+var COIN_SCALE: int = 25 # how many rounds between coin spawn increase
 ###############################
 
 @export var debug_enabled: bool
@@ -77,7 +77,7 @@ func _on_turn_end():
 	pixie_manager._on_next_round()
 	_check_gameover()
 	hand._on_turn_end()
-	for i in round_counter/15 + 1:
+	for i in round_counter/COIN_SCALE + 1:
 		spawn_manager.spawn_coin()
 	if round_counter % EVENT_FREQ == 0:
 		spawn_manager.trigger_random_event()
