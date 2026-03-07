@@ -22,6 +22,8 @@ func get_required_coins() -> int:
 func _update_coins():
 	for coin in coins_in_world:
 		coin.rounds_left -= 1
+		if coin.rounds_left == 1:
+			main.hazard_layer.get_cell_tile_data(coin.grid_pos).set_custom_data("blink", true)
 		if coin.rounds_left <= 0:
 			main.hazard_layer.set_cell(coin.grid_pos, 1)
 			coins_in_world.erase(coin)

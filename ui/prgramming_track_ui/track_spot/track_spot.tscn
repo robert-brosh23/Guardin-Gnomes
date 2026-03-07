@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cep6qnign22b8" path="res://addons/drag_and_drop/resources/drop_behaviors/drop_behavior_swap.gd" id="3_0rj0d"]
 [ext_resource type="Script" uid="uid://djdmnemxrx7bg" path="res://addons/drag_and_drop/resources/draggable_types/draggable_type.gd" id="4_0rj0d"]
 [ext_resource type="Texture2D" uid="uid://c5dsq7wqscp7e" path="res://sprites/cards/card_light_up_frame-export.png" id="5_bg4qv"]
+[ext_resource type="Texture2D" uid="uid://j11kn7mr1fu2" path="res://sprites/pixie_dust_frame.png" id="6_kyri6"]
 
 [sub_resource type="Resource" id="Resource_bg4qv"]
 script = ExtResource("3_0rj0d")
@@ -42,3 +43,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_bg4qv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1595899240]
+texture = ExtResource("6_kyri6")
