@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 SignalBus="*uid://do8d6gblulc5w"
 GameManager="*uid://dh8070o1gnb6i"
 AudioPlayer="*uid://dls4vt5ru6fds"
+ParticlesFxSingleton="*uid://dpm0iwl2ad4ea"
 
 [display]
 

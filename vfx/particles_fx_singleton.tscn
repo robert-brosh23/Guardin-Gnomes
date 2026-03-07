@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dpm0iwl2ad4ea"]
+
+[ext_resource type="Script" uid="uid://dgl5pbqhxmxy4" path="res://vfx/particles_fx_singleton.gd" id="1_y8no4"]
+[ext_resource type="Material" uid="uid://byt1vybxyqoom" path="res://vfx/breaker_particles/new_particle_process_material.tres" id="2_rrdiw"]
+
+[node name="ParticlesFxSingleton" type="Node2D" unique_id=2044423265]
+script = ExtResource("1_y8no4")
+every_effect = Array[ParticleProcessMaterial]([ExtResource("2_rrdiw")])

@@ -1,0 +1,13 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://byt1vybxyqoom"]
+
+[ext_resource type="Texture2D" uid="uid://c2qunds3ol5xc" path="res://vfx/breaker_particles/color_ramps/thorn.tres" id="1_y0owb"]
+
+[resource]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 149.03
+initial_velocity_max = 448.33
+gravity = Vector3(0, 1000, 0)
+scale_min = 4.0
+scale_max = 4.0
+color_ramp = ExtResource("1_y0owb")
